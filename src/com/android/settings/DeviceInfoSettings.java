@@ -68,6 +68,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
+    private static final String KEY_MOD_BUILD_DATE = "build_date";
+
     long[] mHits = new long[3];
     int mDevHitCountdown;
     Toast mDevHitToast;
@@ -90,6 +92,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
         findPreference(KEY_BUILD_NUMBER).setEnabled(true);
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
+        setValueSummary(KEY_MOD_BUILD_DATE, "ro.build.date");
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
