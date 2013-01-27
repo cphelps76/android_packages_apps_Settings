@@ -79,14 +79,16 @@
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
 
-    <!-- DEVICE -->
-    <header android:id="@+id/device_section"
-        android:title="@string/header_category_device" />
+    <!-- Interface -->
+    <header android:id="@+id/interface_section"
+        android:title="@string/interface_title" />
 
+    <!-- TRDS -->
     <header
-        android:id="@+id/launcher_settings"
-        android:title="@string/launcher_settings_title"
-        android:icon="@drawable/ic_settings_home" />
+        android:id="@+id/demented_settings"
+        android:icon="@drawable/ic_settings_demented"
+        android:title="@string/demented_title"
+        android:fragment="com.android.settings.demented.Interface" />
 
     <!-- TRDS -->
     <header
@@ -94,6 +96,15 @@
         android:icon="@drawable/ic_settings_trds"
         android:title="@string/trds_settings_title"
         android:fragment="com.android.settings.TRDSSettings" />
+
+    <header
+        android:id="@+id/launcher_settings"
+        android:title="@string/launcher_settings_title"
+        android:icon="@drawable/ic_settings_home" />
+
+    <!-- DEVICE -->
+    <header android:id="@+id/device_section"
+        android:title="@string/header_category_device" />
 
     <!-- Sound -->
     <header

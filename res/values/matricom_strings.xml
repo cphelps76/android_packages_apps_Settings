@@ -18,6 +18,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- Custom headers -->
+    <string name="interface_title">Interface</string>
+    <string name="demented_title">DEMENTED Settings</string>
+
     <!-- About phone screen, build date of ROM -->
     <string name="build_date">Build date</string>
     <string name="build_date_default">2012-01-01-0000</string>
@@ -30,5 +34,26 @@
 
     <!-- About phone screen, status item label-->
     <string name="processor_info">Processor info</string>
+
+    <!-- Status bar background style -->
+    <string name="status_bar_transparency_title">Status bar transparency</string>
+    <string name="status_bar_color_title">Status bar color</string>
+    <string name="status_bar_background_style">Background style</string>
+    <string name="status_bar_alpha_mode_dialog_text_title">Show status bar transparency</string>
+    <string name="status_bar_alpha_mode_text_title">Transparency mode</string>
+    <string name="status_bar_alpha_mode_home">on launcher</string>
+    <string name="status_bar_alpha_mode_default">on launcher and keyguard</string>
+    <string name="status_bar_alpha_mode_always">always</string>
+    <string name="status_bar_style_reset">Reset</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on Color to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#FF000000</string>
+    <string name="set">Set</string>
+    <string name="ics_color">Holo</string>
 
 </resources>

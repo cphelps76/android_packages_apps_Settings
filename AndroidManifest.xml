@@ -1522,6 +1522,10 @@
             android:theme="@style/CryptKeeperBlankTheme"
         />
 
+        <!-- Demented activities start -->
+        <activity android:name=".demented.Interface" />
+        <!-- Demented activities end -->
+
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:label="@string/crypt_keeper_encrypt_title">
