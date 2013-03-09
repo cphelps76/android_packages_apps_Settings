@@ -66,6 +66,8 @@ import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.settings.TRDSEnabler;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -100,6 +102,7 @@ public class Settings extends PreferenceActivity
     private Header mCurrentHeader;
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
+    private static Switch mTRDSSwitch;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -641,6 +644,8 @@ public class Settings extends PreferenceActivity
         private final BluetoothEnabler mBluetoothEnabler;
         private final EthernetEnabler mEthernetEnabler;
         private final HotspotEnabler mHotspotEnabler;
+        private final TRDSEnabler mTRDSEnabler;
+
         private AuthenticatorHelper mAuthHelper;
 
         private class HeaderViewHolder {
@@ -653,10 +658,13 @@ public class Settings extends PreferenceActivity
         private LayoutInflater mInflater;
 
         static int getHeaderType(Header header)  throws RemoteException {
-            if (header.fragment == null && header.intent == null) {
+            if (header.fragment == null && header.intent == null && header.id != R.id.trds_settings) {
                 return HEADER_TYPE_CATEGORY;
-            } else if ((header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings
-                    || header.id == R.id.ethernet_settings || header.id == R.id.portable_hotspot)
+            } else if ((header.id == R.id.wifi_settings
+                    || header.id == R.id.bluetooth_settings
+                    || header.id == R.id.ethernet_settings
+                    || header.id == R.id.portable_hotspot
+                    || header.id == R.id.trds_settings)
                     && Utils.hardwareKeyboardEnabled()) {
                 return HEADER_TYPE_SWITCH;
             } else {
@@ -714,6 +722,7 @@ public class Settings extends PreferenceActivity
             }
             mHotspotEnabler = new HotspotEnabler(context, new Switch(context));
 
+            mTRDSEnabler = new TRDSEnabler(context, new Switch(context));
         }
 
         @Override
@@ -728,7 +737,7 @@ public class Settings extends PreferenceActivity
             }
             View view = null;
 
-            if (convertView == null) {
+            if (convertView == null || headerType == HEADER_TYPE_SWITCH) {
                 holder = new HeaderViewHolder();
                 switch (headerType) {
                     case HEADER_TYPE_CATEGORY:
@@ -782,6 +791,9 @@ public class Settings extends PreferenceActivity
                             mEthernetEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.portable_hotspot) {
                         mHotspotEnabler.setSwitch(holder.switch_);
+                    } else if (header.id == R.id.trds_settings) {
+                        mTRDSSwitch = (Switch) view.findViewById(R.id.switchWidget);
+                        mTRDSEnabler.setSwitch(holder.switch_);
                     }
                     // No break, fall through on purpose to update common fields
 
@@ -822,6 +834,7 @@ public class Settings extends PreferenceActivity
                 mEthernetEnabler.resume();
             }
             mHotspotEnabler.resume();
+            mTRDSEnabler.resume();
         }
 
         public void pause() {
@@ -831,6 +844,7 @@ public class Settings extends PreferenceActivity
                 mEthernetEnabler.pause();
             }
             mHotspotEnabler.pause();
+            mTRDSEnabler.pause();
         }
     }
 
