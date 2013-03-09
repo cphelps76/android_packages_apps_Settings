@@ -88,6 +88,12 @@
         android:title="@string/launcher_settings_title"
         android:icon="@drawable/ic_settings_home" />
 
+    <!-- TRDS -->
+    <header
+        android:id="@+id/trds_settings"
+        android:icon="@drawable/ic_settings_trds"
+        android:title="@string/trds_settings_title" />
+
     <!-- Sound -->
     <header
         android:id="@+id/sound_settings"
