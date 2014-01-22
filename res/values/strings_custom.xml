@@ -100,4 +100,7 @@
     <string name="root_access_adb">ADB only</string>
     <string name="root_access_all">Apps and ADB</string>
 
+    <!-- TRDS Settings -->
+    <string name="trds_settings_title">DEMENTED Darkside</string>
+
 </resources>

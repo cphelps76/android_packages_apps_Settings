@@ -61,6 +61,7 @@ import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import com.android.settings.TRDSEnabler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -151,6 +152,7 @@ public class Settings extends PreferenceActivity
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
     private boolean mUnofficialBuild;
+    private static Switch mTRDSSwitch;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -845,6 +847,7 @@ public class Settings extends PreferenceActivity
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
         private final EthernetEnabler mEthernetEnabler;
+        private final TRDSEnabler mTRDSEnabler;
         private AuthenticatorHelper mAuthHelper;
         private DevicePolicyManager mDevicePolicyManager;
 
@@ -860,9 +863,13 @@ public class Settings extends PreferenceActivity
         private LayoutInflater mInflater;
 
         static int getHeaderType(Header header) {
-            if (header.fragment == null && header.intent == null) {
+            if (header.fragment == null && header.intent == null && header.id != R.id.trds_settings) {
                 return HEADER_TYPE_CATEGORY;
-            } else if ((header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings || header.id == R.id.ethernet_settings) && !Utils.platformHasMbxUiMode()){
+            } else if ((header.id == R.id.wifi_settings
+                    || header.id == R.id.bluetooth_settings
+                    || header.id == R.id.ethernet_settings
+                    || header.id == R.id.trds_settings)
+                    && !Utils.platformHasMbxUiMode()) {
                 return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.security_settings) {
                 return HEADER_TYPE_BUTTON;
@@ -917,6 +924,7 @@ public class Settings extends PreferenceActivity
                 mEthernetEnabler = null;
 
             mDevicePolicyManager = dpm;
+            mTRDSEnabler = new TRDSEnabler(context, new Switch(context));
         }
 
         @Override
@@ -990,6 +998,9 @@ public class Settings extends PreferenceActivity
                     } else if (header.id == R.id.ethernet_settings) {
                         if (Utils.hwHasEthernet())
                             mEthernetEnabler.setSwitch(holder.switch_);
+                    } else if (header.id == R.id.trds_settings) {
+                        mTRDSSwitch = (Switch) view.findViewById(R.id.switchWidget);
+                        mTRDSEnabler.setSwitch(holder.switch_);
                     }
                     updateCommonHeaderView(header, holder);
                     break;
@@ -1065,6 +1076,7 @@ public class Settings extends PreferenceActivity
             mBluetoothEnabler.resume();
             if (Utils.hwHasEthernet())
                 mEthernetEnabler.resume();
+            mTRDSEnabler.resume();
         }
 
         public void pause() {
@@ -1072,6 +1084,7 @@ public class Settings extends PreferenceActivity
             mBluetoothEnabler.pause();
             if (Utils.hwHasEthernet())
                 mEthernetEnabler.pause();
+            mTRDSEnabler.pause();
         }
     }
 
@@ -1088,6 +1101,9 @@ public class Settings extends PreferenceActivity
             highlightHeader((int) mLastHeader.id);
         } else {
             mLastHeader = header;
+        }
+        if (header.id == R.id.trds_settings) {
+            mTRDSSwitch.toggle();
         }
     }
 
