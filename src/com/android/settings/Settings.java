@@ -439,7 +439,10 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.bluetooth_settings) {
                 // Remove Bluetooth Settings if Bluetooth service is not available.
-                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
+//                            Log.w(LOG_TAG, "Could not find parent activity : " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH));
+
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH))
+                 {
                     target.remove(i);
                 }
             } else if(id == R.id.battery_settings){

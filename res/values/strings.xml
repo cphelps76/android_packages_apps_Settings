@@ -1963,6 +1963,13 @@
     <string name="build_number">Build number</string>
     <!-- About phone screen,  setting option name-->
     <string name="selinux_status">SELinux status</string>
+	<!--  Ethernet and Wi-Fi Info -->
+    <string name="device_ethinfo_title">Ethernet Info</string>
+    <string name="device_wifi_info_title">Wifi Info</string>
+    <string name="device_ethinfo_activity_title">Ethernet Device Info</string>
+    <string name="device_wifi_info_activity_title">Wifi Device Info</string>
+    <string name="device_network_mac">MAC address</string>
+    <string name="device_networkinfo_summary">IP address,DNS,MAC address,etc.</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
     <string name="device_info_not_available">Not available</string>
@@ -2420,7 +2427,7 @@
 
     <!-- About --> <skip />
     <!-- Main settings screen, setting title for the user to go into the About MediaBox screen -->
-    <string name="about_settings" product="mbx">About MediaBox</string>
+    <string name="about_settings" product="mbx">About G-Box</string>
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="tablet">About tablet</string>
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
@@ -3686,9 +3693,9 @@
 
     <!-- Backup and reset Settings screen --><skip />
     <!-- Backup and reset settings menu title -->
-    <string name="privacy_settings">Backup &amp; reset</string>
+    <string name="privacy_settings">Reset G-Box</string>
     <!-- Privacy settings activity title -->
-    <string name="privacy_settings_title">Backup &amp; reset</string>
+    <string name="privacy_settings_title">Reset G-Box</string>
     <!-- Backup section title -->
     <string name="backup_section_title">Backup &amp; restore</string>
     <!-- Personal data section title -->
