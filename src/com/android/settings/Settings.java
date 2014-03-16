@@ -423,8 +423,6 @@ public class Settings extends PreferenceActivity
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.PREF_SHOW,
                 android.os.Build.TYPE.equals("eng"));
-        final boolean showSu = Boolean.valueOf(
-                android.os.Build.TYPE.equals("userdebug"));
         int i = 0;
 
         mHeaderIndexMap.clear();
@@ -478,10 +476,6 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.superuser) {
-                if (!showSu) {
                     target.remove(i);
                 }
             }
