@@ -151,10 +151,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     break;
             }
         }
-        if(!mLockPatternUtils.isLockScreenDisabled()){
-			addPreferencesFromResource(resid);
-		}
-
+        addPreferencesFromResource(resid);
 
         // Add options for device encryption
         DevicePolicyManager dpm =
