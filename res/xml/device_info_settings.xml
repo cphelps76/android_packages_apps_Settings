@@ -137,15 +137,6 @@
                 android:title="@string/build_number"
                 android:summary="@string/device_info_default"/>
 
-        <!-- Ethernet device info  -->
-        <PreferenceScreen android:key="eth_info"
-                android:title="@string/device_ethinfo_title" 
-                android:summary="@string/device_networkinfo_summary">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.deviceinfo.EthInfo" />
-        </PreferenceScreen>
-
         <!-- SELinux status information -->
         <Preference android:key="selinux_status"
                 style="?android:preferenceInformationStyle"

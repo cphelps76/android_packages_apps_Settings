@@ -31,6 +31,8 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.settings.Utils;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -88,7 +90,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         setValueSummary(KEY_EQUIPMENT_ID, PROPERTY_EQUIPMENT_ID);
         setStringSummary(KEY_DEVICE_MODEL, Build.MODEL);
         setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
-        setStringSummary(KEY_FIRMWARE_REVISION, getProp("ro.matricom.firmware.version"));
+        setStringSummary(KEY_FIRMWARE_REVISION, Utils.getProp("ro.matricom.firmware.version"));
         findPreference(KEY_BUILD_NUMBER).setEnabled(true);
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
 
@@ -155,27 +157,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                 Context.MODE_PRIVATE).getBoolean(DevelopmentSettings.PREF_SHOW,
                         android.os.Build.TYPE.equals("eng")) ? -1 : TAPS_TO_BE_A_DEVELOPER;
         mDevHitToast = null;
-    }
-
-    private static String getProp(String prop) {
-        String value = "";
-        try {
-            Process p = new ProcessBuilder("/system/bin/getprop", prop)
-                    .redirectErrorStream(true).start();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            String line;
-            while ((line = br.readLine()) != null) {
-                value = line;
-            }
-            //if (p != null) p.destroy();
-        } catch (IOException io) {
-            io.printStackTrace();
-        } catch (Exception e) {
-            // hate this but sometimes erroneous ErrnoException is thrown
-            // when the process for whatever reason can't be killed
-        }
-        return value;
     }
 
     @Override

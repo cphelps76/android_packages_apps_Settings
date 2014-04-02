@@ -65,9 +65,11 @@ import android.widget.TabWidget;
 
 import com.android.settings.users.ProfileUpdateReceiver;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
@@ -717,5 +719,26 @@ public class Utils {
     public static boolean hasMultipleUsers(Context context) {
         return ((UserManager) context.getSystemService(Context.USER_SERVICE))
                 .getUsers().size() > 1;
+    }
+
+    public static String getProp(String prop) {
+        String value = "";
+        try {
+            Process p = new ProcessBuilder("/system/bin/getprop", prop)
+                    .redirectErrorStream(true).start();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
+                value = line;
+            }
+            //if (p != null) p.destroy();
+        } catch (IOException io) {
+            io.printStackTrace();
+        } catch (Exception e) {
+            // hate this but sometimes erroneous ErrnoException is thrown
+            // when the process for whatever reason can't be killed
+        }
+        return value;
     }
 }
