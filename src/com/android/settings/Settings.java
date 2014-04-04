@@ -136,6 +136,8 @@ public class Settings extends PreferenceActivity
     private Header mLastHeader;
     private boolean mListeningToAccountUpdates;
 
+    private boolean mDeviceHasBrokenBluetooth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getIntent().getBooleanExtra(EXTRA_CLEAR_UI_OPTIONS, false)) {
@@ -153,6 +155,8 @@ public class Settings extends PreferenceActivity
         mInLocalHeaderSwitch = true;
         super.onCreate(savedInstanceState);
         mInLocalHeaderSwitch = false;
+
+        mDeviceHasBrokenBluetooth = getResources().getBoolean(R.bool.config_deviceHasBrokenBluetooth);
 
         if (!onIsHidingHeaders() && onIsMultiPane()) {
             highlightHeader(mTopLevelHeaderId);
@@ -441,8 +445,11 @@ public class Settings extends PreferenceActivity
                 // Remove Bluetooth Settings if Bluetooth service is not available.
 //                            Log.w(LOG_TAG, "Could not find parent activity : " + getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH));
 
-                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH))
-                 {
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
+                    target.remove(i);
+                }
+                if (mDeviceHasBrokenBluetooth) {
+                    /** If device has hardware bluetooth support but is broken, hide the menu **/
                     target.remove(i);
                 }
             } else if(id == R.id.battery_settings){

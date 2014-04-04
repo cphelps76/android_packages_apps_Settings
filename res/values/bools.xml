@@ -38,4 +38,7 @@
  
     <!-- Whether to show a preference item for regulatory information in About phone -->
     <bool name="config_show_regulatory_info">false</bool>
+
+    <!-- If device has hardware bluetooth support, but it is broken -->
+    <bool name="config_deviceHasBrokenBluetooth">false</bool>
 </resources>
