@@ -555,7 +555,7 @@
     <!-- The title of the activity to adjust display settings -->
     <string name="display_label">Screen</string>
     <!-- The title of the activity to see phone info -->
-    <string name="phone_info_label" product="mbx">MBX info</string>
+    <string name="phone_info_label" product="mbx">G-Box MX2 info</string>
     <!-- The title of the activity to see phone info -->
     <string name="phone_info_label" product="tablet">Tablet info</string>
     <!-- The title of the activity to see phone info -->
@@ -602,7 +602,7 @@
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box -->
     <string name="roaming_warning">When you allow data roaming, you may incur significant roaming charges!</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser tablets [CHAR LIMIT=none] -->
-    <string name="roaming_warning_multiuser" product="mbx">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this mbx.</string>
+    <string name="roaming_warning_multiuser" product="mbx">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this G-Box MX2.</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser tablets [CHAR LIMIT=none] -->
     <string name="roaming_warning_multiuser" product="tablet">When you allow data roaming, you may incur significant roaming charges!\n\nThis setting affects all users on this tablet.</string>
     <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box. This is for multiuser phones [CHAR LIMIT=none] -->
@@ -698,7 +698,7 @@
     <string name="crypt_keeper_settings_title">Encryption</string>
 
     <!-- Title of the preferences item to control encryption -->
-    <string name="crypt_keeper_encrypt_title" product="mbx">Encrypt mbx</string>
+    <string name="crypt_keeper_encrypt_title" product="mbx">Encrypt G-Box MX2</string>
     <!-- Title of the preferences item to control encryption -->
     <string name="crypt_keeper_encrypt_title" product="tablet">Encrypt tablet</string>
     <!-- Title of the preferences item to control encryption -->
@@ -706,7 +706,7 @@
 
     <!-- Summary of the preferences item to control encryption, when encryption is inactive -->
     <string name="crypt_keeper_encrypt_summary" product="mbx">
-    Require a numeric PIN or password to decrypt your mbx each time you
+    Require a numeric PIN or password to decrypt your G-Box MX2 each time you
     power it on</string>
     <!-- Summary of the preferences item to control encryption, when encryption is inactive -->
     <string name="crypt_keeper_encrypt_summary" product="tablet">
@@ -722,10 +722,10 @@
     <!-- Informational text in the first confirmation screen before starting device encryption -->
     <string name="crypt_keeper_desc" product="mbx">
     You can encrypt your accounts, settings, downloaded apps and their data,
-    media, and other files. Once you encrypt your mbx, you need to type a numeric PIN
-    or password to decrypt it each time you power it on. You can\'t decrypt your mbx
+    media, and other files. Once you encrypt your G-Box MX2, you need to type a numeric PIN
+    or password to decrypt it each time you power it on. You can\'t decrypt your G-Box MX2
     except by performing a factory data reset, erasing all your data.\n\nEncryption takes
-    an hour or more. You must start with a charged battery and keep your mbx plugged in
+    an hour or more. You must start with a charged battery and keep your G-Box MX2 plugged in
     until encryption is complete. If you interrupt the encryption process, you will lose
     some or all of your data.</string>
     <!-- Informational text in the first confirmation screen before starting device encryption -->
@@ -747,7 +747,7 @@
     until encryption is complete. If you interrupt the encryption process, you will lose
     some or all of your data.</string>
     <!-- Button text to start encryption process -->
-    <string name="crypt_keeper_button_text" product="mbx">Encrypt mbx</string>
+    <string name="crypt_keeper_button_text" product="mbx">Encrypt G-Box MX2</string>
     <!-- Button text to start encryption process -->
     <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
     <!-- Button text to start encryption process -->
@@ -769,7 +769,7 @@
     <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="mbx">
     The encryption operation is irreversible and if you interrupt it, you\'ll lose data.
-    Encryption takes an hour or more, during which the mbx will restart several times.
+    Encryption takes an hour or more, during which the G-Box MX2 will restart several times.
     </string>
     <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="tablet">
@@ -785,7 +785,7 @@
     <!-- Title of the progress screen while encrypting the device -->
     <string name="crypt_keeper_setup_title">Encrypting</string>
     <!-- Informational text on the progress screen while encrypting the device -->
-    <string name="crypt_keeper_setup_description" product="mbx">Wait while your mbx
+    <string name="crypt_keeper_setup_description" product="mbx">Wait while your G-Box MX2
     is being encrypted. <xliff:g id="percent" example="50">^1</xliff:g>% complete.</string>
     <!-- Informational text on the progress screen while encrypting the device -->
     <string name="crypt_keeper_setup_description" product="tablet">Wait while your tablet
@@ -805,10 +805,10 @@
     <!-- Informational text when encryption fails -->
     <string name="crypt_keeper_failed_summary" product="mbx">
       Encryption was interrupted and can\'t complete. As a result, the data on
-      your mbx is no longer accessible.
+      your G-Box MX2 is no longer accessible.
       \n\n
-      To resume using your mbx, you need to perform a factory reset.
-      When you set up your mbx after the reset, you\'ll have an opportunity
+      To resume using your G-Box MX2, you need to perform a factory reset.
+      When you set up your G-Box MX2 after the reset, you\'ll have an opportunity
       to restore any data that was backed up to your Google Account.
     </string>
 
@@ -1250,7 +1250,7 @@
     <!-- Used in the 1st-level settings screen to turn on NFC -->
     <string name="nfc_quick_toggle_title">NFC</string>
     <!-- Description of NFC in the 1st level settings screen, for a tablet. [CHAR LIMIT=NONE] -->
-    <string name="nfc_quick_toggle_summary" product="mbx">Allow data exchange when the mbx touches another device</string>
+    <string name="nfc_quick_toggle_summary" product="mbx">Allow data exchange when the G-Box MX2 touches another device</string>
     <!-- Description of NFC in the 1st level settings screen, for a tablet. [CHAR LIMIT=NONE] -->
     <string name="nfc_quick_toggle_summary" product="tablet">Allow data exchange when the tablet touches another device</string>
     <!-- Description of NFC in the 1st level settings screen, for a phone. [CHAR LIMIT=NONE] -->
@@ -1369,7 +1369,7 @@
     <!-- Wi-Fi settings. wps menu title [CHAR LIMIT=25]-->
     <string name="wifi_setup_wps">Automatic setup (WPS)</string>
     <!-- Message informing that wifi is required during setup [CHAR LIMIT=NONE] -->
-    <string name="wifi_required_info_text" product="mbx">To complete setup, your mbx needs access to Wi-Fi. After setup, you can switch between mobile data and Wi-Fi.</string>
+    <string name="wifi_required_info_text" product="mbx">To complete setup, your G-Box MX2 needs access to Wi-Fi. After setup, you can switch between mobile data and Wi-Fi.</string>
     <!-- Message informing that wifi is required during setup [CHAR LIMIT=NONE] -->
     <string name="wifi_required_info_text" product="default">To complete setup, your tablet needs access to Wi-Fi. After setup, you can switch between mobile data and Wi-Fi.</string>
 
@@ -1509,19 +1509,19 @@
     <!-- Button for going to the previous screen or step [CHAR LIMIT=20] -->
     <string name="wifi_dont_skip">Don\'t skip</string>
     <!-- Text warning about skipping Wi-Fi with a mobile connect (tablet) [CHAR LIMIT=NONE]-->
-    <string name="wifi_skipped_message" product="mbx" msgid="6518433975501257341">WARNING: You may incur extra carrier data charges.\n\nMBX setup can require significant network activity.</string>
+    <string name="wifi_skipped_message" product="mbx" msgid="6518433975501257341">WARNING: You may incur extra carrier data charges.\n\nG-Box MX2 setup can require significant network activity.</string>
     <!-- Text warning about skipping Wi-Fi with a mobile connect (tablet) [CHAR LIMIT=NONE]-->
     <string name="wifi_skipped_message" product="tablet" msgid="6518433975501257341">WARNING: You may incur extra carrier data charges.\n\nTablet setup can require significant network activity.</string>
     <!-- Text warning about skipping Wi-Fi with a mobile connect (phone) [CHAR LIMIT=NONE]-->
     <string name="wifi_skipped_message" product="default" msgid="4376150150678208848">WARNING: You may incur extra carrier data charges.\n\nPhone setup can require significant network activity.</string>
     <!-- Text warning about skipping Wi-Fi without a mobile connect (tablet) [CHAR LIMIT=NONE] -->
-    <string name="wifi_and_mobile_skipped_message" product="mbx" msgid="5647058314212144925">WARNING: The mbx won\'t be able to verify that your software is up to date.</string>
+    <string name="wifi_and_mobile_skipped_message" product="mbx" msgid="5647058314212144925">WARNING: The G-Box MX2 won\'t be able to verify that your software is up to date.</string>
     <!-- Text warning about skipping Wi-Fi without a mobile connect (tablet) [CHAR LIMIT=NONE] -->
     <string name="wifi_and_mobile_skipped_message" product="tablet" msgid="5647058314212144925">WARNING: The tablet won\'t be able to verify that your software is up to date.</string>
     <!-- Text warning about skipping Wi-Fi without a mobile connect (phone) [CHAR LIMIT=NONE] -->
     <string name="wifi_and_mobile_skipped_message" product="default" msgid="1288483646141987070">WARNING: The phone won\'t be able to verify that your software is up to date.</string>
     <!-- Text alerting that Wi-Fi couldn't connect (tablet) [CHAR LIMIT=NONE] -->
-    <string name="wifi_connect_failed_message" product="mbx" msgid="2006689630582761529">The mbx was unable to connect to this Wi-Fi network.</string>
+    <string name="wifi_connect_failed_message" product="mbx" msgid="2006689630582761529">The G-Box MX2 was unable to connect to this Wi-Fi network.</string>
     <!-- Text alerting that Wi-Fi couldn't connect (tablet) [CHAR LIMIT=NONE] -->
     <string name="wifi_connect_failed_message" product="tablet" msgid="2006689630582761529">The tablet was unable to connect to this Wi-Fi network.</string>
     <!-- Text alerting that Wi-Fi couldn't connect (phone) [CHAR LIMIT=NONE] -->
@@ -1786,7 +1786,7 @@
     <!-- Dock audio summary for docked to car dock -->
     <string name="dock_audio_summary_car">Settings for the attached car dock</string>
     <!-- Dock audio summary for undocked -->
-    <string name="dock_audio_summary_none" product="mbx">MBX not docked</string>
+    <string name="dock_audio_summary_none" product="mbx">G-Box MX2 not docked</string>
     <!-- Dock audio summary for undocked -->
     <string name="dock_audio_summary_none" product="tablet">Tablet not docked</string>
     <!-- Dock audio summary for undocked -->
@@ -1796,7 +1796,7 @@
     <!-- Dock not found dialog title -->
     <string name="dock_not_found_title">Dock not found</string>
     <!-- Dock not found dialog text -->
-    <string name="dock_not_found_text" product="mbx">You need to dock the mbx before setting up dock audio.</string>
+    <string name="dock_not_found_text" product="mbx">You need to dock the G-Box MX2 before setting up dock audio.</string>
     <!-- Dock not found dialog text -->
     <string name="dock_not_found_text" product="tablet">You need to dock the tablet before setting up dock audio.</string>
     <!-- Dock not found dialog text -->
@@ -1804,7 +1804,7 @@
     <!-- Dock settings screen, dock events SFX setting check box label -->
     <string name="dock_sounds_enable_title">Dock insert sound</string>
     <!-- Dock settings screen, setting option summary text when check box is selected -->
-    <string name="dock_sounds_enable_summary_on" product="mbx">Play sound when inserting or removing mbx from dock</string>
+    <string name="dock_sounds_enable_summary_on" product="mbx">Play sound when inserting or removing G-Box MX2 from dock</string>
     <!-- Dock settings screen, setting option summary text when check box is selected -->
     <string name="dock_sounds_enable_summary_on" product="tablet">Play sound when inserting or removing tablet from dock</string>
     <!-- Dock settings screen, setting option summary text when check box is selected -->
@@ -1828,13 +1828,13 @@
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
     <string name="accelerometer_title">Auto-rotate screen</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
-    <string name="accelerometer_summary_on" product="mbx">Switch orientation automatically when rotating mbx</string>
+    <string name="accelerometer_summary_on" product="mbx">Switch orientation automatically when rotating G-Box MX2</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
     <string name="accelerometer_summary_on" product="tablet">Switch orientation automatically when rotating tablet</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
     <string name="accelerometer_summary_on" product="default">Switch orientation automatically when rotating phone</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
-    <string name="accelerometer_summary_off" product="mbx">Switch orientation automatically when rotating mbx</string>
+    <string name="accelerometer_summary_off" product="mbx">Switch orientation automatically when rotating G-Box MX2</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
     <string name="accelerometer_summary_off" product="tablet">Switch orientation automatically when rotating tablet</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
@@ -1938,7 +1938,7 @@
     <!-- SIM card lock settings screen, SIM PIN dialog button labels: -->
     <string name="sim_enter_cancel">Cancel</string>
     <!-- Advanced (used for diagnostics) device info activity title -->
-    <string name="device_info_settings" product="mbx">MBX status</string>
+    <string name="device_info_settings" product="mbx">G-Box MX2 status</string>
     <!-- Advanced (used for diagnostics) device info activity title -->
     <string name="device_info_settings" product="tablet">Tablet status</string>
     <!-- Advanced (used for diagnostics) device info activity title -->
@@ -2255,13 +2255,13 @@
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
-    <string name="master_clear_summary" product="mbx">Erases all data on mbx</string>
+    <string name="master_clear_summary" product="mbx">Erases all data on G-Box MX2</string>
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
     <string name="master_clear_summary" product="tablet">Erases all data on tablet</string>
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
     <string name="master_clear_summary" product="default">Erases all data on phone</string>
  	 <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="mbx">"This will erase all data from your mbx\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="master_clear_desc" product="mbx">"This will erase all data from your G-Box MX2\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
@@ -2283,7 +2283,7 @@
     <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
     <string name="erase_external_storage_description" product="default">Erase all the data on the SD card, such as music or photos</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text" product="mbx">Reset mbx</string>
+    <string name="master_clear_button_text" product="mbx">Reset G-Box MX2</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
     <string name="master_clear_button_text" product="tablet">Reset tablet</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
@@ -2405,7 +2405,7 @@
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for GPS satellites -->
     <string name="location_gps">GPS satellites</string>
     <!-- [CHAR LIMIT=100] Security & location settings screen, setting check box summary for GPS satellites on a tablet -->
-    <string name="location_street_level" product="mbx">Let apps use GPS on your mbx to pinpoint your location</string>
+    <string name="location_street_level" product="mbx">Let apps use GPS on your G-Box MX2 to pinpoint your location</string>
     <!-- [CHAR LIMIT=100] Security & location settings screen, setting check box summary for GPS satellites on a tablet -->
     <string name="location_street_level" product="tablet">Let apps use GPS on your tablet to pinpoint your location</string>
     <!-- [CHAR LIMIT=100] Security & location settings screen, setting check box summary for GPS satellites on a phone -->
@@ -2429,7 +2429,7 @@
 
     <!-- About --> <skip />
     <!-- Main settings screen, setting title for the user to go into the About MediaBox screen -->
-    <string name="about_settings" product="mbx">About G-Box</string>
+    <string name="about_settings" product="mbx">About G-Box MX2</string>
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="tablet">About tablet</string>
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
@@ -2572,9 +2572,9 @@
     <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  -->
     <string name="install_unknown_applications">Allow installation of apps from unknown sources</string>
     <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
-    <string name="install_all_warning" product="mbx">Your mbx and personal data are more vulnerable to attack by apps
+    <string name="install_all_warning" product="mbx">Your G-Box MX2 and personal data are more vulnerable to attack by apps
  from unknown sources. You agree that you are solely responsible for any
- damage to your mbx or loss of data that may result from using
+ damage to your G-Box MX2 or loss of data that may result from using
  these apps.</string>
     <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
     <string name="install_all_warning" product="tablet">Your tablet and personal data are more vulnerable to attack by apps
@@ -2738,7 +2738,7 @@
     <!-- Manage applications, text for dialog if clear data fails-->
     <string name="clear_failed_dlg_text">Couldn\'t clear data for app.</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
-    <string name="security_settings_desc" product="mbx">This app can access the following on your mbx:</string>
+    <string name="security_settings_desc" product="mbx">This app can access the following on your G-Box MX2:</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
     <string name="security_settings_desc" product="tablet">This app can access the following on your tablet:</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
@@ -2746,7 +2746,7 @@
     <!-- [CHAR_LIMIT=NONE] Manage applications, individual application info screen, text that appears under the "Permissions" heading.
          This describes the permissions that the application has.  It is used when multiple packages are contributing
          to the permissions and need to be listed here. -->
-    <string name="security_settings_desc_multi" product="mbx">This app can access the following on your mbx.
+    <string name="security_settings_desc_multi" product="mbx">This app can access the following on your G-Box MX2.
          In order to improve performance and reduce memory usage, some of these permissions
          are available to <xliff:g id="base_app_name">%1$s</xliff:g>
          because it runs in the same process as <xliff:g id="additional_apps_list">%2$s</xliff:g>:</string>
@@ -2785,7 +2785,7 @@
     <!-- Manage applications, text for Move button -->
     <string name="move_app">Move</string>
     <!-- Manage applications, text for Move button to move app to internal storage -->
-    <string name="move_app_to_internal" product="mbx">Move to mbx</string>
+    <string name="move_app_to_internal" product="mbx">Move to G-Box MX2</string>
     <!-- Manage applications, text for Move button to move app to internal storage -->
     <string name="move_app_to_internal" product="tablet">Move to tablet</string>
     <!-- Manage applications, text for Move button to move app to internal storage -->
@@ -2914,7 +2914,7 @@
     <string name="runningservicedetails_stop_dlg_title">Stop system service?</string>
     <!-- Running service details, stop confirmation descriptive text. Displays when user selects selects to stop a system service. -->
     <string name="runningservicedetails_stop_dlg_text" product="mbx">If you stop this service, some
-        features of your mbx may stop working correctly until you power it off
+        features of your G-Box MX2 may stop working correctly until you power it off
         and then on again.</string>
     <!-- Running service details, stop confirmation descriptive text. Displays when user selects selects to stop a system service. -->
     <string name="runningservicedetails_stop_dlg_text" product="tablet">If you stop this service, some
@@ -3044,7 +3044,7 @@
     <!-- This is for diagnostics screen. The title of a screen with various items realted to launching screens that will giev the user info. For example, it contains "Phone information" and "Battery information" -->
     <string name="testing">Testing</string>
     <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information.  -->
-    <string name="testing_phone_info" product="mbx">MBX information</string>
+    <string name="testing_phone_info" product="mbx">G-Box MX2 information</string>
     <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information.  -->
     <string name="testing_phone_info" product="tablet">Tablet information</string>
     <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information.  -->
@@ -3277,7 +3277,7 @@
     <string name="accessibility_service_security_warning_summary" product="mbx">
             <xliff:g id="accessibility_service_name">%1$s</xliff:g> can
             collect all of the text you type, except passwords. This includes personal data such as credit card
-            numbers. It can also collect data about your interactions with the mbx.</string>
+            numbers. It can also collect data about your interactions with the G-Box MX2.</string>
     <!-- Summary for a warning message about security implications of enabling an accessibility service,
          displayed as a dialog message when the user selects to enable an accessibility service (tablet). [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_security_warning_summary" product="tablet">
@@ -3389,7 +3389,7 @@
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
-    <string name="power_idle" product="mbx">MBX idle</string>
+    <string name="power_idle" product="mbx">G-Box MX2 idle</string>
     <!-- Label for power consumed when Idle -->
     <string name="power_idle" product="tablet">Tablet idle</string>
     <!-- Label for power consumed when Idle -->
@@ -3406,7 +3406,7 @@
     <!-- [CHAR LIMIT=25] Label for WIFI usage time -->
     <string name="usage_type_wifi_running">Wi-Fi running</string>
     <!-- Label for Phone usage time -->
-    <string name="usage_type_phone" product="mbx">MBX</string>
+    <string name="usage_type_phone" product="mbx">G-Box MX2</string>
     <!-- Label for Phone usage time -->
     <string name="usage_type_phone" product="tablet">Tablet</string>
     <!-- Label for Phone usage time -->
@@ -3695,9 +3695,9 @@
 
     <!-- Backup and reset Settings screen --><skip />
     <!-- Backup and reset settings menu title -->
-    <string name="privacy_settings">Reset G-Box</string>
+    <string name="privacy_settings">Reset G-Box MX2</string>
     <!-- Privacy settings activity title -->
-    <string name="privacy_settings_title">Reset G-Box</string>
+    <string name="privacy_settings_title">Reset G-Box MX2</string>
     <!-- Backup section title -->
     <string name="backup_section_title">Backup &amp; restore</string>
     <!-- Personal data section title -->
@@ -3956,13 +3956,13 @@
     <!-- Title of remove message for remove account dialog -->
     <string name="really_remove_account_title">Remove account?</string>
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
-    <string name="really_remove_account_message" product="mbx">Removing this account will delete all of its messages, contacts, and other data from the mbx!</string>
+    <string name="really_remove_account_message" product="mbx">Removing this account will delete all of its messages, contacts, and other data from the G-Box MX2!</string>
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="tablet">Removing this account will delete all of its messages, contacts, and other data from the tablet!</string>
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. -->
-    <string name="remove_account_failed" product="mbx">This account is required by some apps. You can only remove it by resetting the mbx to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>    
+    <string name="remove_account_failed" product="mbx">This account is required by some apps. You can only remove it by resetting the G-Box MX2 to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>    
     <!-- This is shown if the autheticator for a given account fails to remove it. -->
     <string name="remove_account_failed" product="tablet">This account is required by some apps. You can only remove it by resetting the tablet to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. -->
@@ -4226,7 +4226,7 @@
     <!--  Title of dialog shown when user enables global auto sync [CHAR LIMIT=32] -->
     <string name="data_usage_auto_sync_on_dialog_title">Turn auto-sync data on?</string>
     <!--  Body of dialog shown when user enables global auto sync, for tablet [CHAR LIMIT=none] -->
-    <string name="data_usage_auto_sync_on_dialog" product="mbx">Any changes you make to your accounts on the web will be automatically copied to your mbx.\n\nSome accounts may also automatically copy any changes you make on the mbx to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts.</string>
+    <string name="data_usage_auto_sync_on_dialog" product="mbx">Any changes you make to your accounts on the web will be automatically copied to your G-Box MX2.\n\nSome accounts may also automatically copy any changes you make on the G-Box MX2 to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts.</string>
     <!--  Body of dialog shown when user enables global auto sync, for tablet [CHAR LIMIT=none] -->
     <string name="data_usage_auto_sync_on_dialog" product="tablet">Any changes you make to your accounts on the web will be automatically copied to your tablet.\n\nSome accounts may also automatically copy any changes you make on the tablet to the web. A Google Account works this way.\n\nTo choose which kinds of information to sync within each account, go to Settings &gt; Accounts.</string>
     <!--  Body of dialog shown when user enables global auto sync [CHAR LIMIT=none] -->
@@ -4251,7 +4251,7 @@
     <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_limit_dialog_title">Limiting data usage</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
-    <string name="data_usage_limit_dialog_mobile" product="mbx">Your mobile data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your mbx, and your carrier may account for usage differently, consider using a conservative limit.</string>
+    <string name="data_usage_limit_dialog_mobile" product="mbx">Your mobile data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your G-Box MX2, and your carrier may account for usage differently, consider using a conservative limit.</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
     <string name="data_usage_limit_dialog_mobile" product="tablet">Your mobile data connection will be disabled when the specified limit is reached.\n\nSince data usage is measured by your tablet, and your carrier may account for usage differently, consider using a conservative limit.</string>
     <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
@@ -4474,7 +4474,7 @@
     <!-- User (self) removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_self_message" product="default">You will lose your space and data on this phone. You can\'t undo this action.</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
-    <string name="user_confirm_remove_message" product="mbx">This user\'s space and data will disappear from this mbx. You can\'t undo this action.</string>
+    <string name="user_confirm_remove_message" product="mbx">This user\'s space and data will disappear from this G-Box MX2. You can\'t undo this action.</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
     <string name="user_confirm_remove_message" product="tablet">This user\'s space and data will disappear from this tablet. You can\'t undo this action.</string>
     <!-- User removal confirmation message [CHAR LIMIT=none] -->
@@ -4487,7 +4487,7 @@
     <string name="user_delete_button">Delete</string>
 
     <!-- Warning message when changing a global setting for a tablet.[CHAR LIMIT=none] -->
-    <string name="global_change_warning" product="mbx">This setting affects all users on this mbx.</string>
+    <string name="global_change_warning" product="mbx">This setting affects all users on this G-Box MX2.</string>
     <!-- Warning message when changing a global setting for a tablet.[CHAR LIMIT=none] -->
     <string name="global_change_warning" product="tablet">This setting affects all users on this tablet.</string>
     <!-- Warning message when changing a global setting for a phone.[CHAR LIMIT=none] -->
