@@ -434,40 +434,6 @@ public class WifiSettings extends SettingsPreferenceFragment
                     View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |
                     View.STATUS_BAR_DISABLE_CLOCK);
         }
-
-        // On/off switch is hidden for Setup Wizard
-        if (!mSetupWizardMode) {
-            Switch actionBarSwitch = new Switch(activity);
-
-            if (activity instanceof PreferenceActivity) {
-                PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-                if(Utils.platformHasMbxUiMode()){
-                    final int padding = activity.getResources().getDimensionPixelSize(
-                            R.dimen.action_bar_switch_padding);
-                    actionBarSwitch.setPadding(0, 0, padding, 0);
-                    activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                            ActionBar.DISPLAY_SHOW_CUSTOM);
-                    activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            ActionBar.LayoutParams.WRAP_CONTENT,
-                            Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-                }
-                else{
-                    if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                        final int padding = activity.getResources().getDimensionPixelSize(
-                                R.dimen.action_bar_switch_padding);
-                        actionBarSwitch.setPadding(0, 0, padding, 0);
-                        activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                                ActionBar.DISPLAY_SHOW_CUSTOM);
-                        activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                                ActionBar.LayoutParams.WRAP_CONTENT,
-                                ActionBar.LayoutParams.WRAP_CONTENT,
-                                Gravity.CENTER_VERTICAL | Gravity.END));
-                    }
-                }
-            }
-            mWifiEnabler = new WifiEnabler(activity, actionBarSwitch);
-        }
     }
 
     @Override

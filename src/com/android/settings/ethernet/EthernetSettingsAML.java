@@ -75,7 +75,6 @@ public class EthernetSettingsAML extends SettingsPreferenceFragment {
     @Override
     public void onStart() {
         super.onStart();
-        initToggles();
     }
 
     @Override
@@ -94,49 +93,5 @@ public class EthernetSettingsAML extends SettingsPreferenceFragment {
 	        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
 	        activity.getActionBar().setCustomView(null);
         }
-    }
-    
-    private void initToggles() {
-        // For MultiPane preference, the switch is on the left column header.
-        // Other layouts unsupported for now.
-        
-        final Activity activity = getActivity();
-        Switch actionBarSwitch = new Switch(activity);
-        if (activity instanceof PreferenceActivity) {
-            PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-            if (Utils.platformHasMbxUiMode()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                actionBarSwitch.setPadding(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-            }
-            else if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
-                final int padding = activity.getResources().getDimensionPixelSize(
-                        R.dimen.action_bar_switch_padding);
-                actionBarSwitch.setPadding(0, 0, padding, 0);
-                activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                        ActionBar.DISPLAY_SHOW_CUSTOM);
-                activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        ActionBar.LayoutParams.WRAP_CONTENT,
-                        Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-            }
-            mEthEnabler = new EthernetEnabler(
-                    (EthernetManager)getSystemService(Context.ETH_SERVICE),
-                    actionBarSwitch);
-            mEthConfigDialog = new EthernetConfigDialog(
-                    getActivity(),
-                    (EthernetManager)getSystemService(Context.ETH_SERVICE));
-            mEthEnabler.setConfigDialog(mEthConfigDialog);
-        }
-        if (!Utils.platformHasMbxUiMode()) {
-            mEthConfigDialog = new EthernetConfigDialog(getActivity(),
-                    (EthernetManager) getSystemService(Context.ETH_SERVICE));
-        }    
     }
 }
