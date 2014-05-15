@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="13b2096f-485f-45bf-80ca-0a4e264587f5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/xml/device_info_ethinfo.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Android.mk" afterPath="$PROJECT_DIR$/Android.mk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/android/settings/DeviceInfoSettings.java" afterPath="$PROJECT_DIR$/src/com/android/settings/DeviceInfoSettings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/android/settings/deviceinfo/Status.java" afterPath="$PROJECT_DIR$/src/com/android/settings/deviceinfo/Status.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/android/settings/Utils.java" afterPath="$PROJECT_DIR$/src/com/android/settings/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/device_info_settings.xml" afterPath="$PROJECT_DIR$/res/xml/device_info_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/device_info_status.xml" afterPath="$PROJECT_DIR$/res/xml/device_info_status.xml" />
-    </list>
+    <list default="true" id="13b2096f-485f-45bf-80ca-0a4e264587f5" name="Default" comment="" />
     <ignored path="Settings.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -73,10 +69,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="device_info_status.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="device_info_status.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/xml/device_info_status.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2790">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="2502">
+              <folding>
+                <element signature="e#770#808#0" expanded="false" />
+                <element signature="e#935#965#0" expanded="false" />
+                <element signature="e#990#1025#0" expanded="false" />
+                <element signature="e#1187#1216#0" expanded="false" />
+                <element signature="e#1241#1276#0" expanded="false" />
+                <element signature="e#1438#1463#0" expanded="false" />
+                <element signature="e#1488#1523#0" expanded="false" />
+                <element signature="e#1687#1719#0" expanded="false" />
+                <element signature="e#1744#1779#0" expanded="false" />
+                <element signature="e#1940#1969#0" expanded="false" />
+                <element signature="e#1994#2029#0" expanded="false" />
+                <element signature="e#2194#2227#0" expanded="false" />
+                <element signature="e#2252#2287#0" expanded="false" />
+                <element signature="e#2449#2479#0" expanded="false" />
+                <element signature="e#2504#2539#0" expanded="false" />
+                <element signature="e#2701#2725#0" expanded="false" />
+                <element signature="e#2750#2785#0" expanded="false" />
+                <element signature="e#2944#2971#0" expanded="false" />
+                <element signature="e#2996#3031#0" expanded="false" />
+                <element signature="e#3186#3209#0" expanded="false" />
+                <element signature="e#3234#3269#0" expanded="false" />
+                <element signature="e#3479#3506#0" expanded="false" />
+                <element signature="e#3531#3566#0" expanded="false" />
+                <element signature="e#3777#3805#0" expanded="false" />
+                <element signature="e#3830#3865#0" expanded="false" />
+                <element signature="e#4076#4104#0" expanded="false" />
+                <element signature="e#4129#4164#0" expanded="false" />
+                <element signature="e#4317#4338#0" expanded="false" />
+                <element signature="e#4363#4398#0" expanded="false" />
+                <element signature="e#4554#4578#0" expanded="false" />
+                <element signature="e#4603#4638#0" expanded="false" />
+                <element signature="e#4793#4816#0" expanded="false" />
+                <element signature="e#4841#4876#0" expanded="false" />
+                <element signature="e#5040#5080#0" expanded="false" />
+                <element signature="e#5105#5140#0" expanded="false" />
+                <element signature="e#5305#5338#0" expanded="false" />
+                <element signature="e#5363#5398#0" expanded="false" />
+                <element signature="e#5557#5584#0" expanded="false" />
+                <element signature="e#5609#5644#0" expanded="false" />
+                <element signature="e#5806#5836#0" expanded="false" />
+                <element signature="e#5861#5896#0" expanded="false" />
+                <element signature="e#6052#6076#0" expanded="false" />
+                <element signature="e#6101#6136#0" expanded="false" />
+                <element signature="e#6302#6336#0" expanded="false" />
+                <element signature="e#6361#6396#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sim_lock_settings.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/xml/sim_lock_settings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings_headers.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/xml/settings_headers.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="25" selection-start="1748" selection-end="1767" vertical-scroll-proportion="0.8080808" vertical-offset="108" max-vertical-offset="3672">
               <folding />
             </state>
           </provider>
@@ -126,8 +186,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -198,6 +256,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,19 +292,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -271,6 +318,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -382,43 +442,44 @@
       <created>1396467900798</created>
       <updated>1396467900798</updated>
       <workItem from="1396467906207" duration="49000" />
+      <workItem from="1400171484400" duration="189000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49000" />
+    <option name="totallyTimeSpent" value="238000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1919" y="22" width="1922" height="1059" extended-state="6" />
+    <frame x="1919" y="22" width="1922" height="1059" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -440,7 +501,120 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/res/xml/device_info_status.xml">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2502">
+          <folding>
+            <element signature="e#770#808#0" expanded="false" />
+            <element signature="e#935#965#0" expanded="false" />
+            <element signature="e#990#1025#0" expanded="false" />
+            <element signature="e#1187#1216#0" expanded="false" />
+            <element signature="e#1241#1276#0" expanded="false" />
+            <element signature="e#1438#1463#0" expanded="false" />
+            <element signature="e#1488#1523#0" expanded="false" />
+            <element signature="e#1687#1719#0" expanded="false" />
+            <element signature="e#1744#1779#0" expanded="false" />
+            <element signature="e#1940#1969#0" expanded="false" />
+            <element signature="e#1994#2029#0" expanded="false" />
+            <element signature="e#2194#2227#0" expanded="false" />
+            <element signature="e#2252#2287#0" expanded="false" />
+            <element signature="e#2449#2479#0" expanded="false" />
+            <element signature="e#2504#2539#0" expanded="false" />
+            <element signature="e#2701#2725#0" expanded="false" />
+            <element signature="e#2750#2785#0" expanded="false" />
+            <element signature="e#2944#2971#0" expanded="false" />
+            <element signature="e#2996#3031#0" expanded="false" />
+            <element signature="e#3186#3209#0" expanded="false" />
+            <element signature="e#3234#3269#0" expanded="false" />
+            <element signature="e#3479#3506#0" expanded="false" />
+            <element signature="e#3531#3566#0" expanded="false" />
+            <element signature="e#3777#3805#0" expanded="false" />
+            <element signature="e#3830#3865#0" expanded="false" />
+            <element signature="e#4076#4104#0" expanded="false" />
+            <element signature="e#4129#4164#0" expanded="false" />
+            <element signature="e#4317#4338#0" expanded="false" />
+            <element signature="e#4363#4398#0" expanded="false" />
+            <element signature="e#4554#4578#0" expanded="false" />
+            <element signature="e#4603#4638#0" expanded="false" />
+            <element signature="e#4793#4816#0" expanded="false" />
+            <element signature="e#4841#4876#0" expanded="false" />
+            <element signature="e#5040#5080#0" expanded="false" />
+            <element signature="e#5105#5140#0" expanded="false" />
+            <element signature="e#5305#5338#0" expanded="false" />
+            <element signature="e#5363#5398#0" expanded="false" />
+            <element signature="e#5557#5584#0" expanded="false" />
+            <element signature="e#5609#5644#0" expanded="false" />
+            <element signature="e#5806#5836#0" expanded="false" />
+            <element signature="e#5861#5896#0" expanded="false" />
+            <element signature="e#6052#6076#0" expanded="false" />
+            <element signature="e#6101#6136#0" expanded="false" />
+            <element signature="e#6302#6336#0" expanded="false" />
+            <element signature="e#6361#6396#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/device_info_status.xml">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2790">
+          <folding>
+            <element signature="e#770#808#0" expanded="false" />
+            <element signature="e#935#965#0" expanded="false" />
+            <element signature="e#990#1025#0" expanded="false" />
+            <element signature="e#1187#1216#0" expanded="false" />
+            <element signature="e#1241#1276#0" expanded="false" />
+            <element signature="e#1438#1463#0" expanded="false" />
+            <element signature="e#1488#1523#0" expanded="false" />
+            <element signature="e#1687#1719#0" expanded="false" />
+            <element signature="e#1744#1779#0" expanded="false" />
+            <element signature="e#1940#1969#0" expanded="false" />
+            <element signature="e#1994#2029#0" expanded="false" />
+            <element signature="e#2194#2227#0" expanded="false" />
+            <element signature="e#2252#2287#0" expanded="false" />
+            <element signature="e#2449#2479#0" expanded="false" />
+            <element signature="e#2504#2539#0" expanded="false" />
+            <element signature="e#2701#2725#0" expanded="false" />
+            <element signature="e#2750#2785#0" expanded="false" />
+            <element signature="e#2944#2971#0" expanded="false" />
+            <element signature="e#2996#3031#0" expanded="false" />
+            <element signature="e#3186#3209#0" expanded="false" />
+            <element signature="e#3234#3269#0" expanded="false" />
+            <element signature="e#3479#3506#0" expanded="false" />
+            <element signature="e#3531#3566#0" expanded="false" />
+            <element signature="e#3777#3805#0" expanded="false" />
+            <element signature="e#3830#3865#0" expanded="false" />
+            <element signature="e#4076#4104#0" expanded="false" />
+            <element signature="e#4129#4164#0" expanded="false" />
+            <element signature="e#4317#4338#0" expanded="false" />
+            <element signature="e#4363#4398#0" expanded="false" />
+            <element signature="e#4554#4578#0" expanded="false" />
+            <element signature="e#4603#4638#0" expanded="false" />
+            <element signature="e#4793#4816#0" expanded="false" />
+            <element signature="e#4841#4876#0" expanded="false" />
+            <element signature="e#5040#5080#0" expanded="false" />
+            <element signature="e#5105#5140#0" expanded="false" />
+            <element signature="e#5305#5338#0" expanded="false" />
+            <element signature="e#5363#5398#0" expanded="false" />
+            <element signature="e#5557#5584#0" expanded="false" />
+            <element signature="e#5609#5644#0" expanded="false" />
+            <element signature="e#5806#5836#0" expanded="false" />
+            <element signature="e#5861#5896#0" expanded="false" />
+            <element signature="e#6052#6076#0" expanded="false" />
+            <element signature="e#6101#6136#0" expanded="false" />
+            <element signature="e#6302#6336#0" expanded="false" />
+            <element signature="e#6361#6396#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/sim_lock_settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="941">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/settings_headers.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="25" selection-start="1748" selection-end="1767" vertical-scroll-proportion="0.8080808" vertical-offset="108" max-vertical-offset="3672">
           <folding />
         </state>
       </provider>
