@@ -28,6 +28,7 @@ import com.android.settings.ethernet.EthernetEnabler;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.vpn2.VpnSettings;
+import com.android.settings.wifi.HotspotEnabler;
 import com.android.settings.wifi.WifiEnabler;
 
 import android.accounts.Account;
@@ -488,6 +489,10 @@ public class Settings extends PreferenceActivity
                 if (!showDev) {
                     target.remove(i);
                 }
+            } else if (id == R.id.wireless_settings) {
+                if (Utils.platformHasMbxUiMode()) {
+                    target.remove(i);
+                }
             }
 
             if (target.get(i) == header
@@ -612,6 +617,7 @@ public class Settings extends PreferenceActivity
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
         private final EthernetEnabler mEthernetEnabler;
+        private final HotspotEnabler mHotspotEnabler;
         private AuthenticatorHelper mAuthHelper;
 
         private static class HeaderViewHolder {
@@ -626,7 +632,8 @@ public class Settings extends PreferenceActivity
         static int getHeaderType(Header header) {
             if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
-            } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings || header.id == R.id.ethernet_settings) {
+            } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings
+                    || header.id == R.id.ethernet_settings || header.id == R.id.portable_hotspot) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
@@ -677,6 +684,8 @@ public class Settings extends PreferenceActivity
             } else {
                 mEthernetEnabler = null;
             }
+            mHotspotEnabler = new HotspotEnabler(context, new Switch(context));
+
         }
 
         @Override
@@ -738,6 +747,8 @@ public class Settings extends PreferenceActivity
                     } else if (header.id == R.id.ethernet_settings) {
                         if (Utils.hwHasEthernet())
                             mEthernetEnabler.setSwitch(holder.switch_);
+                    } else if (header.id == R.id.portable_hotspot) {
+                        mHotspotEnabler.setSwitch(holder.switch_);
                     }
                     // No break, fall through on purpose to update common fields
 
@@ -774,15 +785,19 @@ public class Settings extends PreferenceActivity
         public void resume() {
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
-            if (Utils.hwHasEthernet())
+            if (Utils.hwHasEthernet()) {
                 mEthernetEnabler.resume();
+            }
+            mHotspotEnabler.resume();
         }
 
         public void pause() {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
-            if (Utils.hwHasEthernet())
+            if (Utils.hwHasEthernet()) {
                 mEthernetEnabler.pause();
+            }
+            mHotspotEnabler.pause();
         }
     }
 

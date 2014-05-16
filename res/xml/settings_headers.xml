@@ -27,7 +27,7 @@
         android:id="@+id/wifi_settings"
         android:fragment="com.android.settings.wifi.WifiSettings"
         android:title="@string/wifi_settings_title"
-        android:icon="@drawable/ic_settings_wireless" />
+        android:icon="@drawable/ic_settings_wireless"/>
 
     <!-- Bluetooth -->
     <header
@@ -41,13 +41,28 @@
         android:id="@+id/ethernet_settings"
         android:title="@string/eth_setting"
         android:icon="@drawable/ic_settings_ethernet3"
-        android:fragment="com.android.settings.ethernet.EthernetSettingsAML"/>
+        android:fragment="com.android.settings.ethernet.EthernetSettingsAML" />
+
     <!-- Data Usage -->
     <header
         android:id="@+id/data_usage_settings"
         android:fragment="com.android.settings.DataUsageSummary"
         android:title="@string/data_usage_summary_title"
         android:icon="@drawable/ic_settings_data_usage" />
+
+    <!-- VPN -->
+    <header
+        android:id="@+id/vpn_settings"
+        android:fragment="com.android.settings.vpn2.VpnSettings"
+        android:title="@string/vpn_settings_title"
+        android:icon="@drawable/ic_settings_vpn"/>
+
+    <!-- Portable Hotspot -->
+    <header
+        android:id="@+id/portable_hotspot"
+        android:fragment="com.android.settings.TetherSettings"
+        android:title="@string/tether_settings_title_wifi"
+        android:icon="@drawable/ic_settings_wifi_tether"/>
 
     <!-- Operator hook -->
     <header
