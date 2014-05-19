@@ -47,4 +47,9 @@
         android:key="date_format"
         android:title="@string/date_time_date_format"
         android:summary="mm/dd/yyyy"/>
+    <EditTextPreference
+        android:defaultValue="@string/ntp_server_def"
+        android:key="@string/ntp_server_key"
+        android:summary="@string/ntp_server_summary"
+        android:title="@string/ntp_server" />
 </PreferenceScreen>

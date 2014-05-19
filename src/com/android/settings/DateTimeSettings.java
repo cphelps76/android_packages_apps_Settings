@@ -55,6 +55,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     private Calendar mDummyDate;
 
     private static final String KEY_DATE_FORMAT = "date_format";
+    private static final String KEY_NTP_SERVER_CUSTOM = "ntp_server_custom";
     private static final String KEY_AUTO_TIME = "auto_time";
     private static final String KEY_AUTO_TIME_ZONE = "auto_zone";
 
@@ -213,6 +214,11 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             Settings.System.putString(getContentResolver(),
                     Settings.System.DATE_FORMAT, format);
             updateTimeAndDateDisplay(getActivity());
+        } else if (key.equals(KEY_NTP_SERVER_CUSTOM)) {
+            String format = preferences.getString(key,
+                     getResources().getString(R.string.ntp_server_key));
+            Settings.Secure.putString(getContentResolver(),
+                     Settings.Secure.NTP_SERVER_CUSTOM, format);
         } else if (key.equals(KEY_AUTO_TIME)) {
             boolean autoEnabled = preferences.getBoolean(key, true);
             Settings.Global.putInt(getContentResolver(), Settings.Global.AUTO_TIME,

@@ -651,6 +651,11 @@
     <string name="zone_list_menu_sort_alphabetically">Sort alphabetically</string>
     <!-- Menu item on Select time zone screen -->
     <string name="zone_list_menu_sort_by_timezone">Sort by time zone</string>
+    <!-- Menu item on Select custom NTP server. Default value is taken from frameworks/base/core/res/res/values/config.xml-->
+    <item name="ntp_server_def" format="string" type="string">2.pool.ntp.org</item>
+    <string name="ntp_server_key" translate="false">ntp_server_custom</string>
+    <string name="ntp_server">Custom NTP server</string>
+    <string name="ntp_server_summary">Choose custom NTP server</string>
     <!-- Title string shown above DatePicker, letting a user select system date
          [CHAR LIMIT=20] -->
     <string name="date_picker_title">Date</string>
