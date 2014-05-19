@@ -108,9 +108,8 @@ public class HotspotEnabler implements CompoundButton.OnCheckedChangeListener {
                 Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
         int wifiState = mWifiManager.getWifiState();
         boolean isEnabled = wifiState == WifiManager.WIFI_AP_STATE_ENABLED;
-        boolean isDisabled = wifiState == WifiManager.WIFI_AP_STATE_DISABLED;
         mSwitch.setChecked(!isAirplaneMode && isEnabled);
-        mSwitch.setEnabled(isEnabled || isDisabled);
+        mSwitch.setEnabled(!isAirplaneMode);
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
