@@ -16,6 +16,11 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/hdmi_settings">
+    <ListPreference
+        android:key="output_mode"
+        android:title="@string/hdmi_output_title"
+        android:entries="@array/output_mode_list"
+        android:entryValues="@array/output_mode_values"/>
     <CheckBoxPreference
         android:key="dual_disp"
         android:title="@string/hdmi_dual_disp"

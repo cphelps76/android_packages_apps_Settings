@@ -97,6 +97,13 @@
         android:fragment="com.android.settings.DisplaySettings"
         android:title="@string/display_settings" />
 
+    <!-- HDMI -->
+    <header
+        android:id="@+id/hdmi_settings"
+        android:icon="@drawable/ic_settings_hdmi"
+        android:fragment="com.android.settings.HdmiSettings"
+        android:title="@string/hdmi_settings" />
+
     <!-- Storage -->
     <header
         android:id="@+id/storage_settings"

@@ -104,11 +104,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             updateAccelerometerRotationCheckbox();
         }
     };
-    
+
     public void onDestroy(){
         super.onDestroy();
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +116,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         ContentResolver resolver = getActivity().getContentResolver();
 
         addPreferencesFromResource(R.xml.display_settings);
-        sw = (SystemWriteManager)getSystemService("system_write"); 
+        sw = (SystemWriteManager)getSystemService("system_write");
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
         if (RotationPolicy.isRotationLockToggleSupported(getActivity())) {
@@ -132,7 +132,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 			|| (Utils.platformHasMbxUiMode())) {
             getPreferenceScreen().removePreference(mScreenSaverPreference);
         }
-        
+
         mScreenTimeoutPreference = (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
         final long currentTimeout = Settings.System.getLong(resolver, SCREEN_OFF_TIMEOUT,
                 FALLBACK_SCREEN_TIMEOUT_VALUE);
@@ -158,7 +158,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
         }
-        
+
         if(Utils.platformHasMbxUiMode()){
         	getPreferenceScreen().removePreference(findPreference(KEY_WALLPAPER));
         }
@@ -166,7 +166,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if(!Utils.platformHasScreenBrightness()){
         	getPreferenceScreen().removePreference(findPreference(KEY_Brightness));
         }
-        
+
         if(!Utils.platformHasScreenTimeout()){
         	getPreferenceScreen().removePreference(mScreenTimeoutPreference);
         }
@@ -174,21 +174,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if(!Utils.platformHasScreenFontSize()){
         	getPreferenceScreen().removePreference(mFontSizePref);
         }
-        if(Utils.platformHasDefaultTVFreq()){
-    	    mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
-    	    mDefaultFrequency.setOnPreferenceChangeListener(this);
-    	    String valDefaultFrequency = SystemProperties.get(STR_DEFAULT_FREQUENCY_VAR);
-    	    mDefaultFrequencyEntries = getResources().getStringArray(R.array.default_frequency_entries);
-    	    if(valDefaultFrequency.equals("")){
-    	        valDefaultFrequency = getResources().getString(R.string.tv_default_frequency_summary);
-    	    }
-    	    int index_DF = findIndexOfEntry(valDefaultFrequency, mDefaultFrequencyEntries);
-    	    mDefaultFrequency.setValueIndex(index_DF);
-			mDefaultFrequency.setSummary(valDefaultFrequency);
+        mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
+        mDefaultFrequency.setOnPreferenceChangeListener(this);
+        String valDefaultFrequency = SystemProperties.get(STR_DEFAULT_FREQUENCY_VAR);
+        mDefaultFrequencyEntries = getResources().getStringArray(R.array.default_frequency_entries);
+        if (valDefaultFrequency.equals("")) {
+            valDefaultFrequency = getResources().getString(R.string.tv_default_frequency_summary);
         }
-        else{
-        	getPreferenceScreen().removePreference(findPreference(KEY_DEFAULT_FREQUENCY));
-        }
+        int index_DF = findIndexOfEntry(valDefaultFrequency, mDefaultFrequencyEntries);
+        mDefaultFrequency.setValueIndex(index_DF);
+        mDefaultFrequency.setSummary(valDefaultFrequency);
+
         mDisplayManager = (DisplayManager)getActivity().getSystemService(
                 Context.DISPLAY_SERVICE);
         mWifiDisplayStatus = mDisplayManager.getWifiDisplayStatus();
@@ -278,7 +274,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         return indices.length-1;
     }
-    
+
     public void readFontSizePreference(ListPreference pref) {
         try {
             mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
@@ -296,10 +292,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         pref.setSummary(String.format(res.getString(R.string.summary_font_size),
                 fontSizeNames[index]));
     }
-    
+
     @Override
     public void onResume() {
-        super.onResume();       
+        super.onResume();
         updateState();
 
         RotationPolicy.registerRotationPolicyListener(getActivity(),
@@ -344,7 +340,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
-		updateRequestRotationCheckbox();
+        updateRequestRotationCheckbox();
         updateWifiDisplaySummary();
     }
 
@@ -401,8 +397,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
                     value ? 1 : 0);
             return true;
-        
-        }    
+        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -420,13 +415,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);
         }
-        if(KEY_DEFAULT_FREQUENCY.equals(key)){
+        if (KEY_DEFAULT_FREQUENCY.equals(key)){
             try {
-				int frequency_index = Integer.parseInt((String) objValue);
-				mDefaultFrequency.setSummary(mDefaultFrequencyEntries[frequency_index]);
-				SystemProperties.set(STR_DEFAULT_FREQUENCY_VAR,mDefaultFrequencyEntries[frequency_index].toString());
-            }catch(NumberFormatException e){
-				Log.e(TAG, "could not persist default TV frequency setting", e);
+                int frequency_index = Integer.parseInt((String) objValue);
+                mDefaultFrequency.setSummary(mDefaultFrequencyEntries[frequency_index]);
+                SystemProperties.set(STR_DEFAULT_FREQUENCY_VAR,mDefaultFrequencyEntries[frequency_index].toString());
+            } catch(NumberFormatException e) {
+                Log.e(TAG, "could not persist default TV frequency setting", e);
             }
         }
 
@@ -442,7 +437,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 updateWifiDisplaySummary();
             }
         }
-    };	
+    };
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
@@ -456,21 +451,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         return false;
     }
-    
-	private int findIndexOfEntry(String value, CharSequence[] entry) 
-	{
-                if (value != null && entry != null) 
-                {
-                    for (int i = entry.length - 1; i >= 0; i--) 
-                    {
-                        if (entry[i].equals(value)) 
-                        {
-                            return i;
-                        }
-                    }
-                }
 
-		
-		return getResources().getInteger(R.integer.outputmode_default_values);  //set 720p as default
+    private int findIndexOfEntry(String value, CharSequence[] entry) {
+        if (value != null && entry != null) {
+            for (int i = entry.length - 1; i >= 0; i--) {
+                if (entry[i].equals(value)) {
+                    return i;
+                }
+            }
+        }
+        return getResources().getInteger(R.integer.outputmode_default_values);  //set 720p as default
     }
 }

@@ -4562,13 +4562,22 @@
     <string name="hdmi_spdif">Set SPDIF</string>
     <string name="hdmi_auto_switch">Enable auto switch</string>
     <string name="hdmi_auto_switch_on">Auto switch ON</string>
-    <string name="hdmi_auto_switch_off">Auto switch OFF</string>     
+    <string name="hdmi_auto_switch_off">Auto switch OFF</string>
+    <string name="hdmi_output_title">HDMI output mode</string>
+    <string name="hdmi_display_mode_720p">720p</string>
+    <string name="hdmi_display_mode_720p50hz">720p (50Hz)</string>
+    <string name="hdmi_display_mode_1080i">1080i</string>
+    <string name="hdmi_display_mode_1080i50hz">1080i (50Hz)</string>
+    <string name="hdmi_display_mode_1080p">1080p</string>
+    <string name="hdmi_display_mode_1080p50hz">1080p (50Hz)</string>
+
     
     <string name="drc_mode_title">DRC Mode</string>
     <string name="drc_mode_summary">DRC Mode</string>
     <string name="drc_title">DRC</string>
     <string name="cec_language_switch_title">Auto switch language </string>
     <string name="wifi_disable_ethernet_enable">The network route is ethernet now.Please disable it if you want to set Wifi.</string>
+
     <array name="language" translatable="false">
     	<item>zh</item>
     	<item>en</item>

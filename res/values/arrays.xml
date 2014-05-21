@@ -791,4 +791,22 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <string-array name="output_mode_list">
+        <item>@string/hdmi_display_mode_720p</item>
+        <item>@string/hdmi_display_mode_720p50hz</item>
+        <!--<item>@string/hdmi_display_mode_1080i</item>
+        <item>@string/hdmi_display_mode_1080i50hz</item> -->
+        <item>@string/hdmi_display_mode_1080p</item>
+        <item>@string/hdmi_display_mode_1080p50hz</item>
+    </string-array>
+
+    <string-array name="output_mode_values">
+        <item> 720p</item>
+        <item> 720p50hz</item>
+        <!--<item> 1080i</item>
+        <item> 1080i50hz</item>-->
+        <item> 1080p</item>
+        <item> 1080p50hz</item>
+    </string-array>
 </resources>
