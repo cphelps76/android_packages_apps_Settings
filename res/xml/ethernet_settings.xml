@@ -22,4 +22,8 @@
             android:summary="@string/eth_conf_summary"
             android:key="ETHERNET_config"
             android:persistent="false" />
+        <PreferenceScreen
+            android:title="@string/ethernet_info_title"
+            android:summary="@string/ethernet_info_summary"
+            android:key="ethernet_info" />
 </PreferenceScreen>

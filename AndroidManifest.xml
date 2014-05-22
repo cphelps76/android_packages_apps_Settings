@@ -1030,7 +1030,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".deviceinfo.EthInfo"
+        <activity android:name=".ethernet.EthernetInfo"
                 android:label="@string/device_ethinfo_activity_title"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"
                 android:process="com.android.phone">

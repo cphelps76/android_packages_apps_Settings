@@ -7,14 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13b2096f-485f-45bf-80ca-0a4e264587f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_settings_vpn.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_settings_vpn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_settings_vpn.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_settings_vpn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_settings_vpn.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_settings_vpn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_settings_wifi_tether.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_settings_wifi_tether.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_settings_wifi_tether.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_settings_wifi_tether.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_settings_wifi_tether.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_settings_wifi_tether.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/android/settings/Settings.java" afterPath="$PROJECT_DIR$/src/com/android/settings/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/android/settings/ethernet/EthernetSettingsAML.java" afterPath="$PROJECT_DIR$/src/com/android/settings/ethernet/EthernetSettingsAML.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/android/settings/HdmiSettings.java" afterPath="$PROJECT_DIR$/src/com/android/settings/HdmiSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/ethernet_settings.xml" afterPath="$PROJECT_DIR$/res/xml/ethernet_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Settings.iws" />
@@ -100,24 +97,82 @@
       <file leaf-file-name="settings_headers.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/xml/settings_headers.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="41" selection-start="2255" selection-end="2271" vertical-scroll-proportion="-5.4" vertical-offset="828" max-vertical-offset="3942">
+            <state line="106" column="0" selection-start="3888" selection-end="3888" vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="4068">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Settings.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="HdmiSettings.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/android/settings/HdmiSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="53" selection-start="1499" selection-end="1499" vertical-scroll-proportion="-2.1799307" vertical-offset="2376" max-vertical-offset="6390">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#7357#7940#0" expanded="true" />
+                <element signature="e#7933#7934#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hdmi_prefs.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/xml/hdmi_prefs.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="57" selection-start="1006" selection-end="1006" vertical-scroll-proportion="-11.52" vertical-offset="108" max-vertical-offset="810">
+              <folding>
+                <element signature="e#770#793#0" expanded="false" />
+                <element signature="e#1085#1109#0" expanded="false" />
+                <element signature="e#1136#1163#0" expanded="false" />
+                <element signature="e#1191#1219#0" expanded="false" />
+                <element signature="e#1302#1328#0" expanded="false" />
+                <element signature="e#1355#1384#0" expanded="false" />
+                <element signature="e#1412#1442#0" expanded="false" />
+                <element signature="e#1527#1547#0" expanded="false" />
+                <marker date="1400772384498" expanded="true" signature="1030:1220" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4573" column="62" selection-start="365407" selection-end="365407" vertical-scroll-proportion="-9.211538" vertical-offset="81835" max-vertical-offset="82926">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="arrays.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/arrays.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="776" column="4" selection-start="29615" selection-end="29615" vertical-scroll-proportion="-7.48" vertical-offset="13781" max-vertical-offset="14724">
+              <folding>
+                <marker date="1400772384494" expanded="true" signature="727:30721" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/android/settings/Utils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="762" column="1" selection-start="31043" selection-end="31043" vertical-scroll-proportion="-32.0" vertical-offset="12600" max-vertical-offset="13590">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#29326#29518#0" expanded="false" />
+                <element signature="e#29507#29508#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Settings.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/android/settings/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="625" column="29" selection-start="25353" selection-end="25353" vertical-scroll-proportion="-0.85846865" vertical-offset="10784" max-vertical-offset="15012">
-              <folding>
-                <element signature="e#6366#6389#0" expanded="true" />
-                <element signature="e#21389#21425#0" expanded="true" />
-                <element signature="e#21479#21515#0" expanded="true" />
-                <element signature="e#31270#31379#0" expanded="true" />
-                <element signature="e#33533#33575#0" expanded="true" />
-                <element signature="e#33749#33782#0" expanded="true" />
-              </folding>
+            <state line="733" column="0" selection-start="29736" selection-end="29736" vertical-scroll-proportion="0.0" vertical-offset="13194" max-vertical-offset="16272">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -125,7 +180,7 @@
       <file leaf-file-name="WifiApEnabler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/android/settings/wifi/WifiApEnabler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="13" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="3240">
+            <state line="41" column="13" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="3888">
               <folding />
             </state>
           </provider>
@@ -145,13 +200,20 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/com/android/settings/Settings.java" />
+        <option value="$PROJECT_DIR$/res/xml/settings_headers.xml" />
+        <option value="$PROJECT_DIR$/res/xml/hdmi_prefs.xml" />
+        <option value="$PROJECT_DIR$/src/com/android/settings/Utils.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/values/arrays.xml" />
+        <option value="$PROJECT_DIR$/src/com/android/settings/HdmiSettings.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
+    <option name="y" value="22" />
     <option name="width" value="1922" />
-    <option name="height" value="1007" />
+    <option name="height" value="985" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -166,7 +228,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -251,6 +313,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="settings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ethernet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Settings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Settings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -273,6 +357,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Settings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Settings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -288,13 +390,24 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="project.structure.last.edited" value="SDKs" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RunManager" selected="Android Application.tests">
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails" singleton="true">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -309,17 +422,7 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -350,19 +453,17 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
       <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -384,6 +485,109 @@
       </option>
       <envs />
       <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browserFamily" value="FIREFOX" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" output_log_level="null" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browserFamily" value="FIREFOX" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -453,6 +657,11 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="13b2096f-485f-45bf-80ca-0a4e264587f5" name="Default" comment="" />
@@ -461,14 +670,16 @@
       <workItem from="1396467906207" duration="49000" />
       <workItem from="1400171484400" duration="189000" />
       <workItem from="1400274969248" duration="1018000" />
+      <workItem from="1400593907253" duration="1704000" />
+      <workItem from="1400595627660" duration="17031000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1256000" />
+    <option name="totallyTimeSpent" value="19991000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1922" height="1007" extended-state="7" />
+    <frame x="-1" y="22" width="1922" height="985" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -491,12 +702,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24895833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32929292" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -517,6 +728,107 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/res/xml/device_info_status.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2502">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/sim_lock_settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/settings_headers.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="20" selection-start="3908" selection-end="3908" vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="4068">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/HdmiSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="130" column="0" selection-start="4509" selection-end="4509" vertical-scroll-proportion="0.0" vertical-offset="2340" max-vertical-offset="2880">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7357#7940#0" expanded="true" />
+            <element signature="e#7933#7934#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/arrays.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="804" column="31" selection-start="30388" selection-end="30388" vertical-scroll-proportion="0.0" vertical-offset="14204" max-vertical-offset="14868">
+          <folding>
+            <marker date="1400772384494" expanded="true" signature="727:30721" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="575" column="42" selection-start="24209" selection-end="24229" vertical-scroll-proportion="0.0" vertical-offset="10350" max-vertical-offset="13500">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#29326#29518#0" expanded="false" />
+            <element signature="e#29507#29508#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="733" column="0" selection-start="29736" selection-end="29736" vertical-scroll-proportion="0.0" vertical-offset="13194" max-vertical-offset="16272">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/wifi/WifiApEnabler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="13" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="3888">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/device_info_status.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2502">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/sim_lock_settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/settings_headers.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="41" selection-start="2255" selection-end="2271" vertical-scroll-proportion="0.0" vertical-offset="1098" max-vertical-offset="4068">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="625" column="29" selection-start="25297" selection-end="25297" vertical-scroll-proportion="0.0" vertical-offset="11250" max-vertical-offset="15156">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/wifi/WifiApEnabler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="13" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="3888">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/xml/device_info_status.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2502">
@@ -559,13 +871,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/settings_headers.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="41" selection-start="2255" selection-end="2271" vertical-scroll-proportion="-5.4" vertical-offset="828" max-vertical-offset="3942">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/android/settings/wifi/WifiApEnabler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="13" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="3240">
@@ -575,18 +880,171 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/android/settings/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="625" column="29" selection-start="25353" selection-end="25353" vertical-scroll-proportion="-0.85846865" vertical-offset="10784" max-vertical-offset="15012">
+        <state line="733" column="0" selection-start="29736" selection-end="29736" vertical-scroll-proportion="0.0" vertical-offset="11304" max-vertical-offset="15012">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/settings_headers.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="106" column="0" selection-start="3888" selection-end="3888" vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="4068">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="762" column="1" selection-start="31043" selection-end="31043" vertical-scroll-proportion="-32.0" vertical-offset="12600" max-vertical-offset="13590">
           <folding>
-            <element signature="e#6366#6389#0" expanded="true" />
-            <element signature="e#21389#21425#0" expanded="true" />
-            <element signature="e#21479#21515#0" expanded="true" />
-            <element signature="e#31270#31379#0" expanded="true" />
-            <element signature="e#33533#33575#0" expanded="true" />
-            <element signature="e#33749#33782#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#29326#29518#0" expanded="false" />
+            <element signature="e#29507#29508#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4573" column="62" selection-start="365407" selection-end="365407" vertical-scroll-proportion="-9.211538" vertical-offset="81835" max-vertical-offset="82926">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/hdmi_prefs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="57" selection-start="1006" selection-end="1006" vertical-scroll-proportion="-11.52" vertical-offset="108" max-vertical-offset="810">
+          <folding>
+            <element signature="e#770#793#0" expanded="false" />
+            <element signature="e#1085#1109#0" expanded="false" />
+            <element signature="e#1136#1163#0" expanded="false" />
+            <element signature="e#1191#1219#0" expanded="false" />
+            <element signature="e#1302#1328#0" expanded="false" />
+            <element signature="e#1355#1384#0" expanded="false" />
+            <element signature="e#1412#1442#0" expanded="false" />
+            <element signature="e#1527#1547#0" expanded="false" />
+            <marker date="1400772384498" expanded="true" signature="1030:1220" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/arrays.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="776" column="4" selection-start="29615" selection-end="29615" vertical-scroll-proportion="-7.48" vertical-offset="13781" max-vertical-offset="14724">
+          <folding>
+            <marker date="1400772384494" expanded="true" signature="727:30721" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/android/settings/HdmiSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="53" selection-start="1499" selection-end="1499" vertical-scroll-proportion="-2.1799307" vertical-offset="2376" max-vertical-offset="6390">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7357#7940#0" expanded="true" />
+            <element signature="e#7933#7934#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Android</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>Matricom API 17 SDK</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Settings</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>ds</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

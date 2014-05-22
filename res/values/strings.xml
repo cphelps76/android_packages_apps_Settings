@@ -40,7 +40,7 @@
     <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
     <string name="show_dev_on">You are now a developer!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
-    <string name="show_dev_already">No need, you are already a developer.</string>
+    <string name="show_dev_already">No need, you are already a developer</string>
 
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
@@ -1275,7 +1275,9 @@
     <string name="android_beam_explained">When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam Browser pages, YouTube videos, People contacts, and more.\n\nJust bring the devices together (typically back to back) and then touch your screen. The app determines what gets beamed.</string>
 
     <!-- Ethernet configuration dialog -->        
-    <string name="eth_config_title">Configure Ethernet device</string>        
+    <string name="eth_config_title">Configure Ethernet device</string>
+    <string name="ethernet_info_title">Ethernet info</string>
+    <string name="ethernet_info_summary">Information about the connected ethernet device</string>
     <string name="eth_setting">Ethernet</string>        
     <string name="eth_dev_list">Ethernet Devices:</string>        
     <string name="eth_con_type">Connection Type</string>        

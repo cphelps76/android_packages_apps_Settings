@@ -18,6 +18,7 @@
 
 package com.android.settings.ethernet;
 
+import android.preference.*;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -25,31 +26,39 @@ import com.android.settings.Utils;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ethernet.EthernetManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 import android.view.Gravity;
 import android.widget.Switch;
 import android.util.Log;
+import com.android.settings.wifi.AdvancedWifiSettings;
 
 public class EthernetSettingsAML extends SettingsPreferenceFragment {
     private static final String LOG_TAG = "Ethernet";
-    private static final String KEY_CONF_ETH = "ETHERNET_config";
+    private static final String KEY_ETH_CONF = "ethernet_config";
+    private static final String KEY_ETH_INFO = "ethernet_info";
 
     private EthernetEnabler mEthEnabler;
     private EthernetConfigDialog mEthConfigDialog;
     private Preference mEthConfigPref;
-    
+    private Preference mEthInfoPref;
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         super.onPreferenceTreeClick(preferenceScreen, preference);
 
         if (preference == mEthConfigPref) {
             mEthConfigDialog.show();
+            return true;
+        } else if (preference == mEthInfoPref) {
+            ((PreferenceActivity) getActivity()).startPreferencePanel(
+                    EthernetInfo.class.getCanonicalName(),
+                    null,
+                    R.string.ethernet_info_title, null,
+                    this, 0);
+            return true;
         }
         return false;
     }
@@ -61,7 +70,8 @@ public class EthernetSettingsAML extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.ethernet_settings);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        mEthConfigPref = preferenceScreen.findPreference(KEY_CONF_ETH);
+        mEthConfigPref = preferenceScreen.findPreference(KEY_ETH_CONF);
+        mEthInfoPref = preferenceScreen.findPreference(KEY_ETH_INFO);
     }
 
     @Override
@@ -70,11 +80,6 @@ public class EthernetSettingsAML extends SettingsPreferenceFragment {
         if (mEthEnabler != null) {
             mEthEnabler.resume();
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     @Override
