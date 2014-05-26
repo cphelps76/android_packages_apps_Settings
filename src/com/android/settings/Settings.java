@@ -504,8 +504,13 @@ public class Settings extends PreferenceActivity
             // Increment if the current one wasn't removed by the Utils code.
             if (target.get(i) == header) {
                 // Hold on to the first header, when we need to reset to the top-level
-                if (mFirstHeader == null &&
-                        HeaderAdapter.getHeaderType(header) != HeaderAdapter.HEADER_TYPE_CATEGORY) {
+                try {
+                    if (mFirstHeader == null &&
+                            HeaderAdapter.getHeaderType(header) != HeaderAdapter.HEADER_TYPE_CATEGORY) {
+                        mFirstHeader = header;
+                    }
+                } catch (RemoteException e) {
+                    // set to header regardless
                     mFirstHeader = header;
                 }
                 mHeaderIndexMap.put(id, i);
@@ -620,7 +625,7 @@ public class Settings extends PreferenceActivity
         private final HotspotEnabler mHotspotEnabler;
         private AuthenticatorHelper mAuthHelper;
 
-        private static class HeaderViewHolder {
+        private class HeaderViewHolder {
             ImageView icon;
             TextView title;
             TextView summary;
@@ -629,11 +634,12 @@ public class Settings extends PreferenceActivity
 
         private LayoutInflater mInflater;
 
-        static int getHeaderType(Header header) {
+        static int getHeaderType(Header header)  throws RemoteException {
             if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
-            } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings
-                    || header.id == R.id.ethernet_settings || header.id == R.id.portable_hotspot) {
+            } else if ((header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings
+                    || header.id == R.id.ethernet_settings || header.id == R.id.portable_hotspot)
+                    && Utils.hardwareKeyboardEnabled()) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
@@ -643,7 +649,11 @@ public class Settings extends PreferenceActivity
         @Override
         public int getItemViewType(int position) {
             Header header = getItem(position);
-            return getHeaderType(header);
+            try {
+                return getHeaderType(header);
+            } catch (RemoteException e) {
+                return HEADER_TYPE_NORMAL;
+            }
         }
 
         @Override
@@ -692,7 +702,12 @@ public class Settings extends PreferenceActivity
         public View getView(int position, View convertView, ViewGroup parent) {
             HeaderViewHolder holder;
             Header header = getItem(position);
-            int headerType = getHeaderType(header);
+            int headerType;
+            try {
+                headerType = getHeaderType(header);
+            } catch (RemoteException e) {
+                headerType = HEADER_TYPE_NORMAL;
+            }
             View view = null;
 
             if (convertView == null) {

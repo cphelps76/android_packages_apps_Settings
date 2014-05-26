@@ -18,22 +18,18 @@
 
 package com.android.settings.ethernet;
 
+import android.os.RemoteException;
 import android.preference.*;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ethernet.EthernetManager;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Switch;
-import android.util.Log;
-import com.android.settings.wifi.AdvancedWifiSettings;
 
 public class EthernetSettingsAML extends SettingsPreferenceFragment {
     private static final String LOG_TAG = "Ethernet";
@@ -75,6 +71,16 @@ public class EthernetSettingsAML extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        try {
+            initToggles();
+        } catch (RemoteException e) {
+            // fail quietly
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         if (mEthEnabler != null) {
@@ -97,6 +103,52 @@ public class EthernetSettingsAML extends SettingsPreferenceFragment {
 	        final Activity activity = getActivity();
 	        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
 	        activity.getActionBar().setCustomView(null);
+        }
+    }
+
+    private void initToggles() throws RemoteException {
+        if (!Utils.hardwareKeyboardEnabled()) {
+            // For MultiPane preference, the switch is on the left column header.
+            // Other layouts unsupported for now.
+
+            final Activity activity = getActivity();
+            Switch actionBarSwitch = new Switch(activity);
+            if (activity instanceof PreferenceActivity) {
+                PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
+                if (Utils.platformHasMbxUiMode()) {
+                    final int padding = activity.getResources().getDimensionPixelSize(
+                            R.dimen.action_bar_switch_padding);
+                    actionBarSwitch.setPadding(0, 0, padding, 0);
+                    activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                            ActionBar.DISPLAY_SHOW_CUSTOM);
+                    activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                }
+                else if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
+                    final int padding = activity.getResources().getDimensionPixelSize(
+                            R.dimen.action_bar_switch_padding);
+                    actionBarSwitch.setPadding(0, 0, padding, 0);
+                    activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                            ActionBar.DISPLAY_SHOW_CUSTOM);
+                    activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                }
+                mEthEnabler = new EthernetEnabler(
+                        (EthernetManager)getSystemService(Context.ETH_SERVICE),
+                        actionBarSwitch);
+                mEthConfigDialog = new EthernetConfigDialog(
+                        getActivity(),
+                        (EthernetManager)getSystemService(Context.ETH_SERVICE));
+                mEthEnabler.setConfigDialog(mEthConfigDialog);
+            }
+            if (!Utils.platformHasMbxUiMode()) {
+                mEthConfigDialog = new EthernetConfigDialog(getActivity(),
+                        (EthernetManager) getSystemService(Context.ETH_SERVICE));
+            }
         }
     }
 }

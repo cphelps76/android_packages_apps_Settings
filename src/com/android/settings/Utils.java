@@ -39,12 +39,9 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Uri;
-import android.os.BatteryManager;
-import android.os.Bundle;
+import android.os.*;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
-import android.os.ParcelFileDescriptor;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity.Header;
 import android.preference.PreferenceFrameLayout;
@@ -56,11 +53,14 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.IWindowManager;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
@@ -71,6 +71,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.Process;
 import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
@@ -79,6 +80,7 @@ import java.util.Locale;
 public class Utils {
 
     public static final String TAG = "Utils";
+
 
     /**
      * Set the preference's title to the matching activity's label.
@@ -594,6 +596,12 @@ public class Utils {
     public static boolean platformHasDRC()
     {
             return SystemProperties.getBoolean("ro.platform.has.drc", false);
+    }
+
+    public static boolean hardwareKeyboardEnabled() throws RemoteException {
+        IWindowManager wm = IWindowManager.Stub.asInterface(ServiceManager.checkService(
+                Context.WINDOW_SERVICE));
+        return wm.isHardKeyboardEnabled();
     }
 
     /* Used by UserSettings as well. Call this on a non-ui thread. */
