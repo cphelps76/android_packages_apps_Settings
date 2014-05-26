@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.SystemWriteManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -81,6 +82,10 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
+        // until bugs are worked out disable OutputModePref for user builds
+        if (!Build.TYPE.equalsIgnoreCase("user")) {
+            getPreferenceScreen().removePreference(findPreference(KEY_OUTPUT_MODE));
+        }
 
         sw = (SystemWriteManager) getSystemService("system_write");
 
@@ -183,15 +188,7 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
     }
 
-    public void disableFreescale(String mode) {
-        // default to 720p
-        int w = 1280;
-        int h = 720;
-
-        if (mode.contains("1080")) {
-            w = 1920;
-            h = 1080;
-        }
+    public void disableFreescale() {
         // turn off fb freescale
         Utils.writeSysfs(sw, "/sys/class/graphics/fb0/freescale_mode", "0");
         Utils.writeSysfs(sw, "/sys/class/graphics/fb1/freescale_mode", "0");
@@ -203,7 +200,7 @@ public class HdmiSettings extends SettingsPreferenceFragment
         Utils.writeSysfs(sw, "/sys/class/video/disable_video", "1");
 
         // revert display axis
-        Utils.writeSysfs(sw, "/sys/class/display/axis", "0 0 " + String.valueOf(w - 1) + " " + String.valueOf(h - 1));
+        Utils.writeSysfs(sw, "/sys/class/display/axis", "0 0 1279 719");
     }
 
     public void setResolution(String mode) {
@@ -217,7 +214,7 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
      private void updateHdmiOutput(String newMode) {
          setResolution(newMode);
-         disableFreescale(newMode);
+         disableFreescale();
          updateModeProps(newMode);
     }
 
