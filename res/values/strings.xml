@@ -4573,6 +4573,8 @@
     <string name="hdmi_display_mode_1080p">1080p</string>
     <string name="hdmi_display_mode_1080p50hz">1080p (50Hz)</string>
 
+    <string name="gbox_launcher_settings_title">G-BoxLauncher</string>
+
     
     <string name="drc_mode_title">DRC Mode</string>
     <string name="drc_mode_summary">DRC Mode</string>
