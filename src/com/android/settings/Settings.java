@@ -451,11 +451,6 @@ public class Settings extends PreferenceActivity
                     // If device has hardware bluetooth support but is broken, hide the menu
                     target.remove(i);
                 }
-            } else if (id == R.id.data_usage_settings) {
-                // Remove data usage if G-Box
-                if (Utils.platformHasMbxUiMode()) {
-                    target.remove(header);
-                }
             } else if (id == R.id.battery_settings){
                 // Remove Battery Settings if Battery service is not available.
                 if (Utils.hwNoBattery()) {
