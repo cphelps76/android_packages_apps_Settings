@@ -39,6 +39,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ethernet.EthernetManager;
@@ -474,6 +475,14 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
+            } else if (id == R.id.account_add) {
+                if (!checkIfGoogleWizardExists()) {
+                    target.remove(i);
+                    // only way to add accounts is via apps
+                    // only way to get apps is from play store (legally)
+                    // only way to go to play store is with Google Apps
+                    target.remove(i - 1);
+                }
             } else if (id == R.id.user_settings) {
                 if (!UserHandle.MU_ENABLED
                         || !UserManager.supportsMultipleUsers()
@@ -512,6 +521,17 @@ public class Settings extends PreferenceActivity
                 i++;
             }
         }
+    }
+
+    private boolean checkIfGoogleWizardExists() {
+        String google_wizard = "com.google.android.setupwizard";
+        List<ApplicationInfo> packages;
+        PackageManager pm = getPackageManager();
+        packages = pm.getInstalledApplications(0);
+        for (ApplicationInfo packageInfo : packages) {
+            if (packageInfo.packageName.equals(google_wizard)) return true;
+        }
+        return false;
     }
 
     private int insertAccountsHeaders(List<Header> target, int headerIndex) {
