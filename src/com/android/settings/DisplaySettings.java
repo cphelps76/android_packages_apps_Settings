@@ -69,6 +69,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WALLPAPER = "wallpaper";
     private static final String KEY_AUTOBRIGHTNESS = "auto_brightness";
+    private static final String KEY_HEADS_UP = "heads_up_enabled";
 
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
@@ -79,13 +80,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mNotificationPulse;
 
     private final Configuration mCurConfig = new Configuration();
-    
+
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
 
     private ListPreference  mDefaultFrequency;
     private static final String STR_DEFAULT_FREQUENCY_VAR="ubootenv.var.defaulttvfrequency";
     private CharSequence[] mDefaultFrequencyEntries;
+
+    private CheckBoxPreference mHeadsUpEnabled;
 
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
@@ -94,11 +97,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             updateAccelerometerRotationCheckbox();
         }
     };
-    
+
     public void onDestroy(){
         super.onDestroy();
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,16 +109,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         ContentResolver resolver = getActivity().getContentResolver();
 
         addPreferencesFromResource(R.xml.display_settings);
-		
         String autoBrightness = SystemProperties.get("prop.sp.brightness","on");
         if(autoBrightness.equals("off")) {
-            getActivity().getSharedPreferences(AutoBrightnessSwitch.AUTO_PREF_NAME, 
+            getActivity().getSharedPreferences(AutoBrightnessSwitch.AUTO_PREF_NAME,
                             Context.MODE_PRIVATE).edit()
                        .putBoolean(AutoBrightnessSwitch.AUTO_PREF_ON_OFF, false).commit();
             getPreferenceScreen().removePreference(findPreference(KEY_AUTOBRIGHTNESS));
         }
-		
-        sw = (SystemWriteManager)getSystemService("system_write"); 
+
+        sw = (SystemWriteManager)getSystemService("system_write");
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
         if (!RotationPolicy.isRotationSupported(getActivity())
@@ -159,7 +161,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
         }
-        
+
         if(Utils.platformHasMbxUiMode()){
         	getPreferenceScreen().removePreference(findPreference(KEY_WALLPAPER));
         }
@@ -167,7 +169,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if(!Utils.platformHasScreenBrightness()){
         	getPreferenceScreen().removePreference(findPreference(KEY_Brightness));
         }
-        
+
         if(!Utils.platformHasScreenTimeout()){
         	getPreferenceScreen().removePreference(mScreenTimeoutPreference);
         }
@@ -186,11 +188,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     	    int index_DF = findIndexOfEntry(valDefaultFrequency, mDefaultFrequencyEntries);
     	    mDefaultFrequency.setValueIndex(index_DF);
 			mDefaultFrequency.setSummary(valDefaultFrequency);
+        } else {
+            getPreferenceScreen().removePreference(findPreference(KEY_DEFAULT_FREQUENCY));
         }
-        else{
-        	getPreferenceScreen().removePreference(findPreference(KEY_DEFAULT_FREQUENCY));
-        }
+        mHeadsUpEnabled = (CheckBoxPreference) findPreference(KEY_HEADS_UP);
+        mHeadsUpEnabled.setOnPreferenceChangeListener(this);
     }
+
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
         ListPreference preference = mScreenTimeoutPreference;
         String summary;
@@ -275,7 +279,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         return indices.length-1;
     }
-    
+
     public void readFontSizePreference(ListPreference pref) {
         try {
             mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
@@ -293,10 +297,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         pref.setSummary(String.format(res.getString(R.string.summary_font_size),
                 fontSizeNames[index]));
     }
-    
+
     @Override
     public void onResume() {
-        super.onResume();       
+        super.onResume();
         updateState();
 
         RotationPolicy.registerRotationPolicyListener(getActivity(),
@@ -370,15 +374,19 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
                     value ? 1 : 0);
             return true;
-        
-        }    
+
+        } else if (preference == mHeadsUpEnabled) {
+            boolean value = mHeadsUpEnabled.isChecked();
+            Settings.Global.putInt(getContentResolver(), Settings.Global.HEADS_UP_ENABLED,
+                    value ? 1 : 0);
+            return true;
+        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
-        if (KEY_SCREEN_TIMEOUT.equals(key)) {
+        if (preference == mScreenTimeoutPreference) {
             int value = Integer.parseInt((String) objValue);
             try {
                 Settings.System.putInt(getContentResolver(), SCREEN_OFF_TIMEOUT, value);
@@ -386,17 +394,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
-        }
-        if (KEY_FONT_SIZE.equals(key)) {
+        } else if (preference == mFontSizePref) {
             writeFontSizePreference(objValue);
-        }
-        if(KEY_DEFAULT_FREQUENCY.equals(key)){
+        } else if(preference == mDefaultFrequency) {
             try {
-				int frequency_index = Integer.parseInt((String) objValue);
-				mDefaultFrequency.setSummary(mDefaultFrequencyEntries[frequency_index]);
-				SystemProperties.set(STR_DEFAULT_FREQUENCY_VAR,mDefaultFrequencyEntries[frequency_index].toString());
-            }catch(NumberFormatException e){
-				Log.e(TAG, "could not persist default TV frequency setting", e);
+                int frequency_index = Integer.parseInt((String) objValue);
+                mDefaultFrequency.setSummary(mDefaultFrequencyEntries[frequency_index]);
+                SystemProperties.set(STR_DEFAULT_FREQUENCY_VAR,mDefaultFrequencyEntries[frequency_index].toString());
+            }catch (NumberFormatException e) {
+                Log.e(TAG, "could not persist default TV frequency setting", e);
             }
         }
 
@@ -415,21 +421,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         return false;
     }
-    
-	private int findIndexOfEntry(String value, CharSequence[] entry) 
-	{
-                if (value != null && entry != null) 
-                {
-                    for (int i = entry.length - 1; i >= 0; i--) 
-                    {
-                        if (entry[i].equals(value)) 
-                        {
-                            return i;
-                        }
-                    }
-                }
 
-		
-		return getResources().getInteger(R.integer.outputmode_default_values);  //set 720p as default
+    private int findIndexOfEntry(String value, CharSequence[] entry) {
+        if (value != null && entry != null) {
+            for (int i = entry.length - 1; i >= 0; i--) {
+                if (entry[i].equals(value)) {
+                    return i;
+                }
+            }
+        }
+        return getResources().getInteger(R.integer.outputmode_default_values);  //set 720p as default
     }
 }

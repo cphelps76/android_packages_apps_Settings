@@ -1964,6 +1964,11 @@
     <string name="summary_font_size" translatable="false">%1$s</string>
     <!-- [CHAR LIMIT=40] Sound & display settings screen, title of dialog for picking font size -->
     <string name="dialog_title_font_size">Font size</string>
+    <!-- Display settings screen, setting option name to change whether heads up notifications are enabled -->
+    <string name="notification_heads_up_title">Heads up notifications</string>
+    <!-- Display settings screen, setting option summary to change whether heads up notifications are enabled -->
+    <string name="notification_heads_up_summary">When enabled, notifications will be displayed \'heads up\'.</string>
+
 
 	<!--EasyLink settings-->
 	<string name="easylink_settings">EasyLink</string>
