@@ -101,16 +101,10 @@
                 android:title="@string/model_number"
                 android:summary="@string/device_info_default"/>
                 
-        <!-- Device android version -->
+        <!-- Device firmware version -->
         <Preference android:key="firmware_version" 
                 style="?android:preferenceInformationStyle"
                 android:title="@string/firmware_version"
-                android:summary="@string/device_info_default"/>
-
-        <!-- Device firmware version -->
-        <Preference android:key="firmware_revision"
-                style="?android:preferenceInformationStyle"
-                android:title="@string/matricom_firmware_version"
                 android:summary="@string/device_info_default"/>
 
         <!-- Device FCC equipment id -->
