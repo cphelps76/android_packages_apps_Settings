@@ -507,7 +507,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     @Override
     public void onStop() {
         super.onStop();
-        if(Utils.platformHasMbxUiMode()){
+        if(Utils.platformHasMbxUiMode() && !mSetupWizardMode){
 	        final Activity activity = getActivity();
 	        activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
 	        activity.getActionBar().setCustomView(null);
