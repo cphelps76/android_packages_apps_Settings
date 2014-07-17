@@ -72,8 +72,6 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
         mSpdifPref = (ListPreference) findPreference(KEY_SPDIF);
         mSpdifPref.setOnPreferenceChangeListener(this);
-        if (!Utils.platformHasHdmiSpdif())
-            getPreferenceScreen().removePreference(findPreference(KEY_SPDIF));
 
         mAutoSwitchPref = (CheckBoxPreference) findPreference(KEY_AUTO_SWITCH);
         mAutoSwitchPref.setOnPreferenceChangeListener(this);
