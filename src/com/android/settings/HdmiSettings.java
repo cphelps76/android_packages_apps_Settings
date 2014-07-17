@@ -82,10 +82,9 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
-        // until bugs are worked out disable OutputModePref for user builds
-        if (!Build.TYPE.equalsIgnoreCase("user")) {
-            getPreferenceScreen().removePreference(findPreference(KEY_OUTPUT_MODE));
-        }
+        // until bugs are worked out disable OutputModePref
+        getPreferenceScreen().removePreference(findPreference(KEY_OUTPUT_MODE));
+
 
         sw = (SystemWriteManager) getSystemService("system_write");
 
@@ -93,21 +92,21 @@ public class HdmiSettings extends SettingsPreferenceFragment
     }
 
     private void updateUi() {
-        if (mDualDispPref != null) {      
+        if (mDualDispPref != null) {
             mDualDispPref.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.HDMI_DUAL_DISP, 1) != 0);
         }
-        
+
         if (mSpdifPref != null) {
             mSpdifPref.setValue(String.valueOf(Settings.System.getInt(getContentResolver(),
                     Settings.System.HDMI_SPDIF, 0)));
             mSpdifPref.setSummary(mSpdifPref.getEntry());
         }
-        
-        if (mAutoSwitchPref != null) {      
+
+        if (mAutoSwitchPref != null) {
             mAutoSwitchPref.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.HDMI_AUTO_SWITCH, 1) != 0);
-        }        
+        }
     }
 
     @Override
@@ -229,7 +228,7 @@ public class HdmiSettings extends SettingsPreferenceFragment
             String newMode = objValue.toString();
             updateHdmiOutput(newMode);
         }
-        
+
         updateUi();
         return true;
     }
@@ -238,12 +237,12 @@ public class HdmiSettings extends SettingsPreferenceFragment
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mDualDispPref) {
             Settings.System.putInt(getContentResolver(), Settings.System.HDMI_DUAL_DISP,
-                    mDualDispPref.isChecked() ? 1 : 0);            
+                    mDualDispPref.isChecked() ? 1 : 0);
         } else if (preference == mAutoSwitchPref) {
             Settings.System.putInt(getContentResolver(), Settings.System.HDMI_AUTO_SWITCH,
-                    mAutoSwitchPref.isChecked() ? 1 : 0);              
+                    mAutoSwitchPref.isChecked() ? 1 : 0);
         }
-        
+
         updateUi();
         return true;
     }
