@@ -21,16 +21,6 @@
         android:title="@string/hdmi_output_title"
         android:entries="@array/output_mode_list"
         android:entryValues="@array/output_mode_values"/>
-    <CheckBoxPreference
-        android:key="dual_disp"
-        android:title="@string/hdmi_dual_disp"
-        android:summaryOn="@string/hdmi_dual_disp_on"
-        android:summaryOff="@string/hdmi_dual_disp_off"/>
-    <CheckBoxPreference
-        android:key="auto_switch"
-        android:title="@string/hdmi_auto_switch"
-        android:summaryOn="@string/hdmi_auto_switch_on"
-        android:summaryOff="@string/hdmi_auto_switch_off"/>            
     <ListPreference
         android:key="spdif"
         android:title="@string/hdmi_spdif"

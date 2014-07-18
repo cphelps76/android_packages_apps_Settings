@@ -79,7 +79,7 @@
 		<!-- Do not translate. -->
         <item>2147483646</item>
     </string-array>
-    
+
     <!-- Display settings.  The delay in inactivity before the dream is shown. These are shown in a list dialog. -->
     <string-array name="dream_timeout_entries">
         <item>Never</item>
@@ -111,8 +111,8 @@
         <!-- Do not translate. -->
         <item>1800000</item>
     </string-array>
-    
-    <!-- Security settings.  The delay after screen is turned off until device locks. 
+
+    <!-- Security settings.  The delay after screen is turned off until device locks.
          These are shown in a list dialog. -->
     <string-array name="lock_after_timeout_entries">
         <item>Immediately</item>
@@ -147,7 +147,7 @@
         <!-- Do not translate. -->
         <item>1800000</item>
     </string-array>
-    
+
     <string-array name="entries_font_size">
         <item msgid="6490061470416867723">Small</item>
         <item msgid="3579015730662088893">Normal</item>
@@ -161,7 +161,7 @@
         <item>1.15</item>
         <item>1.30</item>
     </string-array>
-    
+
     <!-- TTS settings -->
 
     <!-- Default speech rate choices -->
@@ -555,7 +555,7 @@
     <string-array name="long_press_timeout_selector_titles">
         <!-- A title for the option for short long-press timeout [CHAR LIMIT=25] -->
         <item>Short</item>
-        <!-- A title for the option for medium long-press timeout [CHAR LIMIT=25] -->        
+        <!-- A title for the option for medium long-press timeout [CHAR LIMIT=25] -->
         <item>Medium</item>
         <!-- A title for the option for long long-press timeout [CHAR LIMIT=25] -->
         <item>Long</item>
@@ -756,7 +756,7 @@
         <item>Chimp</item>
         <item>Monkey</item>
     </string-array>
-    
+
     <integer name="outputmode_default_values">4</integer>
 
     <!-- Values for premium SMS permission selector [CHAR LIMIT=30] -->
@@ -779,17 +779,21 @@
         <item>0</item>
         <item>1</item>
     </string-array>
-    
+
     <!-- Hdmi settings for SPDIF. -->
     <string-array name="hdmi_spdif_entries">
-        <item>PCM</item>
-        <item>RAW</item>
+        <item>@string/hdmi_spdif_pcm</item>
+        <item>@string/hdmi_spdif_raw</item>
+        <item>@string/hdmi_spdif_spdif_passthrough</item>
+        <item>@string/hdmi_spdif_hdmi_passthrough</item>
     </string-array>
 
     <!-- Do not translate. -->
     <string-array name="hdmi_spdif_values">
         <item>0</item>
         <item>1</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="output_mode_list">

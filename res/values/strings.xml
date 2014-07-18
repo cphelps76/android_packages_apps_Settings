@@ -1274,28 +1274,28 @@
     <!-- Explanation of the Android Beam feature in the Android Beam settings panel. The use of "beam" here is as a verb and not considered trademarked. [CHAR LIMIT=NONE] -->
     <string name="android_beam_explained">When this feature is turned on, you can beam app content to another NFC-capable device by holding the devices close together. For example, you can beam Browser pages, YouTube videos, People contacts, and more.\n\nJust bring the devices together (typically back to back) and then touch your screen. The app determines what gets beamed.</string>
 
-    <!-- Ethernet configuration dialog -->        
+    <!-- Ethernet configuration dialog -->
     <string name="eth_config_title">Configure Ethernet device</string>
     <string name="ethernet_info_title">Ethernet info</string>
     <string name="ethernet_info_summary">Information about the connected ethernet device</string>
-    <string name="eth_setting">Ethernet</string>        
-    <string name="eth_dev_list">Ethernet Devices:</string>        
-    <string name="eth_con_type">Connection Type</string>        
-    <string name="eth_con_type_dhcp">DHCP</string>        
-    <string name="eth_con_type_manual">Static IP</string>        
-    <string name="eth_dns">DNS address</string>        
-    <string name="eth_gw">Gateway address</string>        
-    <string name="eth_ipaddr">IP address</string>        
-    <string name="eth_quick_toggle_title">Ethernet</string>        
-    <string name="eth_quick_toggle_summary">Turn on Ethernet</string>        
-    <string name="eth_conf_perf_title">Ethernet configuration</string>        
-    <string name="eth_conf_summary">Configure Ethernet devices</string>        
-    <string name="eth_mask">Netmask</string>        
-    <string name="eth_toggle_summary_off">Turn off Ethernet</string>        
-    <string name="eth_toggle_summary_on">Turn on Ethernet</string>        
+    <string name="eth_setting">Ethernet</string>
+    <string name="eth_dev_list">Ethernet Devices:</string>
+    <string name="eth_con_type">Connection Type</string>
+    <string name="eth_con_type_dhcp">DHCP</string>
+    <string name="eth_con_type_manual">Static IP</string>
+    <string name="eth_dns">DNS address</string>
+    <string name="eth_gw">Gateway address</string>
+    <string name="eth_ipaddr">IP address</string>
+    <string name="eth_quick_toggle_title">Ethernet</string>
+    <string name="eth_quick_toggle_summary">Turn on Ethernet</string>
+    <string name="eth_conf_perf_title">Ethernet configuration</string>
+    <string name="eth_conf_summary">Configure Ethernet devices</string>
+    <string name="eth_mask">Netmask</string>
+    <string name="eth_toggle_summary_off">Turn off Ethernet</string>
+    <string name="eth_toggle_summary_on">Turn on Ethernet</string>
     <string name="eth_settings_error">Failed to set: Please enter the valid characters 0~255</string>
 
-    
+
     <!-- Network service discovery settings -->
     <!-- Used in the 1st-level settings screen to turn on NSD -->
     <string name="nsd_quick_toggle_title">Network service discovery</string>
@@ -1898,7 +1898,7 @@
 	<string name="auto_power_on_from_TV_summery">Auto Power on from TV setting</string>
 	<string name="easylink_status_on">ON</string>
 	<string name="easylink_status_OFF">OFF</string>
-	
+
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>
     <!-- Security & location settings screen, setting option name -->
@@ -3967,7 +3967,7 @@
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. -->
-    <string name="remove_account_failed" product="mbx">This account is required by some apps. You can only remove it by resetting the G-Box MX2 to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>    
+    <string name="remove_account_failed" product="mbx">This account is required by some apps. You can only remove it by resetting the G-Box MX2 to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. -->
     <string name="remove_account_failed" product="tablet">This account is required by some apps. You can only remove it by resetting the tablet to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. -->
@@ -4553,16 +4553,14 @@
     <string name="position_help_noreboot">Help: \n1.Press &quot;Enter Key&quot; to switch zoom in/zoom out; \n2.Press &quot;Direction Keys&quot; to change display position; \n3.Press &quot;Back Key&quot; to save; \n4.Press &quot;Menu Key&quot; to set default display position.</string>
     <string name="tv_default_frequency">Default HD TV refresh frequency</string>
     <string name="tv_default_frequency_summary">60Hz</string>
-    
+
     <!-- Hdmi settings -->
     <string name="hdmi_settings">HDMI</string>
-    <string name="hdmi_dual_disp">Enable dual display</string>
-    <string name="hdmi_dual_disp_on">Dual display ON</string>
-    <string name="hdmi_dual_disp_off">Dual display OFF</string>
     <string name="hdmi_spdif">Set SPDIF</string>
-    <string name="hdmi_auto_switch">Enable auto switch</string>
-    <string name="hdmi_auto_switch_on">Auto switch ON</string>
-    <string name="hdmi_auto_switch_off">Auto switch OFF</string>
+    <string name="hdmi_spdif_pcm">PCM</string>
+    <string name="hdmi_spdif_raw">RAW</string>
+    <string name="hdmi_spdif_spdif_passthrough">SPDIF passthrough</string>
+    <string name="hdmi_spdif_hdmi_passthrough">HDMI passthrough</string>
     <string name="hdmi_output_title">HDMI output mode</string>
     <string name="hdmi_display_mode_720p">720p</string>
     <string name="hdmi_display_mode_720p50hz">720p (50Hz)</string>
@@ -4573,7 +4571,7 @@
 
     <string name="gbox_launcher_settings_title">G-BoxLauncher</string>
 
-    
+
     <string name="drc_mode_title">DRC Mode</string>
     <string name="drc_mode_summary">DRC Mode</string>
     <string name="drc_title">DRC</string>
@@ -4585,17 +4583,17 @@
     	<item>en</item>
     	<item>ja</item>
 		<item>ko</item>
-		<item>fr</item>	
-		<item>de</item>	
+		<item>fr</item>
+		<item>de</item>
     </array>
-    
+
 
    <array name="country" translatable="false">
    		<item>CN</item>
    		<item>US</item>
    		<item>JP</item>
     	<item>KR</item>
-    	<item>FR</item>	
-    	<item>DE</item>	
+    	<item>FR</item>
+    	<item>DE</item>
     </array>
 </resources>

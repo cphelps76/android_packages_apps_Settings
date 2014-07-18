@@ -33,31 +33,40 @@ import android.view.WindowManager;
 import android.view.IWindowManager;
 
 
-public class HdmiSettings extends SettingsPreferenceFragment
-        implements Preference.OnPreferenceChangeListener {
+public class HdmiSettings extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
+
     private static final String TAG = "HdmiSettings";
 
-    private static final String KEY_DUAL_DISP = "dual_disp";
+    // Preferences
     private static final String KEY_SPDIF = "spdif";
-    private static final String KEY_AUTO_SWITCH = "auto_switch";
     private static final String KEY_OUTPUT_MODE ="output_mode";
 
+    // 720p values
     private static final int OUTPUT720_FULL_WIDTH = 1280;
     private static final int OUTPUT720_FULL_HEIGHT = 720;
+    // 1080p values
     private static final int OUTPUT1080_FULL_WIDTH = 1920;
     private static final int OUTPUT1080_FULL_HEIGHT = 1080;
 
+    // u-boot props
     private static final String HDMI_MODE_PROP = "ubootenv.var.hdmimode";
     private static final String COMMON_MODE_PROP = "ubootenv.var.outputmode";
+    private static final String DIGITAL_AUDIO_OUTPUT_PROP = "ubootenv.var.digitaudiooutput";
 
-    private CheckBoxPreference mDualDispPref;
+    // sysfs paths
+    private static final String AUDIODSP_DIGITAL_RAW = "/sys/class/audiodsp/digital_raw";
+    private static final String FB0_FREESCALE_MODE = "/sys/class/graphics/fb0/freescale_mode";
+    private static final String FB1_FREESCALE_MODE = "/sys/class/graphics/fb1/freescale_mode";
+    private static final String FREESCALE_AXIS = "/sys/class/graphics/fb0/free_scale_axis";
+    private static final String PPMGR_PPSCALER = "/sys/class/ppmgr/ppscaler";
+    private static final String DISABLE_VIDEO = "/sys/class/video/disable_video";
+    private static final String DISPLAY_AXIS = "/sys/class/display/axis";
+    private static final String DISPLAY_MODE = "/sys/class/display/mode";
+
     private ListPreference mSpdifPref;
-    private CheckBoxPreference mAutoSwitchPref;
     private ListPreference mOutputModePref;
 
     private static SystemWriteManager sw;
-
-    private Context mContext;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -65,18 +74,8 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.hdmi_prefs);
 
-        mDualDispPref = (CheckBoxPreference) findPreference(KEY_DUAL_DISP);
-        mDualDispPref.setOnPreferenceChangeListener(this);
-        if (!Utils.platformHasHdmiDualDisp())
-            getPreferenceScreen().removePreference(findPreference(KEY_DUAL_DISP));
-
         mSpdifPref = (ListPreference) findPreference(KEY_SPDIF);
         mSpdifPref.setOnPreferenceChangeListener(this);
-
-        mAutoSwitchPref = (CheckBoxPreference) findPreference(KEY_AUTO_SWITCH);
-        mAutoSwitchPref.setOnPreferenceChangeListener(this);
-        if (!Utils.platformHasHdmiAutoSwitch())
-            getPreferenceScreen().removePreference(findPreference(KEY_AUTO_SWITCH));
 
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
@@ -85,36 +84,6 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
 
         sw = (SystemWriteManager) getSystemService("system_write");
-
-        updateUi();
-    }
-
-    private void updateUi() {
-        if (mDualDispPref != null) {
-            mDualDispPref.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.HDMI_DUAL_DISP, 1) != 0);
-        }
-
-        if (mSpdifPref != null) {
-            mSpdifPref.setValue(String.valueOf(Settings.System.getInt(getContentResolver(),
-                    Settings.System.HDMI_SPDIF, 0)));
-            mSpdifPref.setSummary(mSpdifPref.getEntry());
-        }
-
-        if (mAutoSwitchPref != null) {
-            mAutoSwitchPref.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.HDMI_AUTO_SWITCH, 1) != 0);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     private void setDensity(String mode) {
@@ -187,21 +156,21 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
     public void disableFreescale() {
         // turn off fb freescale
-        Utils.writeSysfs(sw, "/sys/class/graphics/fb0/freescale_mode", "0");
-        Utils.writeSysfs(sw, "/sys/class/graphics/fb1/freescale_mode", "0");
-        Utils.writeSysfs(sw, "/sys/class/graphics/fb0/free_scale_axis", "0 0 1279 719");
+        Utils.writeSysfs(sw, FB0_FREESCALE_MODE, "0");
+        Utils.writeSysfs(sw, FB1_FREESCALE_MODE, "0");
+        Utils.writeSysfs(sw, FREESCALE_AXIS, "0 0 1279 719");
 
-        Utils.writeSysfs(sw, "/sys/class/ppmgr/ppscaler", "0");
-        Utils.writeSysfs(sw, "/sys/class/video/disable_video", "0");
+        Utils.writeSysfs(sw, PPMGR_PPSCALER, "0");
+        Utils.writeSysfs(sw, DISABLE_VIDEO, "0");
         // now default video display to off
-        Utils.writeSysfs(sw, "/sys/class/video/disable_video", "1");
+        Utils.writeSysfs(sw, DISABLE_VIDEO, "1");
 
         // revert display axis
-        Utils.writeSysfs(sw, "/sys/class/display/axis", "0 0 1279 719");
+        Utils.writeSysfs(sw, DISPLAY_AXIS, "0 0 1279 719");
     }
 
     public void setResolution(String mode) {
-        Utils.writeSysfs(sw, "/sys/class/display/mode", mode);
+        Utils.writeSysfs(sw, DISPLAY_MODE, mode);
     }
 
     public void updateModeProps(String newMode) {
@@ -215,33 +184,24 @@ public class HdmiSettings extends SettingsPreferenceFragment
          updateModeProps(newMode);
     }
 
+    private void setDigitalAudioValue(String value) {
+        sw.setProperty(DIGITAL_AUDIO_OUTPUT_PROP, value);
+        Utils.writeSysfs(sw, AUDIODSP_DIGITAL_RAW, value);
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
 
         if (key.equals(KEY_SPDIF)) {
-            Settings.System.putInt(getContentResolver(), Settings.System.HDMI_SPDIF,
-                    Integer.parseInt((String) objValue));
+            String newValue = objValue.toString();
+            setDigitalAudioValue(newValue);
+            mSpdifPref.setSummary(mSpdifPref.getEntry());
         } else if (key.equals(KEY_OUTPUT_MODE)) {
             String newMode = objValue.toString();
             updateHdmiOutput(newMode);
         }
 
-        updateUi();
-        return true;
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mDualDispPref) {
-            Settings.System.putInt(getContentResolver(), Settings.System.HDMI_DUAL_DISP,
-                    mDualDispPref.isChecked() ? 1 : 0);
-        } else if (preference == mAutoSwitchPref) {
-            Settings.System.putInt(getContentResolver(), Settings.System.HDMI_AUTO_SWITCH,
-                    mAutoSwitchPref.isChecked() ? 1 : 0);
-        }
-
-        updateUi();
         return true;
     }
 
