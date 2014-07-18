@@ -4551,16 +4551,13 @@
 
     <string name="position_help">Help: \n1.Press &quot;Enter Key&quot; to switch zoom in/zoom out; \n2.Press &quot;Direction Keys&quot; to change display position; \n3.Press &quot;Back Key&quot; to save and exit; \n4.Adjusted results will take effect after reboot; \n5.Press &quot;Menu Key&quot; to set default display position.</string>
     <string name="position_help_noreboot">Help: \n1.Press &quot;Enter Key&quot; to switch zoom in/zoom out; \n2.Press &quot;Direction Keys&quot; to change display position; \n3.Press &quot;Back Key&quot; to save; \n4.Press &quot;Menu Key&quot; to set default display position.</string>
-    <string name="tv_default_frequency">Default HD TV refresh frequency</string>
-    <string name="tv_default_frequency_summary">60Hz</string>
 
     <!-- Hdmi settings -->
     <string name="hdmi_settings">HDMI</string>
-    <string name="hdmi_spdif">Set SPDIF</string>
-    <string name="hdmi_spdif_pcm">PCM</string>
-    <string name="hdmi_spdif_raw">RAW</string>
-    <string name="hdmi_spdif_spdif_passthrough">SPDIF passthrough</string>
-    <string name="hdmi_spdif_hdmi_passthrough">HDMI passthrough</string>
+    <string name="hdmi_audio_output">Digital audio output</string>
+    <string name="hdmi_audio_output_pcm">PCM</string>
+    <string name="hdmi_audio_output_spdif_passthrough">RAW/SPDIF passthrough</string>
+    <string name="hdmi_audio_output_hdmi_passthrough">HDMI passthrough</string>
     <string name="hdmi_output_title">HDMI output mode</string>
     <string name="hdmi_display_mode_720p">720p</string>
     <string name="hdmi_display_mode_720p50hz">720p (50Hz)</string>
@@ -4568,6 +4565,8 @@
     <string name="hdmi_display_mode_1080i50hz">1080i (50Hz)</string>
     <string name="hdmi_display_mode_1080p">1080p</string>
     <string name="hdmi_display_mode_1080p50hz">1080p (50Hz)</string>
+    <string name="hdmi_default_frequency">Refresh frequency</string>
+    <string name="hdmi_default_frequency_summary">60Hz</string>
 
     <string name="gbox_launcher_settings_title">G-BoxLauncher</string>
 

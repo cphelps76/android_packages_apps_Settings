@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -40,6 +41,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     // Preferences
     private static final String KEY_SPDIF = "spdif";
     private static final String KEY_OUTPUT_MODE ="output_mode";
+    private static final String KEY_DEFAULT_FREQUENCY = "default_frequency";
 
     // 720p values
     private static final int OUTPUT720_FULL_WIDTH = 1280;
@@ -52,6 +54,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     private static final String HDMI_MODE_PROP = "ubootenv.var.hdmimode";
     private static final String COMMON_MODE_PROP = "ubootenv.var.outputmode";
     private static final String DIGITAL_AUDIO_OUTPUT_PROP = "ubootenv.var.digitaudiooutput";
+    private static final String DEFAULT_FREQUENCY_PROP = "ubootenv.var.defaulttvfrequency";
 
     // sysfs paths
     private static final String AUDIODSP_DIGITAL_RAW = "/sys/class/audiodsp/digital_raw";
@@ -65,6 +68,10 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     private ListPreference mSpdifPref;
     private ListPreference mOutputModePref;
+
+    private ListPreference  mDefaultFrequency;
+    private CharSequence[] mDefaultFrequencyEntries;
+    private CharSequence[] mDigitalOutputEntries;
 
     private static SystemWriteManager sw;
 
@@ -82,8 +89,28 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         // until bugs are worked out disable OutputModePref
         getPreferenceScreen().removePreference(findPreference(KEY_OUTPUT_MODE));
 
+        mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
+        mDefaultFrequency.setOnPreferenceChangeListener(this);
+
+        mDefaultFrequencyEntries = getResources().getStringArray(R.array.default_frequency_entries);
+        mDigitalOutputEntries = getResources().getStringArray(R.array.hdmi_audio_output_entries);
+
 
         sw = (SystemWriteManager) getSystemService("system_write");
+
+        updateSummaries();
+    }
+
+    private void updateSummaries() {
+        String valDefaultFrequency = SystemProperties.get(DEFAULT_FREQUENCY_PROP);
+        if (valDefaultFrequency.equals("")) {
+            valDefaultFrequency = getResources().getString(R.string.hdmi_default_frequency_summary);
+        }
+        int index_DF = findIndexOfEntry(valDefaultFrequency, mDefaultFrequencyEntries);
+        mDefaultFrequency.setValueIndex(index_DF);
+        mDefaultFrequency.setSummary(valDefaultFrequency);
+
+        mSpdifPref.setSummary(mSpdifPref.getEntry());
     }
 
     private void setDensity(String mode) {
@@ -154,6 +181,17 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     }
 
+    private int findIndexOfEntry(String value, CharSequence[] entry) {
+        if (value != null && entry != null) {
+            for (int i = entry.length - 1; i >= 0; i--) {
+                if (entry[i].equals(value)) {
+                    return i;
+                }
+            }
+        }
+        return getResources().getInteger(R.integer.outputmode_default_values);  //set 720p as default
+    }
+
     public void disableFreescale() {
         // turn off fb freescale
         Utils.writeSysfs(sw, FB0_FREESCALE_MODE, "0");
@@ -196,10 +234,18 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         if (key.equals(KEY_SPDIF)) {
             String newValue = objValue.toString();
             setDigitalAudioValue(newValue);
-            mSpdifPref.setSummary(mSpdifPref.getEntry());
+            mSpdifPref.setSummary(mDigitalOutputEntries[Integer.valueOf(newValue)]);
         } else if (key.equals(KEY_OUTPUT_MODE)) {
             String newMode = objValue.toString();
             updateHdmiOutput(newMode);
+        } else if (key.equals(KEY_DEFAULT_FREQUENCY)){
+            try {
+                int frequency_index = Integer.parseInt((String) objValue);
+                mDefaultFrequency.setSummary(mDefaultFrequencyEntries[frequency_index]);
+                SystemProperties.set(DEFAULT_FREQUENCY_PROP, mDefaultFrequencyEntries[frequency_index].toString());
+            } catch(NumberFormatException e) {
+                Log.e(TAG, "could not persist default TV frequency setting", e);
+            }
         }
 
         return true;

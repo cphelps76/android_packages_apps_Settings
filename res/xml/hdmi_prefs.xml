@@ -23,7 +23,14 @@
         android:entryValues="@array/output_mode_values"/>
     <ListPreference
         android:key="spdif"
-        android:title="@string/hdmi_spdif"
-        android:entries="@array/hdmi_spdif_entries"
-        android:entryValues="@array/hdmi_spdif_values" />
+        android:title="@string/hdmi_audio_output"
+        android:entries="@array/hdmi_audio_output_entries"
+        android:entryValues="@array/hdmi_audio_output_values" />
+    <ListPreference
+            android:key="default_frequency"
+            android:title="@string/hdmi_default_frequency"
+            android:summary="@string/hdmi_default_frequency_summary"
+            android:persistent="false"
+            android:entries="@array/default_frequency_entries"
+            android:entryValues="@array/default_frequency_values" />
 </PreferenceScreen>

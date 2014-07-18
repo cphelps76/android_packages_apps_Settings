@@ -44,7 +44,7 @@
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
-		        
+
         <com.android.settings.WarnedListPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
@@ -52,14 +52,6 @@
                 android:entries="@array/entries_font_size"
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
-
-		<ListPreference
-		        android:key="default_frequency"
-		        android:title="@string/tv_default_frequency"
-		        android:summary="@string/tv_default_frequency_summary"
-		        android:persistent="false"
-		        android:entries="@array/default_frequency_entries"
-		        android:entryValues="@array/default_frequency_values" />
         <CheckBoxPreference
             android:key="notification_pulse"
             android:title="@string/notification_pulse_title"

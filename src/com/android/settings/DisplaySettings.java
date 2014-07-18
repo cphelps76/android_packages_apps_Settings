@@ -22,13 +22,10 @@ import android.app.ActivityManagerNative;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.display.DisplayManager;
@@ -43,17 +40,13 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.app.SystemWriteManager;
 
 import com.android.internal.view.RotationPolicy;
-import com.android.settings.DreamSettings;
 
 import java.util.ArrayList;
 
-import android.os.SystemProperties;
-import android.app.Activity;
 public class DisplaySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, OnPreferenceClickListener {
     private static final String TAG = "DisplaySettings";
@@ -72,7 +65,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_Brightness = "brightness";
-    private static final String KEY_DEFAULT_FREQUENCY = "default_frequency";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
     private static final String KEY_WALLPAPER = "wallpaper";
@@ -87,15 +79,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mNotificationPulse;
 
     private final Configuration mCurConfig = new Configuration();
-    
+
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
 
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
-    private ListPreference  mDefaultFrequency;
-    private static final String STR_DEFAULT_FREQUENCY_VAR="ubootenv.var.defaulttvfrequency";
-    private CharSequence[] mDefaultFrequencyEntries;
 
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
@@ -128,7 +117,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if ((mScreenSaverPreference != null
                 && getResources().getBoolean(
-                        com.android.internal.R.bool.config_dreamsSupported) == false) 
+                        com.android.internal.R.bool.config_dreamsSupported) == false)
 			|| (Utils.platformHasMbxUiMode())) {
             getPreferenceScreen().removePreference(mScreenSaverPreference);
         }
@@ -174,16 +163,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if(!Utils.platformHasScreenFontSize()){
         	getPreferenceScreen().removePreference(mFontSizePref);
         }
-        mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
-        mDefaultFrequency.setOnPreferenceChangeListener(this);
-        String valDefaultFrequency = SystemProperties.get(STR_DEFAULT_FREQUENCY_VAR);
-        mDefaultFrequencyEntries = getResources().getStringArray(R.array.default_frequency_entries);
-        if (valDefaultFrequency.equals("")) {
-            valDefaultFrequency = getResources().getString(R.string.tv_default_frequency_summary);
-        }
-        int index_DF = findIndexOfEntry(valDefaultFrequency, mDefaultFrequencyEntries);
-        mDefaultFrequency.setValueIndex(index_DF);
-        mDefaultFrequency.setSummary(valDefaultFrequency);
 
         mDisplayManager = (DisplayManager)getActivity().getSystemService(
                 Context.DISPLAY_SERVICE);
@@ -415,15 +394,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);
         }
-        if (KEY_DEFAULT_FREQUENCY.equals(key)){
-            try {
-                int frequency_index = Integer.parseInt((String) objValue);
-                mDefaultFrequency.setSummary(mDefaultFrequencyEntries[frequency_index]);
-                SystemProperties.set(STR_DEFAULT_FREQUENCY_VAR,mDefaultFrequencyEntries[frequency_index].toString());
-            } catch(NumberFormatException e) {
-                Log.e(TAG, "could not persist default TV frequency setting", e);
-            }
-        }
 
         return true;
     }
@@ -450,16 +420,5 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
         return false;
-    }
-
-    private int findIndexOfEntry(String value, CharSequence[] entry) {
-        if (value != null && entry != null) {
-            for (int i = entry.length - 1; i >= 0; i--) {
-                if (entry[i].equals(value)) {
-                    return i;
-                }
-            }
-        }
-        return getResources().getInteger(R.integer.outputmode_default_values);  //set 720p as default
     }
 }
