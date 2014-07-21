@@ -16,8 +16,13 @@
 
 package com.android.settings;
 
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.SystemWriteManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -29,9 +34,11 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.*;
 import android.view.Display;
-import android.view.WindowManager;
 import android.view.IWindowManager;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 
 public class HdmiSettings extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
@@ -42,6 +49,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     private static final String KEY_SPDIF = "spdif";
     private static final String KEY_OUTPUT_MODE ="output_mode";
     private static final String KEY_DEFAULT_FREQUENCY = "default_frequency";
+    private static final String KEY_OVERSCAN = "overscan";
 
     // 720p values
     private static final int OUTPUT720_FULL_WIDTH = 1280;
@@ -55,25 +63,44 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     private static final String COMMON_MODE_PROP = "ubootenv.var.outputmode";
     private static final String DIGITAL_AUDIO_OUTPUT_PROP = "ubootenv.var.digitaudiooutput";
     private static final String DEFAULT_FREQUENCY_PROP = "ubootenv.var.defaulttvfrequency";
+    private final static String OUTPUT_X_PROP = "ubootenv.var.720poutputx";
+    private final static String OUTPUT_Y_PROP = "ubootenv.var.720poutputy";
+    private final static String OUTPUT_WIDTH_PROP = "ubootenv.var.720poutputwidth";
+    private final static String OUTPUT_HEIGHT_PROP = "ubootenv.var.720poutputheight";
 
     // sysfs paths
     private static final String AUDIODSP_DIGITAL_RAW = "/sys/class/audiodsp/digital_raw";
     private static final String FB0_FREESCALE_MODE = "/sys/class/graphics/fb0/freescale_mode";
     private static final String FB1_FREESCALE_MODE = "/sys/class/graphics/fb1/freescale_mode";
+    private static final String FB0_FREESCALE = "/sys/class/graphics/fb0/free_scale";
+    private static final String FB1_FREESCALE = "/sys/class/graphics/fb1/free_scale";
     private static final String FREESCALE_AXIS = "/sys/class/graphics/fb0/free_scale_axis";
     private static final String PPMGR_PPSCALER = "/sys/class/ppmgr/ppscaler";
+    private static final String PPMGR_PPSCALER_RECT = "/sys/class/ppmgr/ppscaler_rect";
     private static final String DISABLE_VIDEO = "/sys/class/video/disable_video";
     private static final String DISPLAY_AXIS = "/sys/class/display/axis";
     private static final String DISPLAY_MODE = "/sys/class/display/mode";
 
     private ListPreference mSpdifPref;
     private ListPreference mOutputModePref;
+    private Preference mOverscanPref;
 
     private ListPreference  mDefaultFrequency;
     private CharSequence[] mDefaultFrequencyEntries;
     private CharSequence[] mDigitalOutputEntries;
 
     private static SystemWriteManager sw;
+
+    private static final float zoomStep = 4.0f;
+    private static final float zoomStepWidth = 1.78f;
+
+    private static final int MAX_HEIGHT = 100;
+    private static final int MAX_WIDTH = 100;
+
+    private int mLeft, mTop, mWidth, mHeight, mRight, mBottom;
+    private int mNewLeft, mNewTop, mNewRight, mNewBottom;
+
+    private static final int MENU_ID_HDMI_RESET = Menu.FIRST;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -95,10 +122,30 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mDefaultFrequencyEntries = getResources().getStringArray(R.array.default_frequency_entries);
         mDigitalOutputEntries = getResources().getStringArray(R.array.hdmi_audio_output_entries);
 
+        mOverscanPref = (Preference) findPreference(KEY_OVERSCAN);
 
         sw = (SystemWriteManager) getSystemService("system_write");
 
         updateSummaries();
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, MENU_ID_HDMI_RESET, 0, R.string.hdmi_menu_reset)
+                .setEnabled(true)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_ID_HDMI_RESET:
+                restorePosition(0,0,1280,720);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void updateSummaries() {
@@ -181,6 +228,22 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     }
 
+    private void initPosition() {
+        mLeft = Integer.valueOf(sw.getPropertyString(OUTPUT_X_PROP, "0"));
+        mTop = Integer.valueOf(sw.getPropertyString(OUTPUT_Y_PROP, "0"));
+        mWidth = Integer.valueOf(sw.getPropertyString(OUTPUT_WIDTH_PROP, String.valueOf(OUTPUT720_FULL_WIDTH)));
+        mHeight = Integer.valueOf(sw.getPropertyString(OUTPUT_HEIGHT_PROP, String.valueOf(OUTPUT720_FULL_HEIGHT)));
+        mRight = mWidth;// + mLeft;
+        mBottom = mHeight;// + mTop;
+        Log.d(TAG, "left=" + mLeft + " top=" + mTop + " width=" + mWidth + " height=" + mHeight + " right=" + mRight + " bottom=" + mBottom);
+        mNewLeft = mLeft;
+        mNewTop = mTop;
+        mNewRight = mRight;
+        mNewBottom = mBottom;
+        Utils.writeSysfs(sw, FB0_FREESCALE, "1");
+        Utils.writeSysfs(sw, FB1_FREESCALE, "1");
+    }
+
     private int findIndexOfEntry(String value, CharSequence[] entry) {
         if (value != null && entry != null) {
             for (int i = entry.length - 1; i >= 0; i--) {
@@ -227,6 +290,162 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         Utils.writeSysfs(sw, AUDIODSP_DIGITAL_RAW, value);
     }
 
+    private int getCurrentWidthRate() {
+        Log.d(TAG, "mLeft is " + mLeft);
+        float offset = mLeft / (zoomStep*zoomStepWidth);
+        float curVal = MAX_WIDTH - offset;
+        Log.d(TAG, "currentWidthRate=" + (int)curVal);
+        return ((int) curVal);
+    }
+
+    private int getCurrentHeightRate() {
+        float offset = mTop / zoomStep;
+        float curVal = MAX_HEIGHT - offset;
+        Log.d(TAG, "currentHeightRate=" + (int)curVal);
+        return ((int) curVal);
+    }
+
+    private void showOverscanDialog(Context context) {
+        initPosition();
+        // sysfs are written as progress is changed for real-time effect
+        // cancel obviously reverts back to previous values
+        final int[] width_rate = {getCurrentWidthRate()};
+        final int[] height_rate = {getCurrentHeightRate()};
+        //final int[] newWidth = new int[1], newHeight = new int[1];
+        LayoutInflater inflater = this.getActivity().getLayoutInflater();
+        View dialog = inflater.inflate(R.layout.overscan_dialog, null);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setView(dialog);
+        builder.setNegativeButton(R.string.dlg_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                restorePosition(mLeft, mTop, mRight, mBottom);
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                restorePosition(mLeft, mTop, mRight, mBottom);
+            }
+        });
+        builder.setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                savePosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+            }
+        });
+        builder.setTitle(R.string.hdmi_overscan_title);
+        builder.setMessage(R.string.hdmi_overscan_help);
+        AlertDialog alert = builder.show();
+
+        TextView mMessage = (TextView) alert.findViewById(android.R.id.message);
+        mMessage.setGravity(Gravity.CENTER_HORIZONTAL);
+        SeekBar mWidthSeekBar = (SeekBar) dialog.findViewById(R.id.width_seekbar);
+        mWidthSeekBar.setProgress(width_rate[0]);
+        mWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.d(TAG, "progress is now " + progress);
+                if (width_rate[0] > progress) {
+                    //zoom out
+                    zoomOutWidth();
+                } else {
+                    // zoom in
+                    zoomInWidth();
+                }
+                width_rate[0] = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        SeekBar mHeightSeekBar = (SeekBar) dialog.findViewById(R.id.height_seekbar);
+        mHeightSeekBar.setProgress(height_rate[0]);
+        mHeightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.d(TAG, "progress is now " + progress);
+                if (height_rate[0] > progress) {
+                    // zoom out
+                    zoomOutHeight();
+                } else {
+                    // zoom in
+                    zoomInHeight();
+                }
+                height_rate[0] = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+    private void zoomOutWidth() {
+        mNewLeft += (int)(zoomStep * zoomStepWidth);
+        mNewRight -= (int)(zoomStep * zoomStepWidth);
+        Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
+        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+    }
+
+    private void zoomOutHeight() {
+        mNewTop += zoomStep;
+        mNewBottom -= zoomStep;
+        Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
+        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+    }
+
+    private void zoomInWidth() {
+        mNewLeft -= (int)(zoomStep * zoomStepWidth);
+        mNewRight += (int)(zoomStep * zoomStepWidth);
+        Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
+        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+    }
+
+    private void zoomInHeight() {
+        mNewTop -= zoomStep;
+        mNewBottom += zoomStep;
+        Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
+        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+    }
+
+    private void setPosition(int left, int top, int right, int bottom) {
+        String string = String.valueOf(left) +
+                " " + String.valueOf(top) + " " + String.valueOf(right) + " " + String.valueOf(bottom) + " 0";
+        Utils.writeSysfs(sw, PPMGR_PPSCALER_RECT, string);
+
+    }
+
+    private void savePosition(int left, int top, int right, int bottom) {
+        sw.setProperty(OUTPUT_X_PROP, String.valueOf(left));
+        sw.setProperty(OUTPUT_Y_PROP, String.valueOf(top));
+        sw.setProperty(OUTPUT_WIDTH_PROP, String.valueOf(right));
+        sw.setProperty(OUTPUT_HEIGHT_PROP, String.valueOf(bottom));
+
+        mLeft = left;
+        mTop = top;
+        mRight = right;
+        mBottom = bottom;
+    }
+
+    private void restorePosition(int left, int top, int right, int bottom) {
+        setPosition(left, top, right, bottom);
+        savePosition(left, top, right, bottom);
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
@@ -235,9 +454,11 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
             String newValue = objValue.toString();
             setDigitalAudioValue(newValue);
             mSpdifPref.setSummary(mDigitalOutputEntries[Integer.valueOf(newValue)]);
+            return true;
         } else if (key.equals(KEY_OUTPUT_MODE)) {
             String newMode = objValue.toString();
             updateHdmiOutput(newMode);
+            return true;
         } else if (key.equals(KEY_DEFAULT_FREQUENCY)){
             try {
                 int frequency_index = Integer.parseInt((String) objValue);
@@ -246,10 +467,18 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
             } catch(NumberFormatException e) {
                 Log.e(TAG, "could not persist default TV frequency setting", e);
             }
+            return true;
         }
-
-        return true;
+        return false;
     }
 
 
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mOverscanPref) {
+            showOverscanDialog(this.getActivity());
+            return true;
+        }
+        return false;
+    }
 }

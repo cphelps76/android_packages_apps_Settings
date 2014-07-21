@@ -21,6 +21,10 @@
         android:title="@string/hdmi_output_title"
         android:entries="@array/output_mode_list"
         android:entryValues="@array/output_mode_values"/>
+    <Preference
+            android:key="overscan"
+            android:title="@string/hdmi_overscan_title"
+            android:summary="@string/hdmi_overscan_summary" />
     <ListPreference
         android:key="spdif"
         android:title="@string/hdmi_audio_output"
