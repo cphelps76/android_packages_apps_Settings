@@ -37,6 +37,7 @@ import android.util.Log;
 import android.view.*;
 import android.view.Display;
 import android.view.IWindowManager;
+import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -340,56 +341,45 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
         TextView mMessage = (TextView) alert.findViewById(android.R.id.message);
         mMessage.setGravity(Gravity.CENTER_HORIZONTAL);
-        SeekBar mWidthSeekBar = (SeekBar) dialog.findViewById(R.id.width_seekbar);
-        mWidthSeekBar.setProgress(width_rate[0]);
-        mWidthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        NumberPicker mWidthPicker = (NumberPicker) dialog.findViewById(R.id.width_picker);
+        mWidthPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        mWidthPicker.setMinValue(0);
+        mWidthPicker.setMaxValue(100);
+        mWidthPicker.setValue(width_rate[0]);
+        mWidthPicker.setWrapSelectorWheel(false);
+        mWidthPicker.requestFocus();
+        mWidthPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.d(TAG, "progress is now " + progress);
-                if (width_rate[0] > progress) {
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if (oldVal > newVal) {
                     //zoom out
                     zoomOutWidth();
                 } else {
                     // zoom in
                     zoomInWidth();
                 }
-                width_rate[0] = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+                width_rate[0] = newVal;
 
             }
         });
-        SeekBar mHeightSeekBar = (SeekBar) dialog.findViewById(R.id.height_seekbar);
-        mHeightSeekBar.setProgress(height_rate[0]);
-        mHeightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        NumberPicker mHeightPicker = (NumberPicker) dialog.findViewById(R.id.height_picker);
+        mHeightPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        mHeightPicker.setMinValue(0);
+        mHeightPicker.setMaxValue(100);
+        mHeightPicker.setValue(height_rate[0]);
+        mHeightPicker.setWrapSelectorWheel(false);
+        mHeightPicker.setNextFocusRightId(R.string.dlg_ok);
+        mHeightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.d(TAG, "progress is now " + progress);
-                if (height_rate[0] > progress) {
-                    // zoom out
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if (oldVal > newVal) {
+                    //zoom out
                     zoomOutHeight();
                 } else {
                     // zoom in
                     zoomInHeight();
                 }
-                height_rate[0] = progress;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+                height_rate[0] = newVal;
             }
         });
     }
