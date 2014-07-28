@@ -368,7 +368,6 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mHeightPicker.setMaxValue(100);
         mHeightPicker.setValue(height_rate[0]);
         mHeightPicker.setWrapSelectorWheel(false);
-        mHeightPicker.setNextFocusRightId(R.string.dlg_ok);
         mHeightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
