@@ -41,6 +41,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.hardware.display.HdmiManager;
 import android.net.ethernet.EthernetManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -138,6 +139,8 @@ public class Settings extends PreferenceActivity
     private boolean mListeningToAccountUpdates;
 
     private boolean mDeviceHasBrokenBluetooth;
+
+    private static HdmiManager mHdmiManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -488,6 +491,10 @@ public class Settings extends PreferenceActivity
                 if (Utils.platformHasMbxUiMode()) {
                     target.remove(i);
                 }
+            } else if (id == R.id.hdmi_settings) {
+                if (!mHdmiManager.isHdmiPlugged(sw)) {
+                    target.remove(i);
+                }
             }
 
             if (target.get(i) == header
@@ -690,6 +697,7 @@ public class Settings extends PreferenceActivity
                 mEthernetEnabler = null;
             }
             mHotspotEnabler = new HotspotEnabler(context, new Switch(context));
+            mHdmiManager = (HdmiManager) context.getSystemService(Context.HDMI_SERVICE);
 
         }
 

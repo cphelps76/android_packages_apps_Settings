@@ -23,6 +23,7 @@ import android.app.SystemWriteManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.hardware.display.HdmiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -52,35 +53,19 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     private static final String KEY_DEFAULT_FREQUENCY = "default_frequency";
     private static final String KEY_OVERSCAN = "overscan";
 
-    // 720p values
-    private static final int OUTPUT720_FULL_WIDTH = 1280;
-    private static final int OUTPUT720_FULL_HEIGHT = 720;
-    // 1080p values
-    private static final int OUTPUT1080_FULL_WIDTH = 1920;
-    private static final int OUTPUT1080_FULL_HEIGHT = 1080;
-
     // u-boot props
-    private static final String HDMI_MODE_PROP = "ubootenv.var.hdmimode";
     private static final String COMMON_MODE_PROP = "ubootenv.var.outputmode";
     private static final String DIGITAL_AUDIO_OUTPUT_PROP = "ubootenv.var.digitaudiooutput";
     private static final String DEFAULT_FREQUENCY_PROP = "ubootenv.var.defaulttvfrequency";
-    private final static String OUTPUT_X_PROP = "ubootenv.var.720poutputx";
-    private final static String OUTPUT_Y_PROP = "ubootenv.var.720poutputy";
-    private final static String OUTPUT_WIDTH_PROP = "ubootenv.var.720poutputwidth";
-    private final static String OUTPUT_HEIGHT_PROP = "ubootenv.var.720poutputheight";
 
     // sysfs paths
     private static final String AUDIODSP_DIGITAL_RAW = "/sys/class/audiodsp/digital_raw";
     private static final String FB0_FREESCALE_MODE = "/sys/class/graphics/fb0/freescale_mode";
     private static final String FB1_FREESCALE_MODE = "/sys/class/graphics/fb1/freescale_mode";
-    private static final String FB0_FREESCALE = "/sys/class/graphics/fb0/free_scale";
-    private static final String FB1_FREESCALE = "/sys/class/graphics/fb1/free_scale";
     private static final String FREESCALE_AXIS = "/sys/class/graphics/fb0/free_scale_axis";
     private static final String PPMGR_PPSCALER = "/sys/class/ppmgr/ppscaler";
-    private static final String PPMGR_PPSCALER_RECT = "/sys/class/ppmgr/ppscaler_rect";
     private static final String DISABLE_VIDEO = "/sys/class/video/disable_video";
-    private static final String DISPLAY_AXIS = "/sys/class/display/axis";
-    private static final String DISPLAY_MODE = "/sys/class/display/mode";
+    private static final String HDMI_MODE_PROP = "ubootenv.var.hdmimode";
 
     private ListPreference mSpdifPref;
     private ListPreference mOutputModePref;
@@ -91,6 +76,8 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     private CharSequence[] mDigitalOutputEntries;
 
     private static SystemWriteManager sw;
+
+    private static HdmiManager mHdmiManager;
 
     private static final float zoomStep = 4.0f;
     private static final float zoomStepWidth = 1.78f;
@@ -108,6 +95,9 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.hdmi_prefs);
+
+
+        mHdmiManager = (HdmiManager) getSystemService(Context.HDMI_SERVICE);
 
         mSpdifPref = (ListPreference) findPreference(KEY_SPDIF);
         mSpdifPref.setOnPreferenceChangeListener(this);
@@ -143,7 +133,9 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ID_HDMI_RESET:
-                restorePosition(0,0,1280,720);
+                int[] position = getPosition(mHdmiManager.getBestResolution());
+
+                restorePosition(position[0], position[1], position[2], position[3]);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -162,11 +154,8 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     }
 
     private void setDensity(String mode) {
-        int density = 240;
+        int density = 160;
 
-        if (mode.contains("720")) {
-            density = 160;
-        }
         IWindowManager wm = IWindowManager.Stub.asInterface(ServiceManager.checkService(
                 Context.WINDOW_SERVICE));
         if (wm == null) {
@@ -186,7 +175,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     }
 
-    private void setDisplaySize(String newMode) {
+    /*private void setDisplaySize(String newMode) {
         int width;
         int height;
         int mode = OUTPUT720_FULL_HEIGHT;
@@ -227,13 +216,18 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
             // fail quietly
         }
 
+    }*/
+
+    private int[] getPosition(String mode) {
+        return mHdmiManager.getPosition(mHdmiManager.getBestResolution());
     }
 
     private void initPosition() {
-        mLeft = Integer.valueOf(sw.getPropertyString(OUTPUT_X_PROP, "0"));
-        mTop = Integer.valueOf(sw.getPropertyString(OUTPUT_Y_PROP, "0"));
-        mWidth = Integer.valueOf(sw.getPropertyString(OUTPUT_WIDTH_PROP, String.valueOf(OUTPUT720_FULL_WIDTH)));
-        mHeight = Integer.valueOf(sw.getPropertyString(OUTPUT_HEIGHT_PROP, String.valueOf(OUTPUT720_FULL_HEIGHT)));
+        final int[] position = getPosition(mHdmiManager.getBestResolution());
+        mLeft = position[0];
+        mTop = position[1];
+        mWidth = position[2];
+        mHeight = position[3];
         mRight = mWidth;// + mLeft;
         mBottom = mHeight;// + mTop;
         Log.d(TAG, "left=" + mLeft + " top=" + mTop + " width=" + mWidth + " height=" + mHeight + " right=" + mRight + " bottom=" + mBottom);
@@ -241,8 +235,8 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mNewTop = mTop;
         mNewRight = mRight;
         mNewBottom = mBottom;
-        Utils.writeSysfs(sw, FB0_FREESCALE, "1");
-        Utils.writeSysfs(sw, FB1_FREESCALE, "1");
+        Utils.writeSysfs(sw, mHdmiManager.FREESCALE_FB0, "1");
+        Utils.writeSysfs(sw, mHdmiManager.FREESCALE_FB1, "1");
     }
 
     private int findIndexOfEntry(String value, CharSequence[] entry) {
@@ -268,11 +262,11 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         Utils.writeSysfs(sw, DISABLE_VIDEO, "1");
 
         // revert display axis
-        Utils.writeSysfs(sw, DISPLAY_AXIS, "0 0 1279 719");
+        Utils.writeSysfs(sw, mHdmiManager.OUTPUT_AXIS, "0 0 1279 719");
     }
 
     public void setResolution(String mode) {
-        Utils.writeSysfs(sw, DISPLAY_MODE, mode);
+        Utils.writeSysfs(sw, mHdmiManager.DISPLAY_MODE, mode);
     }
 
     public void updateModeProps(String newMode) {
@@ -414,15 +408,41 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     private void setPosition(int left, int top, int right, int bottom) {
         String string = String.valueOf(left) +
                 " " + String.valueOf(top) + " " + String.valueOf(right) + " " + String.valueOf(bottom) + " 0";
-        Utils.writeSysfs(sw, PPMGR_PPSCALER_RECT, string);
+        Utils.writeSysfs(sw, mHdmiManager.PPSCALER_RECT, string);
 
     }
 
     private void savePosition(int left, int top, int right, int bottom) {
-        sw.setProperty(OUTPUT_X_PROP, String.valueOf(left));
-        sw.setProperty(OUTPUT_Y_PROP, String.valueOf(top));
-        sw.setProperty(OUTPUT_WIDTH_PROP, String.valueOf(right));
-        sw.setProperty(OUTPUT_HEIGHT_PROP, String.valueOf(bottom));
+        int[] position = getPosition(mHdmiManager.getBestResolution());
+        switch (position[3]) {
+            case 480:
+                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_X, String.valueOf(left));
+                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_Y, String.valueOf(top));
+                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_WIDTH, String.valueOf(right));
+                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_HEIGHT, String.valueOf(bottom));
+                break;
+            case 576:
+                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_X, String.valueOf(left));
+                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_Y, String.valueOf(top));
+                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_WIDTH, String.valueOf(right));
+                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_HEIGHT, String.valueOf(bottom));
+                break;
+            case 720:
+                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_X, String.valueOf(left));
+                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_Y, String.valueOf(top));
+                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_WIDTH, String.valueOf(right));
+                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_HEIGHT, String.valueOf(bottom));
+                break;
+            case 1080:
+                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_X, String.valueOf(left));
+                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_Y, String.valueOf(top));
+                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_WIDTH, String.valueOf(right));
+                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_HEIGHT, String.valueOf(bottom));
+                break;
+            default:
+                break;
+
+        }
 
         mLeft = left;
         mTop = top;
