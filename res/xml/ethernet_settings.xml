@@ -20,7 +20,7 @@
         <Preference
             android:title="@string/eth_conf_perf_title"
             android:summary="@string/eth_conf_summary"
-            android:key="ETHERNET_config"
+            android:key="ethernet_config"
             android:persistent="false" />
         <PreferenceScreen
             android:title="@string/ethernet_info_title"
