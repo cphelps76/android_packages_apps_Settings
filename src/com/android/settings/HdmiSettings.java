@@ -96,7 +96,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
         addPreferencesFromResource(R.xml.hdmi_prefs);
 
-
+        sw = (SystemWriteManager) getSystemService("system_write");
         mHdmiManager = (HdmiManager) getSystemService(Context.HDMI_SERVICE);
 
         mSpdifPref = (ListPreference) findPreference(KEY_SPDIF);
@@ -104,6 +104,10 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
+        // remove outputmode selector if not hdmi only
+        if (!sw.getPropertyBoolean(mHdmiManager.HDMIONLY_PROP, true)) {
+            getPreferenceScreen().removePreference(mOutputModePref);
+        }
 
         mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
         mDefaultFrequency.setOnPreferenceChangeListener(this);
@@ -112,8 +116,6 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mDigitalOutputEntries = getResources().getStringArray(R.array.hdmi_audio_output_entries);
 
         mOverscanPref = (Preference) findPreference(KEY_OVERSCAN);
-
-        sw = (SystemWriteManager) getSystemService("system_write");
 
         updateSummaries();
         setHasOptionsMenu(true);
@@ -370,15 +372,15 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
             return true;
         } else if (key.equals(KEY_OUTPUT_MODE)) {
             String newMode = objValue.toString();
-            if (sw.getPropertyBoolean(mHdmiManager.HDMIONLY_PROP, true)) {
-                sw.writeSysfs(mHdmiManager.HDMI_PLUGGED, "vdac");
-                if (mHdmiManager.isFreescaleClosed()) {
-                    mHdmiManager.setOutputWithoutFreescale(newMode);
-                } else {
-                    mHdmiManager.setOutputMode(newMode);
-                }
-                sw.writeSysfs(mHdmiManager.BLANK_DISPLAY, "0");
+            sw.writeSysfs(mHdmiManager.HDMI_PLUGGED, "vdac");
+            if (mHdmiManager.isFreescaleClosed()) {
+                mHdmiManager.setOutputWithoutFreescale(newMode);
+            } else {
+                mHdmiManager.setOutputMode(newMode);
             }
+            sw.writeSysfs(mHdmiManager.BLANK_DISPLAY, "0");
+            Settings.Secure.putString(getActivity().getContentResolver(),
+                    Settings.Secure.HDMI_RESOLUTION, newMode);
             return true;
         } else if (key.equals(KEY_DEFAULT_FREQUENCY)){
             try {
