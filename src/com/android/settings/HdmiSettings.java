@@ -104,8 +104,6 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
-        // until bugs are worked out disable OutputModePref
-        getPreferenceScreen().removePreference(findPreference(KEY_OUTPUT_MODE));
 
         mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
         mDefaultFrequency.setOnPreferenceChangeListener(this);
@@ -153,71 +151,6 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mSpdifPref.setSummary(mSpdifPref.getEntry());
     }
 
-    private void setDensity(String mode) {
-        int density = 160;
-
-        IWindowManager wm = IWindowManager.Stub.asInterface(ServiceManager.checkService(
-                Context.WINDOW_SERVICE));
-        if (wm == null) {
-            Log.d(TAG, "Can't connect to window manager, is the system running?");
-            return;
-        }
-
-        try {
-            if (density > 0) {
-                wm.setForcedDisplayDensity(Display.DEFAULT_DISPLAY, density);
-            } else {
-                wm.clearForcedDisplayDensity(Display.DEFAULT_DISPLAY);
-            }
-        } catch (RemoteException e) {
-            // fail quietly
-        }
-
-    }
-
-    /*private void setDisplaySize(String newMode) {
-        int width;
-        int height;
-        int mode = OUTPUT720_FULL_HEIGHT;
-
-        if (newMode.contains(String.valueOf(OUTPUT1080_FULL_HEIGHT))) {
-            mode = OUTPUT1080_FULL_HEIGHT;
-        }
-
-        switch (mode) {
-            case OUTPUT1080_FULL_HEIGHT:
-                width = OUTPUT1080_FULL_WIDTH;
-                height = OUTPUT1080_FULL_HEIGHT;
-                break;
-            case OUTPUT720_FULL_HEIGHT:
-                width = OUTPUT720_FULL_WIDTH;
-                height = OUTPUT720_FULL_HEIGHT;
-                break;
-            default:
-                width = OUTPUT720_FULL_WIDTH;
-                height = OUTPUT720_FULL_HEIGHT;
-                break;
-        }
-
-        IWindowManager wm = IWindowManager.Stub.asInterface(ServiceManager.checkService(
-                Context.WINDOW_SERVICE));
-        if (wm == null) {
-            Log.d(TAG, "Can't connect to window manager; is the system running?");
-            return;
-        }
-
-        try {
-            if (width >= 0 && height >= 0) {
-                wm.setForcedDisplaySize(Display.DEFAULT_DISPLAY, width, height);
-            } else {
-                wm.clearForcedDisplaySize(Display.DEFAULT_DISPLAY);
-            }
-        } catch (RemoteException e) {
-            // fail quietly
-        }
-
-    }*/
-
     private int[] getPosition(String mode) {
         return mHdmiManager.getPosition(mHdmiManager.getBestResolution());
     }
@@ -250,35 +183,6 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         return getResources().getInteger(R.integer.outputmode_default_values);  //set 720p as default
     }
 
-    public void disableFreescale() {
-        // turn off fb freescale
-        Utils.writeSysfs(sw, FB0_FREESCALE_MODE, "0");
-        Utils.writeSysfs(sw, FB1_FREESCALE_MODE, "0");
-        Utils.writeSysfs(sw, FREESCALE_AXIS, "0 0 1279 719");
-
-        Utils.writeSysfs(sw, PPMGR_PPSCALER, "0");
-        Utils.writeSysfs(sw, DISABLE_VIDEO, "0");
-        // now default video display to off
-        Utils.writeSysfs(sw, DISABLE_VIDEO, "1");
-
-        // revert display axis
-        Utils.writeSysfs(sw, mHdmiManager.OUTPUT_AXIS, "0 0 1279 719");
-    }
-
-    public void setResolution(String mode) {
-        Utils.writeSysfs(sw, mHdmiManager.DISPLAY_MODE, mode);
-    }
-
-    public void updateModeProps(String newMode) {
-        sw.setProperty(COMMON_MODE_PROP, newMode);
-        sw.setProperty(HDMI_MODE_PROP, newMode);
-    }
-
-     private void updateHdmiOutput(String newMode) {
-         setResolution(newMode);
-         disableFreescale();
-         updateModeProps(newMode);
-    }
 
     private void setDigitalAudioValue(String value) {
         sw.setProperty(DIGITAL_AUDIO_OUTPUT_PROP, value);
@@ -466,7 +370,15 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
             return true;
         } else if (key.equals(KEY_OUTPUT_MODE)) {
             String newMode = objValue.toString();
-            updateHdmiOutput(newMode);
+            if (sw.getPropertyBoolean(mHdmiManager.HDMIONLY_PROP, true)) {
+                sw.writeSysfs(mHdmiManager.HDMI_PLUGGED, "vdac");
+                if (mHdmiManager.isFreescaleClosed()) {
+                    mHdmiManager.setOutputWithoutFreescale(newMode);
+                } else {
+                    mHdmiManager.setOutputMode(newMode);
+                }
+                sw.writeSysfs(mHdmiManager.BLANK_DISPLAY, "0");
+            }
             return true;
         } else if (key.equals(KEY_DEFAULT_FREQUENCY)){
             try {
