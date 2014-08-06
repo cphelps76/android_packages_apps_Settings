@@ -104,10 +104,6 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
-        // remove outputmode selector if not hdmi only
-        if (!sw.getPropertyBoolean(mHdmiManager.HDMIONLY_PROP, true)) {
-            getPreferenceScreen().removePreference(mOutputModePref);
-        }
 
         mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
         mDefaultFrequency.setOnPreferenceChangeListener(this);
