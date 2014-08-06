@@ -4556,12 +4556,17 @@
     <string name="hdmi_audio_output_spdif_passthrough">RAW/SPDIF passthrough</string>
     <string name="hdmi_audio_output_hdmi_passthrough">HDMI passthrough</string>
     <string name="hdmi_output_title">HDMI output mode</string>
+    <string name="hdmi_display_mode_480i">480i</string>
+    <string name="hdmi_display_mode_480p">480p</string>
+    <string name="hdmi_display_mode_576i">576i</string>
+    <string name="hdmi_display_mode_576p">576p</string>
     <string name="hdmi_display_mode_720p">720p</string>
     <string name="hdmi_display_mode_720p50hz">720p (50Hz)</string>
     <string name="hdmi_display_mode_1080i">1080i</string>
     <string name="hdmi_display_mode_1080i50hz">1080i (50Hz)</string>
     <string name="hdmi_display_mode_1080p">1080p</string>
     <string name="hdmi_display_mode_1080p50hz">1080p (50Hz)</string>
+    <string name="hdmi_display_mode_1080p24hz">1080p (24Hz)</string>
     <string name="hdmi_default_frequency">Refresh frequency</string>
     <string name="hdmi_default_frequency_summary">60Hz</string>
     <string name="hdmi_overscan_title">Overscan compensation</string>
