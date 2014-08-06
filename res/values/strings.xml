@@ -4555,6 +4555,8 @@
     <string name="hdmi_audio_output_pcm">PCM</string>
     <string name="hdmi_audio_output_spdif_passthrough">RAW/SPDIF passthrough</string>
     <string name="hdmi_audio_output_hdmi_passthrough">HDMI passthrough</string>
+    <string name="hdmi_auto_adjust_title">Auto adjust resolution</string>
+    <string name="hdmi_auto_adjust_summary">Adjust the resolution to the best possible on boot.</string>
     <string name="hdmi_output_title">HDMI output mode</string>
     <string name="hdmi_display_mode_480i">480i</string>
     <string name="hdmi_display_mode_480p">480p</string>

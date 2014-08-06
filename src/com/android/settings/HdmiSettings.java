@@ -49,7 +49,8 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     // Preferences
     private static final String KEY_SPDIF = "spdif";
-    private static final String KEY_OUTPUT_MODE ="output_mode";
+    private static final String KEY_OUTPUT_MODE = "output_mode";
+    private static final String KEY_AUTO_ADJUST = "auto_adjust";
     private static final String KEY_DEFAULT_FREQUENCY = "default_frequency";
     private static final String KEY_OVERSCAN = "overscan";
 
@@ -69,6 +70,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     private ListPreference mSpdifPref;
     private ListPreference mOutputModePref;
+    private CheckBoxPreference mAutoAdjustPref;
     private Preference mOverscanPref;
 
     private ListPreference  mDefaultFrequency;
@@ -112,6 +114,10 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mDigitalOutputEntries = getResources().getStringArray(R.array.hdmi_audio_output_entries);
 
         mOverscanPref = (Preference) findPreference(KEY_OVERSCAN);
+
+        mAutoAdjustPref = (CheckBoxPreference) findPreference(KEY_AUTO_ADJUST);
+        mAutoAdjustPref.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.HDMI_AUTO_ADJUST, 0) != 0);
 
         updateSummaries();
         setHasOptionsMenu(true);
@@ -378,7 +384,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
             Settings.Secure.putString(getActivity().getContentResolver(),
                     Settings.Secure.HDMI_RESOLUTION, newMode);
             return true;
-        } else if (key.equals(KEY_DEFAULT_FREQUENCY)){
+        } else if (key.equals(KEY_DEFAULT_FREQUENCY)) {
             try {
                 int frequency_index = Integer.parseInt((String) objValue);
                 mDefaultFrequency.setSummary(mDefaultFrequencyEntries[frequency_index]);
@@ -397,7 +403,14 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         if (preference == mOverscanPref) {
             showOverscanDialog(this.getActivity());
             return true;
+        } else if (preference == mAutoAdjustPref) {
+            Log.d(TAG, "auto adjust is " + mAutoAdjustPref.isChecked());
+            int enabled = mAutoAdjustPref.isChecked() ? 1 : 0;
+            Log.d(TAG, "setting HDMI_AUTO_ADJUST to " + enabled);
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.HDMI_AUTO_ADJUST, enabled);
+            return true;
         }
-        return false;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 }
