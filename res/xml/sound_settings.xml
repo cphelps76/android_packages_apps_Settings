@@ -15,7 +15,7 @@
      @@DOLBY_BANNER
 
      This file was modified by Dolby Laboratories, Inc. The portions of the
-     code that are surrounded by "DOLBY..." are copyrighted and 
+     code that are surrounded by "DOLBY..." are copyrighted and
      licensed separately, as follows:
 
      (C) 2011-2012 Dolby Laboratories, Inc.
@@ -49,6 +49,12 @@
         <intent android:targetPackage="com.android.musicfx"
                 android:targetClass="com.android.musicfx.ControlPanelPicker" />
     </Preference>
+
+    <ListPreference
+            android:key="spdif"
+            android:title="@string/hdmi_audio_output"
+            android:entries="@array/hdmi_audio_output_entries"
+            android:entryValues="@array/hdmi_audio_output_values" />
 
 <!-- DOLBY_DAP_GUI -->
     <PreferenceCategory

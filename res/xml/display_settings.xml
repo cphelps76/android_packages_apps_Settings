@@ -18,6 +18,21 @@
         android:title="@string/display_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+        <ListPreference
+                android:key="output_mode"
+                android:title="@string/hdmi_output_title"
+                android:entries="@array/output_mode_list"
+                android:entryValues="@array/output_mode_values"/>
+        <CheckBoxPreference
+                android:key="auto_adjust"
+                android:title="@string/hdmi_auto_adjust_title"
+                android:summary="@string/hdmi_auto_adjust_summary"
+                android:defaultValue="false" />
+        <Preference
+                android:key="position"
+                android:title="@string/hdmi_overscan_title"
+                android:summary="@string/hdmi_overscan_summary" />
+
         <com.android.settings.BrightnessPreference
                 android:key="brightness"
                 android:title="@string/brightness"

@@ -4557,7 +4557,7 @@
     <string name="hdmi_audio_output_hdmi_passthrough">HDMI passthrough</string>
     <string name="hdmi_auto_adjust_title">Auto adjust resolution</string>
     <string name="hdmi_auto_adjust_summary">Adjust the resolution to the best possible on boot.</string>
-    <string name="hdmi_output_title">HDMI output mode</string>
+    <string name="hdmi_output_title">Display resolution</string>
     <string name="hdmi_display_mode_480i">480i</string>
     <string name="hdmi_display_mode_480p">480p</string>
     <string name="hdmi_display_mode_576i">576i</string>
@@ -4571,10 +4571,10 @@
     <string name="hdmi_display_mode_1080p24hz">1080p (24Hz)</string>
     <string name="hdmi_default_frequency">Refresh frequency</string>
     <string name="hdmi_default_frequency_summary">60Hz</string>
-    <string name="hdmi_overscan_title">Overscan compensation</string>
+    <string name="hdmi_overscan_title">Display position</string>
     <string name="hdmi_overscan_summary">Adjust HDMI output to fill TV screen</string>
     <string name="hdmi_overscan_help">Adjust the values for height and width until the screen appears correct.\n\t\tPress OK to accept and Cancel to revert.</string>
-    <string name="hdmi_menu_reset">Reset compensation</string>
+    <string name="hdmi_menu_reset">Reset position</string>
     <string name="overscan_seekbar_width_text">Width</string>
     <string name="overscan_seekbar_height_text">Height</string>
 

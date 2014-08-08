@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
+import android.hardware.display.HdmiManager;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.media.audiofx.AudioEffect;
@@ -53,13 +54,6 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import android.os.SystemProperties;
 
 import java.util.List;
@@ -89,8 +83,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_SETTINGS = "dock_audio";
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
-    private static final String STR_DIGIT_AUDIO_OUTPUT = "ubootenv.var.digitaudiooutput";
-    private static String DigitalRawFile = "/sys/class/audiodsp/digital_raw";
+    private static final String KEY_SPDIF = "spdif";
 
     // DOLBY_DAP_GUI
     private static final boolean DOLBY_ALLOW_PROFILE_SELECTION = SystemProperties.getBoolean("ds1.audio.effect.support", false);//true;
@@ -121,6 +114,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Preference mDolbyLaunchTitle;
     private Preference mDolbyLaunchApp;
     private Preference mDolbyDSProfile;
+    private ListPreference mSpdifPref;
+
+    private static HdmiManager mHdmiManager;
 
     private final IDsClientEvents mDsListener = new IDsClientEvents() {
 
@@ -168,9 +164,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Intent mDockIntent;
     private CheckBoxPreference mDockAudioMediaEnabled;
 
-    private CharSequence[] mEntryValues;
-    private int index_entry;
-    private int sel_index;
+    private CharSequence[] mDigitalOutputEntries;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -204,6 +198,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
+        mHdmiManager = (HdmiManager) getSystemService(Context.HDMI_SERVICE);
+
         addPreferencesFromResource(R.xml.sound_settings);
 
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
@@ -214,6 +210,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         if (!getResources().getBoolean(R.bool.has_silent_mode)) {
             findPreference(KEY_RING_VOLUME).setDependency(null);
         }
+
+        mDigitalOutputEntries = getResources().getStringArray(R.array.hdmi_audio_output_entries);
+        mSpdifPref = (ListPreference) findPreference(KEY_SPDIF);
+        mSpdifPref.setOnPreferenceChangeListener(this);
 
         mVibrateWhenRinging = (CheckBoxPreference) findPreference(KEY_VIBRATE);
         mVibrateWhenRinging.setPersistent(false);
@@ -334,7 +334,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                             MSG_UPDATE_NOTIFICATION_SUMMARY);
                 }
             }
-        };		
+        };
         initDockSettings();
     }
 
@@ -527,6 +527,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 int value = Integer.parseInt((String) objValue);
                 Settings.Global.putInt(getContentResolver(),
                         Settings.Global.EMERGENCY_TONE, value);
+                return true;
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
@@ -536,6 +537,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 try {
                     mDsClient.setDsOn((Boolean) objValue);
                     updateDolbyStateUI();
+                    return true;
                 } catch (Exception e) {
                     e.printStackTrace();
                     unbindDsClient();
@@ -544,10 +546,16 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mDolbyDSProfile) {
             if (mDsClientConnected) {
                 updateDolbyStateUI();
+                return true;
             }
             // DOLBY_DAP_GUI END
+        } else if (preference == mSpdifPref) {
+            String newValue = objValue.toString();
+            mHdmiManager.setDigitalAudioValue(newValue);
+            mSpdifPref.setSummary(mDigitalOutputEntries[Integer.valueOf(newValue)]);
+            return true;
         }
-        return true;
+        return false;
     }
 
 	private int findIndexOfEntry(String value, CharSequence[] entry) {
