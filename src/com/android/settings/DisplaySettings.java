@@ -192,6 +192,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
         mOutputModePref.setValue(mHdmiManager.getResolution());
+        mOutputModePref.setEntries(mHdmiManager.getAvailableResolutions());
+        mOutputModePref.setEntryValues(mHdmiManager.getAvailableResolutions());
+        mOutputModePref.setSummary(mHdmiManager.getResolution());
 
         mPositionPref = (Preference) findPreference(KEY_POSITION);
 
@@ -645,6 +648,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             sw.writeSysfs(mHdmiManager.BLANK_DISPLAY, "0");
             Settings.Secure.putString(getActivity().getContentResolver(),
                     Settings.Secure.HDMI_RESOLUTION, newMode);
+            mOutputModePref.setSummary(newMode);
             // reset position after resolution change
             reset();
             return true;
