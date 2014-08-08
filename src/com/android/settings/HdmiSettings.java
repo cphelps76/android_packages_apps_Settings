@@ -81,8 +81,8 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     private static HdmiManager mHdmiManager;
 
-    private static final float zoomStep = 4.0f;
-    private static final float zoomStepWidth = 1.78f;
+    private static float zoomStep = 3.0f; // defaulted to 720p
+    private static float zoomStepWidth = 1.78f; //defaulted to 720p
 
     private static final int MAX_HEIGHT = 100;
     private static final int MAX_WIDTH = 100;
@@ -106,6 +106,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
         mOutputModePref = (ListPreference) findPreference(KEY_OUTPUT_MODE);
         mOutputModePref.setOnPreferenceChangeListener(this);
+        mOutputModePref.setValue(mHdmiManager.getResolution());
 
         mDefaultFrequency = (ListPreference) findPreference(KEY_DEFAULT_FREQUENCY);
         mDefaultFrequency.setOnPreferenceChangeListener(this);
@@ -135,9 +136,7 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ID_HDMI_RESET:
-                int[] position = getPosition(mHdmiManager.getBestResolution());
-
-                restorePosition(position[0], position[1], position[2], position[3]);
+                resetPosition();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -155,12 +154,8 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mSpdifPref.setSummary(mSpdifPref.getEntry());
     }
 
-    private int[] getPosition(String mode) {
-        return mHdmiManager.getPosition(mHdmiManager.getBestResolution());
-    }
-
     private void initPosition() {
-        final int[] position = getPosition(mHdmiManager.getBestResolution());
+        final int[] position = mHdmiManager.getPosition(mHdmiManager.getResolution());
         mLeft = position[0];
         mTop = position[1];
         mWidth = position[2];
@@ -174,6 +169,34 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mNewBottom = mBottom;
         Utils.writeSysfs(sw, mHdmiManager.FREESCALE_FB0, "1");
         Utils.writeSysfs(sw, mHdmiManager.FREESCALE_FB1, "1");
+    }
+
+    private void initSteps() {
+        String resolution = mHdmiManager.getResolution();
+        if (resolution.contains("480")) {
+            zoomStep = 2.0f;
+            zoomStepWidth = 1.50f;
+        } else if (resolution.contains("576")) {
+            zoomStep = 2.0f;
+            zoomStepWidth = 1.25f;
+        } else if (resolution.contains("720")) {
+            zoomStep = 3.0f;
+            zoomStepWidth = 1.78f;
+        } else {
+            zoomStep = 4.0f;
+            zoomStepWidth = 1.78f;
+        }
+    }
+
+    private void resetPosition() {
+        // reset position to 100% of current resolution
+        int[] position = mHdmiManager.getResolutionPosition();
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.HDMI_OVERSCAN_WIDTH, 100);
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.HDMI_OVERSCAN_HEIGHT, 100);
+
+        restorePosition(position[0], position[1], position[2], position[3]);
     }
 
     private int findIndexOfEntry(String value, CharSequence[] entry) {
@@ -195,21 +218,33 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
 
     private int getCurrentWidthRate() {
         Log.d(TAG, "mLeft is " + mLeft);
-        float offset = mLeft / (zoomStep*zoomStepWidth);
-        float curVal = MAX_WIDTH - offset;
-        Log.d(TAG, "currentWidthRate=" + (int)curVal);
-        return ((int) curVal);
+        int savedValue = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.HDMI_OVERSCAN_WIDTH, 100);
+        if (savedValue == 100) {
+            float offset = mLeft / (zoomStep * zoomStepWidth);
+            float curVal = MAX_WIDTH - offset;
+            Log.d(TAG, "currentWidthRate=" + (int) curVal);
+            return ((int) curVal);
+        }
+        return savedValue;
     }
 
     private int getCurrentHeightRate() {
-        float offset = mTop / zoomStep;
-        float curVal = MAX_HEIGHT - offset;
-        Log.d(TAG, "currentHeightRate=" + (int)curVal);
-        return ((int) curVal);
+        Log.d(TAG, "mTop is " + mTop);
+        int savedValue = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.HDMI_OVERSCAN_WIDTH, 100);
+        if (savedValue == 100) {
+            float offset = mTop / zoomStep;
+            float curVal = MAX_HEIGHT - offset;
+            Log.d(TAG, "currentHeightRate=" + (int) curVal);
+            return ((int) curVal);
+        }
+        return savedValue;
     }
 
     private void showOverscanDialog(Context context) {
         initPosition();
+        initSteps();
         // sysfs are written as progress is changed for real-time effect
         // cancel obviously reverts back to previous values
         final int[] width_rate = {getCurrentWidthRate()};
@@ -234,7 +269,15 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         builder.setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                savePosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+                mHdmiManager.savePosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+                mLeft = mNewLeft;
+                mTop = mNewTop;
+                mRight = mNewRight;
+                mBottom = mNewBottom;
+                Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.HDMI_OVERSCAN_WIDTH, width_rate[0]);
+                Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.HDMI_OVERSCAN_HEIGHT, height_rate[0]);
             }
         });
         builder.setTitle(R.string.hdmi_overscan_title);
@@ -289,78 +332,38 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
         mNewLeft += (int)(zoomStep * zoomStepWidth);
         mNewRight -= (int)(zoomStep * zoomStepWidth);
         Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
-        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+        mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
     }
 
     private void zoomOutHeight() {
         mNewTop += zoomStep;
         mNewBottom -= zoomStep;
         Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
-        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+        mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
     }
 
     private void zoomInWidth() {
         mNewLeft -= (int)(zoomStep * zoomStepWidth);
         mNewRight += (int)(zoomStep * zoomStepWidth);
         Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
-        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+        mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
     }
 
     private void zoomInHeight() {
         mNewTop -= zoomStep;
         mNewBottom += zoomStep;
         Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
-        setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
+        mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
     }
 
-    private void setPosition(int left, int top, int right, int bottom) {
-        String string = String.valueOf(left) +
-                " " + String.valueOf(top) + " " + String.valueOf(right) + " " + String.valueOf(bottom) + " 0";
-        Utils.writeSysfs(sw, mHdmiManager.PPSCALER_RECT, string);
-
-    }
-
-    private void savePosition(int left, int top, int right, int bottom) {
-        int[] position = getPosition(mHdmiManager.getBestResolution());
-        switch (position[3]) {
-            case 480:
-                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_X, String.valueOf(left));
-                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_Y, String.valueOf(top));
-                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_WIDTH, String.valueOf(right));
-                sw.setProperty(mHdmiManager.UBOOT_480P_OUTPUT_HEIGHT, String.valueOf(bottom));
-                break;
-            case 576:
-                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_X, String.valueOf(left));
-                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_Y, String.valueOf(top));
-                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_WIDTH, String.valueOf(right));
-                sw.setProperty(mHdmiManager.UBOOT_576P_OUTPUT_HEIGHT, String.valueOf(bottom));
-                break;
-            case 720:
-                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_X, String.valueOf(left));
-                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_Y, String.valueOf(top));
-                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_WIDTH, String.valueOf(right));
-                sw.setProperty(mHdmiManager.UBOOT_720P_OUTPUT_HEIGHT, String.valueOf(bottom));
-                break;
-            case 1080:
-                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_X, String.valueOf(left));
-                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_Y, String.valueOf(top));
-                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_WIDTH, String.valueOf(right));
-                sw.setProperty(mHdmiManager.UBOOT_1080P_OUTPUT_HEIGHT, String.valueOf(bottom));
-                break;
-            default:
-                break;
-
-        }
-
+    private void restorePosition(int left, int top, int right, int bottom) {
+        Log.d(TAG, "resetting position to " + left + "," + top + "," + right + "," + bottom);
+        mHdmiManager.setPosition(left, top, right, bottom);
+        mHdmiManager.savePosition(left, top, right, bottom);
         mLeft = left;
         mTop = top;
         mRight = right;
         mBottom = bottom;
-    }
-
-    private void restorePosition(int left, int top, int right, int bottom) {
-        setPosition(left, top, right, bottom);
-        savePosition(left, top, right, bottom);
     }
 
     @Override
@@ -383,6 +386,8 @@ public class HdmiSettings extends SettingsPreferenceFragment implements Preferen
             sw.writeSysfs(mHdmiManager.BLANK_DISPLAY, "0");
             Settings.Secure.putString(getActivity().getContentResolver(),
                     Settings.Secure.HDMI_RESOLUTION, newMode);
+            // reset position after resolution change
+            resetPosition();
             return true;
         } else if (key.equals(KEY_DEFAULT_FREQUENCY)) {
             try {
