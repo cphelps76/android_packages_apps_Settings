@@ -50,12 +50,6 @@
                 android:targetClass="com.android.musicfx.ControlPanelPicker" />
     </Preference>
 
-    <ListPreference
-            android:key="spdif"
-            android:title="@string/hdmi_audio_output"
-            android:entries="@array/hdmi_audio_output_entries"
-            android:entryValues="@array/hdmi_audio_output_values" />
-
 <!-- DOLBY_DAP_GUI -->
     <PreferenceCategory
             android:key="sound_dolby_title"
@@ -106,6 +100,12 @@
             android:key="dtmf_tone"
             android:title="@string/dtmf_tone_enable_title"
             android:defaultValue="true" />
+
+    <ListPreference
+            android:key="spdif"
+            android:title="@string/hdmi_audio_output"
+            android:entries="@array/hdmi_audio_output_entries"
+            android:entryValues="@array/hdmi_audio_output_values" />
 
     <CheckBoxPreference
             android:key="sound_effects"
