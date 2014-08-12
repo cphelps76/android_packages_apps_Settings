@@ -281,7 +281,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private int getCurrentHeightRate() {
         Log.d(TAG, "mTop is " + mTop);
         int savedValue = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.HDMI_OVERSCAN_WIDTH, 100);
+                Settings.Secure.HDMI_OVERSCAN_HEIGHT, 100);
         if (savedValue == 100) {
             float offset = mTop / zoomStep;
             float curVal = MAX_HEIGHT - offset;
