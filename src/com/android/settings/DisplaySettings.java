@@ -196,11 +196,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mOutputModePref.setEntryValues(mHdmiManager.getAvailableResolutions());
         mOutputModePref.setSummary(mHdmiManager.getResolution());
 
-        mPositionPref = (Preference) findPreference(KEY_POSITION);
+        mPositionPref = findPreference(KEY_POSITION);
 
         mAutoAdjustPref = (CheckBoxPreference) findPreference(KEY_AUTO_ADJUST);
         mAutoAdjustPref.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.HDMI_AUTO_ADJUST, 0) != 0);
+
+        if (!mHdmiManager.isHdmiPlugged()) {
+            // If user is using CVBS hide this preference, since all they will have is cvbs
+            getPreferenceScreen().removePreference(mOutputModePref);
+            // Using cvbs only usually provides one resolution, so remove auto adjust
+            getPreferenceScreen().removePreference(mAutoAdjustPref);
+        }
 
         setHasOptionsMenu(true);
     }
