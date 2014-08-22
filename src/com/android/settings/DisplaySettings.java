@@ -202,13 +202,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mAutoAdjustPref.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.HDMI_AUTO_ADJUST, 0) != 0);
 
-        if (!mHdmiManager.isHdmiPlugged()) {
-            // If user is using CVBS hide this preference, since all they will have is cvbs
-            getPreferenceScreen().removePreference(mOutputModePref);
-            // Using cvbs only usually provides one resolution, so remove auto adjust
-            getPreferenceScreen().removePreference(mAutoAdjustPref);
-        }
-
         setHasOptionsMenu(true);
     }
 
@@ -400,6 +393,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public void onResume() {
         super.onResume();
         updateState();
+
+        mOutputModePref.setValue(mHdmiManager.getResolution());
+        mOutputModePref.setEntries(mHdmiManager.getAvailableResolutions());
+        mOutputModePref.setEntryValues(mHdmiManager.getAvailableResolutions());
+        mOutputModePref.setSummary(mHdmiManager.getResolution());
 
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
