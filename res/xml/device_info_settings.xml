@@ -23,8 +23,8 @@
                 android:summary="@string/system_update_settings_list_item_summary">
             <intent
                 android:action="android.intent.action.MAIN"
-                android:targetClass="com.matricom.updater.UpdateSettings"
-                android:targetPackage="com.matricom.updater" />
+                android:targetClass="net.matricom.updater.UpdateSettings"
+                android:targetPackage="net.matricom.updater" />
         </PreferenceScreen>
 
 
