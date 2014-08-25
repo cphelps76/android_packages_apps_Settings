@@ -1,50 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/overscan_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 style="@android:style/Theme.DeviceDefault.Dialog">
 
-    <NumberPicker
-            android:id="@+id/height_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:nextFocusLeft="@+id/width_picker"
-            android:layout_below="@+id/heightText"
-            android:layout_toRightOf="@+id/widthText"
-            android:layout_marginLeft="92dp"
-            android:layout_marginTop="21dp"
-            android:nextFocusRight="@android:id/button1"/>
+
     <TextView
-            android:id="@+id/heightText"
+            android:id="@+id/leftText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/overscan_seekbar_height_text"
-            android:layout_alignLeft="@id/height_picker"
-            android:layout_alignRight="@id/height_picker"
-            android:gravity="center_horizontal"/>
-    <TextView
-            android:id="@+id/widthText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/overscan_seekbar_width_text"
-            android:layout_alignRight="@+id/width_picker"
+            android:text="@string/overscan_seekbar_left_text"
             android:gravity="center_horizontal"
-            android:layout_alignBottom="@+id/heightText"
-            android:layout_alignLeft="@+id/width_picker"/>
+            android:layout_above="@+id/left_picker"
+            android:layout_alignRight="@+id/left_picker" android:layout_alignLeft="@+id/left_picker"/>
     <NumberPicker
-            android:id="@+id/width_picker"
+            android:id="@+id/left_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:nextFocusRight="@+id/height_picker"
-            android:layout_alignTop="@id/height_picker"/>
+            android:nextFocusRight="@+id/top_picker"
+            android:layout_alignTop="@+id/top_picker" android:layout_toLeftOf="@+id/top_picker"/>
+    <TextView
+            android:id="@+id/topText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/overscan_seekbar_top_text"
+            android:gravity="center_horizontal"
+            android:layout_above="@+id/top_picker"
+            android:layout_alignLeft="@+id/top_picker" android:layout_toLeftOf="@+id/rightText"/>
+    <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/top_picker"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_alignTop="@+id/right_picker"
+            android:layout_toLeftOf="@+id/right_picker"/>
+
+    <TextView
+            android:id="@+id/rightText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/overscan_seekbar_right_text"
+            android:gravity="center_horizontal"
+            android:layout_alignTop="@+id/topText" android:layout_toRightOf="@+id/top_picker"
+            android:layout_alignRight="@+id/right_picker"/>
+
+
+
+    <NumberPicker
+            android:id="@+id/right_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:nextFocusLeft="@+id/top_picker"
+            android:layout_marginTop="23dp"
+            android:nextFocusRight="@+id/bottom_picker"
+            android:layout_toLeftOf="@+id/bottom_picker"/>
+
+    <TextView
+            android:id="@+id/bottomText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/overscan_seekbar_bottom_text"
+            android:gravity="center_horizontal"
+            android:layout_above="@+id/bottom_picker" android:layout_alignLeft="@+id/bottom_picker"
+            android:layout_alignRight="@+id/bottom_picker"/>
+
+
+    <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_picker"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:nextFocusRight="@android:id/button1"
+            android:layout_alignTop="@+id/right_picker"
+            android:layout_alignParentRight="true"/>
+
 
 
 </RelativeLayout>

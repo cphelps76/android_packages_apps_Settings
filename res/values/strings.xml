@@ -4564,8 +4564,10 @@
     <string name="hdmi_overscan_summary">Adjust HDMI output to fill TV screen</string>
     <string name="hdmi_overscan_help">Adjust the values for height and width until the screen appears correct.\n\t\tPress OK to accept and Cancel to revert.</string>
     <string name="hdmi_menu_reset">Reset position</string>
-    <string name="overscan_seekbar_width_text">Width</string>
-    <string name="overscan_seekbar_height_text">Height</string>
+    <string name="overscan_seekbar_left_text">Left</string>
+    <string name="overscan_seekbar_top_text">Top</string>
+    <string name="overscan_seekbar_right_text">Right</string>
+    <string name="overscan_seekbar_bottom_text">Bottom</string>
 
     <string name="gbox_launcher_settings_title">G-BoxLauncher</string>
 

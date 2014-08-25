@@ -265,29 +265,57 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private int getCurrentWidthRate() {
+    private int getCurrentLeftRate() {
         Log.d(TAG, "mLeft is " + mLeft);
         int savedValue = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.HDMI_OVERSCAN_WIDTH, 100);
-        if (savedValue == 100) {
+                Settings.Secure.HDMI_OVERSCAN_LEFT, 100);
+        /*if (savedValue == 100) {
             float offset = mLeft / (zoomStep * zoomStepWidth);
             float curVal = MAX_WIDTH - offset;
-            Log.d(TAG, "currentWidthRate=" + (int) curVal);
+            Log.d(TAG, "currentLeftRate=" + (int) curVal);
             return ((int) curVal);
-        }
+        }*/
         return savedValue;
     }
 
-    private int getCurrentHeightRate() {
+    private int getCurrentTopRate() {
         Log.d(TAG, "mTop is " + mTop);
         int savedValue = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.HDMI_OVERSCAN_HEIGHT, 100);
-        if (savedValue == 100) {
+                Settings.Secure.HDMI_OVERSCAN_TOP, 100);
+        /*if (savedValue == 100) {
             float offset = mTop / zoomStep;
             float curVal = MAX_HEIGHT - offset;
-            Log.d(TAG, "currentHeightRate=" + (int) curVal);
+            Log.d(TAG, "currentTopRate=" + (int) curVal);
             return ((int) curVal);
-        }
+        }*/
+        return savedValue;
+    }
+
+    private int getCurrentRightRate() {
+        Log.d(TAG, "mRight is " + mRight);
+        int savedValue = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.HDMI_OVERSCAN_RIGHT, 100);
+        Log.d(TAG, "saved right value " + savedValue);
+        /*if (savedValue == 100) {
+            float offset = (zoomStep * zoomStepWidth) / (mRight + 1);
+            float curVal = MAX_WIDTH - offset;
+            Log.d(TAG, "currentRightRate=" + (int) curVal);
+            return ((int) curVal);
+        }*/
+        return savedValue;
+    }
+
+    private int getCurrentBottomRate() {
+        Log.d(TAG, "mBottom is " + mBottom);
+        int savedValue = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.HDMI_OVERSCAN_BOTTOM, 100);
+        Log.d(TAG, "Saved bottom value " + savedValue);
+        /*if (savedValue == 100) {
+            float offset = mBottom / zoomStep;
+            float curVal = MAX_WIDTH - offset;
+            Log.d(TAG, "currentBottomRate=" + (int) curVal);
+            return ((int) curVal);
+        }*/
         return savedValue;
     }
 
@@ -493,8 +521,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         initSteps();
         // sysfs are written as progress is changed for real-time effect
         // cancel obviously reverts back to previous values
-        final int[] width_rate = {getCurrentWidthRate()};
-        final int[] height_rate = {getCurrentHeightRate()};
+        final int[] left_rate = {getCurrentLeftRate()};
+        final int[] top_rate = {getCurrentTopRate()};
+        final int[] right_rate = {getCurrentRightRate()};
+        final int[] bottom_rate = {getCurrentBottomRate()};
         //final int[] newWidth = new int[1], newHeight = new int[1];
         LayoutInflater inflater = this.getActivity().getLayoutInflater();
         View dialog = inflater.inflate(R.layout.overscan_dialog, null);
@@ -523,9 +553,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 mRight = mNewRight;
                 mBottom = mNewBottom;
                 Settings.Secure.putInt(getActivity().getContentResolver(),
-                        Settings.Secure.HDMI_OVERSCAN_WIDTH, width_rate[0]);
+                        Settings.Secure.HDMI_OVERSCAN_LEFT, left_rate[0]);
                 Settings.Secure.putInt(getActivity().getContentResolver(),
-                        Settings.Secure.HDMI_OVERSCAN_HEIGHT, height_rate[0]);
+                        Settings.Secure.HDMI_OVERSCAN_TOP, top_rate[0]);
+                Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.HDMI_OVERSCAN_RIGHT, right_rate[0]);
+                Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.HDMI_OVERSCAN_BOTTOM, bottom_rate[0]);
             }
         });
         builder.setTitle(R.string.hdmi_overscan_title);
@@ -534,72 +568,121 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         TextView mMessage = (TextView) alert.findViewById(android.R.id.message);
         mMessage.setGravity(Gravity.CENTER_HORIZONTAL);
-        NumberPicker mWidthPicker = (NumberPicker) dialog.findViewById(R.id.width_picker);
-        mWidthPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        mWidthPicker.setMinValue(0);
-        mWidthPicker.setMaxValue(100);
-        mWidthPicker.setValue(width_rate[0]);
-        mWidthPicker.setWrapSelectorWheel(false);
-        mWidthPicker.requestFocus();
-        mWidthPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        final NumberPicker mLeftPicker = (NumberPicker) dialog.findViewById(R.id.left_picker);
+        mLeftPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        mLeftPicker.setMinValue(0);
+        mLeftPicker.setMaxValue(100);
+        mLeftPicker.setValue(left_rate[0]);
+        mLeftPicker.setWrapSelectorWheel(false);
+        mLeftPicker.requestFocus();
+        mLeftPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 if (oldVal > newVal) {
                     //zoom out
-                    zoomOutWidth();
+                    zoomOut(mLeftPicker);
                 } else {
                     // zoom in
-                    zoomInWidth();
+                    zoomIn(mLeftPicker);
                 }
-                width_rate[0] = newVal;
+                left_rate[0] = newVal;
 
             }
         });
-        NumberPicker mHeightPicker = (NumberPicker) dialog.findViewById(R.id.height_picker);
-        mHeightPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        mHeightPicker.setMinValue(0);
-        mHeightPicker.setMaxValue(100);
-        mHeightPicker.setValue(height_rate[0]);
-        mHeightPicker.setWrapSelectorWheel(false);
-        mHeightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        final NumberPicker mTopPicker = (NumberPicker) dialog.findViewById(R.id.top_picker);
+        mTopPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        mTopPicker.setMinValue(0);
+        mTopPicker.setMaxValue(100);
+        mTopPicker.setValue(top_rate[0]);
+        mTopPicker.setWrapSelectorWheel(false);
+        mTopPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 if (oldVal > newVal) {
                     //zoom out
-                    zoomOutHeight();
+                    zoomOut(mTopPicker);
                 } else {
                     // zoom in
-                    zoomInHeight();
+                    zoomIn(mTopPicker);
                 }
-                height_rate[0] = newVal;
+                top_rate[0] = newVal;
+            }
+        });
+        final NumberPicker mRightPicker = (NumberPicker) dialog.findViewById(R.id.right_picker);
+        mRightPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        mRightPicker.setMinValue(0);
+        mRightPicker.setMaxValue(100);
+        mRightPicker.setValue(right_rate[0]);
+        mRightPicker.setWrapSelectorWheel(false);
+        mRightPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if (oldVal > newVal) {
+                    //zoom out
+                    zoomOut(mRightPicker);
+                } else {
+                    // zoom in
+                    zoomIn(mRightPicker);
+                }
+                right_rate[0] = newVal;
+
+            }
+        });
+        final NumberPicker mBottomPicker = (NumberPicker) dialog.findViewById(R.id.bottom_picker);
+        mBottomPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        mBottomPicker.setMinValue(0);
+        mBottomPicker.setMaxValue(100);
+        mBottomPicker.setValue(bottom_rate[0]);
+        mBottomPicker.setWrapSelectorWheel(false);
+        mBottomPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                if (oldVal > newVal) {
+                    //zoom out
+                    zoomOut(mBottomPicker);
+                } else {
+                    // zoom in
+                    zoomIn(mBottomPicker);
+                }
+                bottom_rate[0] = newVal;
             }
         });
     }
 
-    private void zoomOutWidth() {
-        mNewLeft += (int)(zoomStep * zoomStepWidth);
-        mNewRight -= (int)(zoomStep * zoomStepWidth);
+    private void zoomOut(NumberPicker picker) {
+        switch (picker.getId()) {
+            case R.id.left_picker:
+                mNewLeft += (int)(zoomStep * zoomStepWidth);
+                break;
+            case R.id.top_picker:
+                mNewTop += zoomStep;
+                break;
+            case R.id.right_picker:
+                mNewRight -= (int)(zoomStep * zoomStepWidth);
+                break;
+            case R.id.bottom_picker:
+                mNewBottom -= zoomStep;
+                break;
+        }
         Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
         mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
     }
 
-    private void zoomOutHeight() {
-        mNewTop += zoomStep;
-        mNewBottom -= zoomStep;
-        Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
-        mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
-    }
-
-    private void zoomInWidth() {
-        mNewLeft -= (int)(zoomStep * zoomStepWidth);
-        mNewRight += (int)(zoomStep * zoomStepWidth);
-        Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
-        mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
-    }
-
-    private void zoomInHeight() {
-        mNewTop -= zoomStep;
-        mNewBottom += zoomStep;
+    private void zoomIn(NumberPicker picker) {
+        switch (picker.getId()) {
+            case R.id.left_picker:
+                mNewLeft -= (int)(zoomStep * zoomStepWidth);
+                break;
+            case R.id.top_picker:
+                mNewTop -= zoomStep;
+                break;
+            case R.id.right_picker:
+                mNewRight += (int)(zoomStep * zoomStepWidth);
+                break;
+            case R.id.bottom_picker:
+                mNewBottom += zoomStep;
+                break;
+        }
         Log.d(TAG, "left=" + mNewLeft + " top=" + mNewTop + " right=" + mNewRight + " bottom=" + mNewBottom);
         mHdmiManager.setPosition(mNewLeft, mNewTop, mNewRight, mNewBottom);
     }
