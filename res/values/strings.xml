@@ -4578,6 +4578,18 @@
     <string name="cec_language_switch_title">Auto switch language </string>
     <string name="wifi_disable_ethernet_enable">The network route is ethernet now.Please disable it if you want to set Wifi.</string>
 
+    <!-- Surpress warnings -->
+    <string name="hdmi_spdif">Set SPDIF</string>
+    <string name="hdmi_dual_disp">Dual display</string>
+    <string name="hdmi_dual_disp_on">Dual display is enabled</string>
+    <string name="hdmi_dual_disp_off">Dual display is disabled</string>
+    <string name="hdmi_auto_switch">Automatic switching</string>
+    <string name="hdmi_auto_switch_on">Automatic switching is enabled</string>
+    <string name="hdmi_auto_switch_off">Automatic switching is disabled</string>
+    <string name="position_help">Help : \ n1 press the Enter key to switch zoom in / out ; \ n2 press the arrow keys to adjust the position of the four sides of the screen ; \ n3 press the return key to save and exit ; \ n4 adjustment results will take effect after the restart ; \ n5... press the menu key to set the default weight penetrance.</string>
+    <string name="position_help_noreboot">Help :.... \ N1 press the Enter key to switch zoom in / out ; \ n2 press the arrow keys to adjust the position of the four edges of the screen ; \ n3 press the return key to save ; \ n4 press the Menu key to set the default weight penetrance .</string>
+    <string name="tv_default_frequency">Default HD standard refresh rate</string>
+
     <array name="language" translatable="false">
     	<item>zh</item>
     	<item>en</item>
