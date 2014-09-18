@@ -793,4 +793,23 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <array name="language" translatable="false">
+    	<item>zh</item>
+    	<item>en</item>
+    	<item>ja</item>
+        <item>ko</item>
+        <item>fr</item>
+        <item>de</item>
+    </array>
+
+    <array name="country" translatable="false">
+        <item>CN</item>
+        <item>US</item>
+        <item>JP</item>
+        <item>KR</item>
+        <item>FR</item>
+        <item>DE</item>
+    </array>
+
 </resources>

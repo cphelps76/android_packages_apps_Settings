@@ -4590,22 +4590,4 @@
     <string name="position_help_noreboot">Help :.... \ N1 press the Enter key to switch zoom in / out ; \ n2 press the arrow keys to adjust the position of the four edges of the screen ; \ n3 press the return key to save ; \ n4 press the Menu key to set the default weight penetrance .</string>
     <string name="tv_default_frequency">Default HD standard refresh rate</string>
 
-    <array name="language" translatable="false">
-    	<item>zh</item>
-    	<item>en</item>
-    	<item>ja</item>
-		<item>ko</item>
-		<item>fr</item>
-		<item>de</item>
-    </array>
-
-
-   <array name="country" translatable="false">
-   		<item>CN</item>
-   		<item>US</item>
-   		<item>JP</item>
-    	<item>KR</item>
-    	<item>FR</item>
-    	<item>DE</item>
-    </array>
 </resources>
