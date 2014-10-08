@@ -34,6 +34,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
@@ -228,7 +229,7 @@ public class DevelopmentSettings extends PreferenceFragment
             disableForUser(mQuickBoot);
         }
 
-        if (!isPackageInstalled(QUICKBOOT_PACKAGE_NAME)) {
+        if (!isPackageInstalled(getActivity(),QUICKBOOT_PACKAGE_NAME)) {
             removePreference(mQuickBoot);
         }
 
@@ -425,7 +426,6 @@ public class DevelopmentSettings extends PreferenceFragment
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateCheckBox(mQuickBoot, Settings.Global.getInt(cr,
                 Settings.Global.ENABLE_QUICKBOOT, 0) != 0);
-        updateRuntimeValue();
         updateHdcpValues();
         updatePasswordSummary();
         updateDebuggerOptions();
@@ -1228,6 +1228,19 @@ public class DevelopmentSettings extends PreferenceFragment
                 }
             }
             return null;
+        }
+    }
+
+    private void removePreference(Preference preference) {
+        getPreferenceScreen().removePreference(preference);
+        mAllPrefs.remove(preference);
+    }
+
+    private static boolean isPackageInstalled(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getPackageInfo(packageName, 0) != null;
+        } catch (NameNotFoundException e) {
+            return false;
         }
     }
 
